@@ -13,10 +13,16 @@ public class HomeController {
 	@Autowired
 	public HomeService homeService;
 	
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String index() {
-		return "/index";
+		return "root.mid_contentList";
 	}
+	
+	@GetMapping("/joinForm")
+	public String joinForm() {
+		return "root.mid_joinForm";
+	}
+	
 	
 	
 }
