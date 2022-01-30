@@ -2,7 +2,6 @@ package com.MyBlog.Dto;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Entity;
 
 import org.springframework.stereotype.Repository;
 
