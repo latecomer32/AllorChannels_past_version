@@ -1,11 +1,13 @@
 package com.MyBlog.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.MyBlog.Dto.ResponseDto;
 import com.MyBlog.Dto.UserDto;
 import com.MyBlog.Service.HeaderService;
 
@@ -15,21 +17,23 @@ public class HeaderController {
 	@Autowired
 	public HeaderService headerService;
 
-	@GetMapping("/")
+	@GetMapping({"","/"})
 	public String index() {
 		return "root.mid_contentList";
 	}
 
-	@GetMapping("/joinForm")
-	public String GetjoinForm() {
+	@GetMapping("/auth/joinForm")
+	public String joinForm() {
 		return "root.mid_joinForm";
 	}
-
-	@PostMapping("/joinForm")
-	public void PostjoinForm(@RequestBody UserDto user) {
-		headerService.join(user);
+	
+	@GetMapping("/auth/loginForm")
+	public String loginForm() {
+		return "root.mid_loginForm";
 	}
+
 	
+
 	
-	
+
 }
