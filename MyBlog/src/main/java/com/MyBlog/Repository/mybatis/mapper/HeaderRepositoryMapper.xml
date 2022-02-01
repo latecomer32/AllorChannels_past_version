@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.MyBlog.Repository.HeaderRepository">
+  
+  <resultMap type="com.MyBlog.Dto.UserDto" id="UserDto">
+  	<!-- <result property="memberName" column="member_name"/> -->
+  </resultMap>
+  
+	<insert id="insert" parameterType="com.MyBlog.Dto.UserDto">
+		insert into user(userId, nickName, password, role)
+		values(#{userId}, #{nickName}, #{password}, #{role} )
+	</insert>
+	
+	<select id="findByUsername" parameterType="com.MyBlog.Dto.UserDto" resultType="com.MyBlog.Dto.UserDto">
+		SELECT userId FROM user WHERE userId = #{userId}
+	</select>
+</mapper>
