@@ -11,6 +11,6 @@ public interface HeaderRepository {
 	//Select * From user WHERE username = 1?;
 	
 
-	Optional<UserDto> findByUsername(String userId);
+	Optional<UserDto> findByUserId(String userId);
 
 }

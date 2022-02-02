@@ -31,15 +31,18 @@ margin-top:50px;
 			</div>
 			<br />
 			<div class="form-floating mb-3">
-				<input type="password" class="form-control" id="joinPassword" placeholder="Password" name="joinPassword" required> <label for="floatingPassword">Password</label>
+				<input type="password" class="form-control" id="joinPassword" placeholder="Password" name="joinPassword" required> <label for="floatingInput">Password</label>
 			</div>
 			<br />
 			<div class="form-floating mb-3">
-				<input type="password" class="form-control" id="passwordCheck" placeholder="Password reconfirm" name="PasswordCheck" required> <label for="floatingPassword">Password reconfirm</label>
+				<input type="password" class="form-control" id="passwordCheck" placeholder="Password reconfirm" name="PasswordCheck" required> <label for="floatingInput">Password reconfirm</label>
 			</div>
 			<br />
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="joinNickName" placeholder="Nickname" name="joinNickName" required> <label for="floatingPassword">Nick name</label>
+				<input type="text" class="form-control" id="joinNickName" placeholder="Nickname" name="joinNickName" required> <label for="floatingInput">Nick name</label>
+			</div>
+			<div class="form-floating mb-3">
+				<input type="email" class="form-control" id="email" placeholder="email" name="email" required> <label for="floatingInput">Email</label>
 			</div>
 			<br />
 		</form>

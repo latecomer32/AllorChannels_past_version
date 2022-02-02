@@ -9,11 +9,12 @@
   </resultMap>
   
 	<insert id="insert" parameterType="com.MyBlog.Dto.UserDto">
-		insert into user(userId, nickName, password, role)
-		values(#{userId}, #{nickName}, #{password}, #{role} )
+		insert into user(userId, email, nickName, password, role,date)
+		values(#{userId},#{email}, #{nickName}, #{password}, #{role},#{date_col,jdbcType=TIMESTAMP})
+		
 	</insert>
 	
-	<select id="findByUsername" parameterType="com.MyBlog.Dto.UserDto" resultType="com.MyBlog.Dto.UserDto">
-		SELECT userId FROM user WHERE userId = #{userId}
+	<select id="findByUserId" parameterType="com.MyBlog.Dto.UserDto" resultType="com.MyBlog.Dto.UserDto">
+		SELECT * FROM user WHERE userId = #{userId}
 	</select>
 </mapper>

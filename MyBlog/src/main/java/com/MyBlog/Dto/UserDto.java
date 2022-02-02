@@ -3,9 +3,6 @@ package com.MyBlog.Dto;
 import java.sql.Timestamp;
 
 
-import org.springframework.stereotype.Repository;
-
-
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,13 +17,15 @@ public class UserDto {
 
 	private int id;
 	
+	private String email;
+	
 	private String userId;
 	
 	private String nickName;
 	
 	private String password;
 	
-	private int role;
+	private RoleType role;
 	
 	private String oauth; //kakao. google
 	

@@ -4,11 +4,11 @@
 <div class="container">
 	<form action="/auth/loginProc" method="POST">
 		<div class="form-group">
-			<label for="email">Username</label> <input type="text" name="username" class="form-control" placeholder="Enter Username" id="username">
+			<label for="email">Username</label> <input type="text" name="loginUserId1" class="form-control" placeholder="Enter Username" id="username">
 		</div>
 
 		<div class="form-group">
-			<label for="pwd">Password</label> <input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
+			<label for="pwd">Password</label> <input type="password" name="loginPassword1" class="form-control" placeholder="Enter password" id="password">
 		</div>
 
 		<button id="btn-login" class="btn btn-primary">로그인</button>

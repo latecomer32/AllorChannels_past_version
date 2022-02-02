@@ -19,8 +19,9 @@ let index = {
     let data = {
       //id값으로 찾아서 값 가져옴
       userId: $("#joinUserId").val(),
-      userName: $("#joinNickName").val(),
+      nickName: $("#joinNickName").val(),
       password: $("#joinPassword").val(),
+      email: $("#email").val(),
     };
 
     //console.log(data);
@@ -38,9 +39,8 @@ let index = {
     })
       .done(function (resp) {
         alert("회원가입이 완료되었습니다.");
-        console.log("성공 resp:", resp);
-        console.log("성공 data:", data);
-        location.href = "/auth/joinForm";
+
+        location.href = "/";
       })
       .fail(function (error) {
         console.log("실패 data:", data); //console.log("실패 data:"+ data); 라고 쓰면 원하는대로 출력되지 않았었음.

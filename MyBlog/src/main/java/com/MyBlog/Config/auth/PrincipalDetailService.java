@@ -21,10 +21,15 @@ public class PrincipalDetailService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String userId)throws UsernameNotFoundException{
 		System.out.println("loadUserByUsername"+userId);
-		UserDto principal = headerRepository.findByUsername(userId)
+		
+		UserDto principal = headerRepository.findByUserId(userId)
 				.orElseThrow(()->{
-					return new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다.:"+userId);
+					return new UsernameNotFoundException("해당 사용자("+userId+")를 찾을 수 없습니다.");
 				});
+		System.out.println("return new PrincipalDetail(principal).getPassword"+new PrincipalDetail(principal).getPassword());
+		System.out.println("return new PrincipalDetail(principal).getUsername"+new PrincipalDetail(principal).getUsername());
+	
 		return new PrincipalDetail(principal); //시큐리티의 세션에 유저 정보가 저장이 됨.
+		//이걸 구현하지 않으면 로그인시 입력한 user값이 들어가지 않는다.
 	}
 }

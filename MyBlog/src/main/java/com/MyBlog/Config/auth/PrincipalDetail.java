@@ -8,15 +8,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.MyBlog.Dto.UserDto;
 
+//스프링 시큐리티가 로그인 요청을 가로채서 로그인을 진행하고 완료가 되면 UserDetails 타입의 오브젝트를
+//스프링 시큐리티의 고유한 세션저장소에 저장을 해둔다.
+
 public class PrincipalDetail implements UserDetails {
 
-	private UserDto user;
+	private UserDto user; //객체를 품고 있는걸 콤포지션이라 한다.
 
 	public PrincipalDetail(UserDto user) {
 		this.user = user;
 		System.out.println("PrincipalDetail(UserDto user):"+user);
 		System.out.println("getUsername():"+user.getUserId());
 	}
+
+	
 
 	@Override
 	public String getPassword() {
@@ -61,12 +66,14 @@ public class PrincipalDetail implements UserDetails {
 
 	// 계정이 갖고있는 권한 목록을 리턴한다. (권한이 여러개 있을 수 있어서 루프를 돌아야 하는데 우리는 한개만)
 	// 권한이 여러개면 for문을 돌려야 함.
+	//Collection<? extends GrantedAuthority> 콜렉션 타입에 GrantedAuthority를 상속받아야한다.
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		Collection<GrantedAuthority> collectors = new ArrayList<>();
 		collectors.add(() -> {
-			return "ROLE_" + user.getRole();
+			System.out.println("ROLE_ + user.getRole():"+"ROLE_" + user.getRole());
+			return "ROLE_" + user.getRole(); //스프링에서 롤 받을때 ROLE_USER라고 정해진 규칙이다.
 		});
 
 		return collectors;

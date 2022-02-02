@@ -1,38 +1,38 @@
 function joinCheck() {
   /* */
 
-  if (document.join.userId.value == "") {
+  if (document.join.joinUserId.value == "") {
     alert("아이디 입력하세요");
-    document.join.Id.focus();
+    document.join.joinUserId.focus();
     return false;
   }
 
   exp3 = /^[a-z0-9_]+$/;
-  if (!exp3.test(document.join.userId.value)) {
+  if (!exp3.test(document.join.joinUserId.value)) {
     alert("아이디를 영문과 숫자로만 입력하세요");
-    document.join.Id.focus();
+    document.join.joinUserId.focus();
     return false;
   }
 
-  if (document.join.password.value == "") {
+  if (document.join.joinPassword.value == "") {
     alert("비밀번호를 입력하세요");
-    document.join.password.focus();
-    document.join.password.value = "";
+    document.join.joinPassword.focus();
+    document.join.joinPassword.value = "";
     return false;
   }
 
-  if (document.join.password.value.length < 4) {
+  if (document.join.joinPassword.value.length < 4) {
     alert("비밀번호를 4자리 이상 입력하세요");
-    document.join.password.focus();
-    document.join.password.value = "";
+    document.join.joinPassword.focus();
+    document.join.joinPassword.value = "";
     return false;
   }
 
   exp2 = /^[a-z0-9_]+$/;
-  if (!exp2.test(document.join.password.value)) {
+  if (!exp2.test(document.join.joinPassword.value)) {
     alert("비밀번호를 영문과 숫자로만 입력하세요");
-    document.join.password.focus();
-    document.join.password.value = "";
+    document.join.joinPassword.focus();
+    document.join.joinPassword.value = "";
     return false;
   }
 
@@ -43,24 +43,24 @@ function joinCheck() {
     return false;
   }
 
-  if (document.join.password.value != document.join.PasswordCheck.value) {
+  if (document.join.joinPassword.value != document.join.PasswordCheck.value) {
     alert("비밀번호가 일치하지 않습니다.");
-    document.join.password.focus();
+    document.join.joinPassword.focus();
     document.join.PasswordCheck.value = "";
-    document.join.password.value = "";
+    document.join.joinPassword.value = "";
     return false;
   }
 
-  if (document.join.nickName.value == "") {
+  if (document.join.joinNickName.value == "") {
     alert("닉네임을 입력해주세요");
-    document.join.nickName.focus();
+    document.join.joinNickName.focus();
     return false;
   }
 
   exp4 = /^[가-힣a-zA-Z0-9_]+$/;
-  if (!exp4.test(document.join.nickName.value)) {
+  if (!exp4.test(document.join.joinNickName.value)) {
     alert("닉네임을 한글,영어,숫자로 입력해주세요");
-    document.join.nickName.focus();
+    document.join.joinNickName.focus();
     return false;
   }
 }
