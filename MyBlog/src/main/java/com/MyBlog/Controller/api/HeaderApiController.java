@@ -12,18 +12,14 @@ import com.MyBlog.Service.HeaderService;
 
 @RestController
 public class HeaderApiController {
-	
+
 	@Autowired
 	private HeaderService headerService;
-	
 
 	@PostMapping("/auth/joinForm")
 	public ResponseDto<Integer> join(@RequestBody UserDto user) {
-		System.out.println("join controller User:"+user);
-		System.out.println("ResponseDto<Integer>(HttpStatus.OK.value(), 1):"+new ResponseDto<Integer>(HttpStatus.OK.value(), 1));
 		headerService.join(user);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
-	
 
 }

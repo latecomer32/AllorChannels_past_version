@@ -13,15 +13,12 @@ import com.MyBlog.Dto.UserDto;
 
 public class PrincipalDetail implements UserDetails {
 
-	private UserDto user; //객체를 품고 있는걸 콤포지션이라 한다.
+	private UserDto user; // 객체를 품고 있는걸 콤포지션이라 한다.
 
 	public PrincipalDetail(UserDto user) {
 		this.user = user;
-		System.out.println("PrincipalDetail(UserDto user):"+user);
-		System.out.println("getUsername():"+user.getUserId());
-	}
 
-	
+	}
 
 	@Override
 	public String getPassword() {
@@ -34,7 +31,6 @@ public class PrincipalDetail implements UserDetails {
 		// TODO Auto-generated method stub
 		return user.getUserId();
 	}
-
 
 	// 계정이 만료되지 않았는지 리턴한다. (true:만료안됨)
 	@Override
@@ -66,18 +62,17 @@ public class PrincipalDetail implements UserDetails {
 
 	// 계정이 갖고있는 권한 목록을 리턴한다. (권한이 여러개 있을 수 있어서 루프를 돌아야 하는데 우리는 한개만)
 	// 권한이 여러개면 for문을 돌려야 함.
-	//Collection<? extends GrantedAuthority> 콜렉션 타입에 GrantedAuthority를 상속받아야한다.
+	// Collection<? extends GrantedAuthority> 콜렉션 타입에 GrantedAuthority를 상속받아야한다.
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		Collection<GrantedAuthority> collectors = new ArrayList<>();
 		collectors.add(() -> {
-			System.out.println("ROLE_ + user.getRole():"+"ROLE_" + user.getRole());
-			return "ROLE_" + user.getRole(); //스프링에서 롤 받을때 ROLE_USER라고 정해진 규칙이다.
+
+			return "ROLE_" + user.getRole(); // 스프링에서 롤 받을때 ROLE_USER라고 정해진 규칙이다.
 		});
 
 		return collectors;
 	}
 
-	
 }

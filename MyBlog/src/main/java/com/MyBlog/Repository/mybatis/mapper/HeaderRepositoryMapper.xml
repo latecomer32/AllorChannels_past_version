@@ -9,9 +9,8 @@
   </resultMap>
   
 	<insert id="insert" parameterType="com.MyBlog.Dto.UserDto">
-		insert into user(userId, email, nickName, password, role,date)
-		values(#{userId},#{email}, #{nickName}, #{password}, #{role},#{date_col,jdbcType=TIMESTAMP})
-		
+		insert into user(userId, email, nickName, password, role)
+		values(#{userId},#{email}, #{nickName}, #{password}, #{role})
 	</insert>
 	
 	<select id="findByUserId" parameterType="com.MyBlog.Dto.UserDto" resultType="com.MyBlog.Dto.UserDto">

@@ -51,22 +51,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 //DB에는 암호화된 password,
 	 //로그인할떄에는 암호화되지 않은 password가 입력이 되기 떄문에
 	 //이 두 값을 비교하여 맞는지 아닌지를 확인해주는 메서드이다.
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(principalDetailService)
-		.passwordEncoder(encodePWD());
-	}
+	
+		  @Override protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+			  auth.userDetailsService(principalDetailService)
+		  .passwordEncoder(encodePWD()); }
+		 
 	
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {
-		// TODO Auto-generated method stub
 		return super.authenticationManagerBean();
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		System.out.println("security configure");
-
 		http
 		.csrf().disable() //csrf 토큰 비활성화
 		.authorizeRequests()
@@ -76,12 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authenticated()
 	.and()
 		.formLogin()
-		.usernameParameter("loginUserId") //.JSP에서 전송오는 name="loginUserId"이면 default값인 username과 다르므로 해당 설정해줘야함.
-		.loginPage("/auth/loginForm") // 인증이 필요한 곳으로 요청오면 해당 주소로 이동
+		.usernameParameter("loginUserId")//.JSP에서 전송오는 name="loginUserId"이면 default값인 username과 다르므로 해당 설정해줘야함.
+		.passwordParameter("loginPpassword")
+		.loginPage("/") // 인증이 필요한 곳으로 요청오면 해당 주소로 이동
 		.loginProcessingUrl("/auth/loginProc") //해당 주소에서 로그인 처리, 해당 페이지 안만들어도 시큐리티가 가로채서 username 확인하게된다.
 		.failureHandler(customFailurHandler) // 실패 핸들러
 		.defaultSuccessUrl("/");
 	
-		
 	}
 }

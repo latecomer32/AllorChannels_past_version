@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.MyBlog.Repository.BoardRepository">
+
+	<resultMap type="com.MyBlog.Dto.UserDto" id="UserDto">
+		<!-- <result property="memberName" column="member_name"/> -->
+	</resultMap>
+
+
+	<insert id="saveTheWriting" parameterType="com.MyBlog.Dto.Board">
+		insert into board(title, content, nickName, category)
+		values(#{title},#{content}, #{nickName}, #{category})
+	</insert>
+
+
+</mapper>

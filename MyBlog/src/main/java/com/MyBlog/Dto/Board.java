@@ -2,32 +2,32 @@ package com.MyBlog.Dto;
 
 import java.sql.Timestamp;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class UserDto {
+public class Board {
 
 	private int id;
 	
-	private String email;
+	private String title;
 	
-	private String userId;
+	private String content;
 	
 	private String nickName;
 	
-	private String password;
-	
-	private RoleType role;
-	
-	private String oauth; //kakao. google
-	
 	private Timestamp date;
+	
+	private int viewCount;
+	
+	private int replyCount;
+	
+	private int category;
+	
+
 }

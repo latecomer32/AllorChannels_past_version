@@ -24,11 +24,9 @@ public class HeaderController {
 		return "root.mid_joinForm";
 	}
 
-	@GetMapping("/auth/loginForm")
-	public String loginForm() {
-		return "root.mid_loginForm";
-	}
 
+
+	//나중에 url주소 수정해서 로그인 실패시 화면제작해서 거기로 실패문구와 함께 보내주자.
 	@GetMapping("/auth/login")
 	public String login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "exception", required = false) String exception, Model model) {
@@ -36,5 +34,6 @@ public class HeaderController {
 		model.addAttribute("exception", exception);
 		return "root.loginForm";
 	}
+
 
 }
