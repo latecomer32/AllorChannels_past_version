@@ -1,7 +1,7 @@
 let index = {
   init: function () {
-    $("#btn-save").on("click", () => {
-      this.save();
+    $("#btn-saveTheWriting").on("click", () => {
+      this.saveTheWriting();
     });
     $("#btn-delete").on("click", () => {
       this.deleteById();
@@ -14,14 +14,15 @@ let index = {
     });
   },
 
-  save: function () {
+  saveTheWriting: function () {
     let data = {
       title: $("#title").val(),
-      content: $("#content").val(),
+      content: $("#summernote").val(),
+      category: $("#category").val(),
     };
     $.ajax({
       type: "POST",
-      url: "/api/board",
+      url: "/board/saveTheWritingForm",
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8",
       dataType: "json",

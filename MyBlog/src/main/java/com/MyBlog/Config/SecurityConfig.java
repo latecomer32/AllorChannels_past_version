@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 	public void configure(WebSecurity web) throws Exception {
 	        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	    }
-	 
+		/* .antMatchers("/favicon.ico", "/resources/**", "/error") */
 	 
 	 //configure(AuthenticationManagerBuilder auth) : 해쉬로 암호화를 하게 되면
 	 //DB에는 암호화된 password,
@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.csrf().disable() //csrf 토큰 비활성화
 		.authorizeRequests()
-		.antMatchers("/","/logout", "/auth/**", "/js/**", "/css/**", "/image/**")
+		.antMatchers("/","/logout", "/auth/**", "/js/**", "/css/**", "/image/**","/favicon.ico", "/resources/**", "/error")
 		.permitAll()
 		.anyRequest()
 		.authenticated()

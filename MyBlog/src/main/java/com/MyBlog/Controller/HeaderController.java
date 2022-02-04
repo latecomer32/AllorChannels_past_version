@@ -14,10 +14,7 @@ public class HeaderController {
 	@Autowired
 	public HeaderService headerService;
 
-	@GetMapping({ "", "/" })
-	public String index() {
-		return "root.mid_contentList";
-	}
+	
 
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {

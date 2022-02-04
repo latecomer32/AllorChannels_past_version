@@ -14,5 +14,17 @@
 		values(#{title},#{content}, #{nickName}, #{category})
 	</insert>
 
+	<select id="getWritingList" resultType="com.MyBlog.Dto.Board">
+	select * from board 
+     <where>
+	    <if test="query !=null and query != ''">
+	         ${title} like '%${query}%'
+	    </if>
+	        and pub = #{pub}
+	    </where>
+    order by date desc
+    limit #{offset}, #{size}
+  </select>
+  
 
 </mapper>

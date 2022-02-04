@@ -18,8 +18,11 @@ public class BoardApiController {
 	@Autowired
 	BoardService boardService;
 	
-	@PostMapping("/api/board")
+	@PostMapping("/board/saveTheWritingForm")
 	public ResponseDto<Integer> saveTheWriting(@RequestBody Board board,@AuthenticationPrincipal PrincipalDetail principal) {
+		
+		System.out.println("@PostMapping(\"/board/saveTheWritingForm\")");
+		
 		boardService.saveTheWriting(board, principal.getUsername());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}

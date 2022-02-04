@@ -68,19 +68,19 @@ min-height:650px!important;
 			</thead>
 
 			<tbody>
-				<c:forEach var="n" items="${list}">
+				<c:forEach var="getWritingList" items="${getWritingList}">
 					<tr>
 						<th>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="${n.id}"
+							<input class="form-check-input" type="checkbox" value="${getWritingList.id}"
 								id="flexCheckDefault" name="del_member"> 
 						</div>
 						</th>
-						<th scope="row">${n.no}</th>
-						<td>${n.id}</td>
-						<td>${n.userName}</td>
-						<td>${n.grade}</td>
-						<td>${n.joinDate}</td>
+						<th scope="row">${getWritingList.title}</th>
+						<td>${getWritingList.id}</td>
+						<td>${getWritingList.nickName}</td>
+						<td>${getWritingList.content}</td>
+						<td>${getWritingList.date}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

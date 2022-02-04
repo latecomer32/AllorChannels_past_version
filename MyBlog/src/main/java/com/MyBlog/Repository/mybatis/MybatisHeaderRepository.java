@@ -30,8 +30,6 @@ public class MybatisHeaderRepository implements HeaderRepository {
 	@Override
 	public Optional<UserDto> findByUserId(String userId) {
 		//SELECT * FROM user WHERE username = 1?;
-		System.out.println("findByUsername"+userId);
-		System.out.println("mapper.findByUsername(userId)"+mapper.findByUserId(userId));
-		return mapper.findByUserId(userId);
+			return mapper.findByUserId(userId);
 	}
 }

@@ -68,7 +68,7 @@ https://kauth.kakao.com/oauth/authorize
 			<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
 		</c:when>
 		<c:otherwise>
-			<li class="nav-item"><a class="nav-link" href="/board/saveForm">글쓰기</a></li>
+			<li class="nav-item"><a class="nav-link" href="/board/saveTheWritingForm">글쓰기</a></li>
 			<li class="nav-item"><a class="nav-link" href="/user/updateForm">회원정보</a></li>
 			<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 		</c:otherwise>
