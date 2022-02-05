@@ -10,7 +10,11 @@ public interface BoardRepository {
 
 	void saveTheWriting(Board board);
 
+	
+
+	List<Board> getWritingList(int offset, String field, String query, boolean pub, Integer rowNum, String order, String desc);
 
 
-	List<Board> getWritingList(int offset, int size, String title, String query, boolean pub);
+
+	void deleteWritingList(int no);
 }

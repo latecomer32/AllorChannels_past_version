@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Board {
 
-	private int id;
+	private int no;
 	
 	private String title;
 	

@@ -1,6 +1,7 @@
 package com.MyBlog.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public interface BoardService {
 
 	void saveTheWriting(Board board, String username);
 
-	List<Board> getWritingList(int page, String title, String query, boolean pub);
+	List<Board> getWritingList(int page, String field, String query, boolean pub, Integer rowNum, String order, String desc);
 
+	void deleteWritingList(int no);
 }

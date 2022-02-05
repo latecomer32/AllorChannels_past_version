@@ -1,6 +1,7 @@
 package com.MyBlog.Repository.mybatis;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,21 @@ public class MybatisBoardRepository implements BoardRepository {
 
 	@Override
 	public void saveTheWriting(Board board) {
-		System.out.println("MybatisBoardRepository implements BoardRepository");
+	
 		mapper.saveTheWriting(board);
 		
 	}
 
 
 	@Override
-	public List<Board> getWritingList(int offset, int size, String title, String query, boolean pub) {
-		// TODO Auto-generated method stub
-		return mapper.getWritingList(offset, size, title, query, pub);
+	public List<Board> getWritingList(int offset, String field, String query, boolean pub, Integer rowNum, String order, String desc) {
+	System.out.println("getWritingList// offset:"+offset+"// field:"+ field+"// query:"+ query+"// pub:"+ pub+"// rowNum:"+ rowNum+"// order:"+ order+"// desc:"+ desc);
+		return mapper.getWritingList(offset, field, query, pub, rowNum, order, desc);
 	}
 	
-	
+	public void deleteWritingList(int no) {
+		mapper.deleteWritingList(no);
+	}
 	
 
 

@@ -10,21 +10,32 @@
 
 
 	<insert id="saveTheWriting" parameterType="com.MyBlog.Dto.Board">
-		insert into board(title, content, nickName, category)
-		values(#{title},#{content}, #{nickName}, #{category})
+		insert into
+		board(title, content, nickName, category)
+		values(#{title},#{content},
+		#{nickName}, #{category})
 	</insert>
 
 	<select id="getWritingList" resultType="com.MyBlog.Dto.Board">
-	select * from board 
-     <where>
-	    <if test="query !=null and query != ''">
-	         ${title} like '%${query}%'
-	    </if>
-	        and pub = #{pub}
-	    </where>
-    order by date desc
-    limit #{offset}, #{size}
-  </select>
-  
+		select * from board
+		<where>
+			<if test="query !=null and query != ''">
+				${field} like '%${query}%'
+			</if>
+			and pub = #{pub}
+		</where>
+		order by ${order} ${desc}
+		limit #{offset}, #{rowNum}
+	</select>
+
+	<delete id="deleteWritingList">
+		DELETE FROM member WHERE no in
+		<foreach item="no" collection="numbers" 
+		open="(" separator="," close=")">
+			#{no}
+		</foreach>
+	</delete>
+
+
 
 </mapper>

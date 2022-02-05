@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.MyBlog.Dto.Board;
 import com.MyBlog.Repository.BoardRepository;
@@ -27,12 +28,21 @@ public class BoardServiceImp implements BoardService{
 
 	
 	@Override
-	public List<Board> getWritingList(int page, String title, String query, boolean pub) {
-		int size = 10;
-		int offset = 0+(page-1)*size;
-		 List<Board> WritingList =boardRepository.getWritingList(offset, size, title, query, pub);
+	public List<Board> getWritingList(int page, String field, String query, boolean pub, Integer rowNum, String order, String desc) {
+		
+		int offset = 0+(page-1)*rowNum;
+		 List<Board> WritingList =boardRepository.getWritingList(offset, field, query, pub, rowNum, order, desc);
 		 return WritingList;
+	}
+
+
+	@Override
+	public void deleteWritingList(int no) {
+		boardRepository.deleteWritingList(no);
+		
 	} 
+	
+	
 
 	
 
