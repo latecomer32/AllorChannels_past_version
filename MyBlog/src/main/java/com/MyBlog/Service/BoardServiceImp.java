@@ -1,6 +1,7 @@
 package com.MyBlog.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,24 @@ public class BoardServiceImp implements BoardService{
 		 return WritingList;
 	}
 
-
 	@Override
-	public void deleteWritingList(int no) {
-		boardRepository.deleteWritingList(no);
+	public void deleteWritingList(Map<String, Object> numbers) {
+		boardRepository.deleteWritingList(numbers);
 		
 	} 
+	
+	
+	@Override
+	public int getWritingCount(String field, String query) {
+		return boardRepository.getWritingCount(field, query);
+	}
+
+
+	@Override
+	public Board getWritingDetail(int no) {
+		return boardRepository.getWritingDetail(no);
+		
+	}
 	
 	
 

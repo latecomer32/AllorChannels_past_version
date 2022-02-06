@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,13 +37,19 @@ public class BoardController {
 
 		boolean pub =true;
 
-	
-	
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub,rowNum,order,desc);
-		
+		int getWritingCount = boardService.getWritingCount(field, query);
 		model.addAttribute("getWritingList", getWritingList);
-
+		model.addAttribute("getWritingCount", getWritingCount);
 		return "root.mid_contentList";
+	}
+	
+	@GetMapping("/board/detail/{no}")
+	public String findByNo(@PathVariable int no, Model model) {
+		System.out.println("no"+boardService.getWritingDetail(no).getNo());
+		model.addAttribute("board",boardService.getWritingDetail(no));
+		return "root.mid_detail";
+		
 	}
 
 }

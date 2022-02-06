@@ -29,13 +29,21 @@
 	</select>
 
 	<delete id="deleteWritingList">
-		DELETE FROM member WHERE no in
-		<foreach item="no" collection="numbers" 
-		open="(" separator="," close=")">
+		DELETE FROM board WHERE no in
+		<foreach item="no" collection="numbers" open="(" separator="," close=")">
 			#{no}
 		</foreach>
 	</delete>
 
+	<select id="getWritingCount" resultType="int">
+		SELECT COUNT(no) COUNT FROM 
+		(SELECT * FROM board WHERE ${field} LIKE '%${query}%' ORDER BY date DESC)N
+	</select>
+	
+	<select id="getWritingDetail" resultType="com.MyBlog.Dto.Board">
+		SELECT * FROM board 
+		WHERE no=#{no}
+	</select>
 
 
 </mapper>

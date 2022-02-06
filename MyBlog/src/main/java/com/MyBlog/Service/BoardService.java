@@ -1,9 +1,7 @@
 package com.MyBlog.Service;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
+import java.util.Map;
 
 import com.MyBlog.Dto.Board;
 
@@ -16,5 +14,9 @@ public interface BoardService {
 
 	List<Board> getWritingList(int page, String field, String query, boolean pub, Integer rowNum, String order, String desc);
 
-	void deleteWritingList(int no);
+	void deleteWritingList(Map<String, Object> numbers);
+
+	int getWritingCount(String field, String query);
+
+	Board getWritingDetail(int no);
 }
