@@ -14,7 +14,7 @@ public interface BoardService {
 
 	List<Board> getWritingList(int page, String field, String query, boolean pub, Integer rowNum, String order, String desc);
 
-	void deleteWritingList(Map<String, Object> numbers);
+	void deleteWritingList(int no);
 
 	int getWritingCount(String field, String query);
 

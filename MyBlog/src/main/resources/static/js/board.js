@@ -42,25 +42,25 @@ let index = {
   deleteById: function () {
     //let id = $("#id").val(); 아래 data부분 없애고 이렇게만 넣으면 - (1/3)
 
-    var checkArray = [];
-
-    var seperator = "";
+    let no = "";
 
     $("input[name=no]:checked").each(function () {
-      checkArray.push($(this).attr("value"));
+      var no = $(this).attr("value");
+      console.log(no);
+
+      $.ajax({
+        type: "DELETE",
+        url: "/board/detail/" + no,
+        data: JSON.stringify(no),
+      })
+        .done(function (resp) {
+          alert("글삭제가 완료되었습니다.");
+          location.href = "/";
+        })
+        .fail(function (error) {
+          alert(JSON.stringify(error));
+        });
     });
-
-    console.log(checkArray);
-
-    //.text()방식으로 쓸 수도 있음
-    $.ajax({
-      type: "DELETE",
-      url: "/board/deleteWriting",
-      data: checkArray,
-
-      success: function (data) {},
-    });
-    return false;
   },
 
   update: function () {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,10 +33,10 @@ public class BoardApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 
-	@DeleteMapping("/board/deleteWriting")
-	public ResponseDto<Integer> deleteWriting(@RequestBody Map<String, Object> numbers,@RequestBody List<String> checkArray ) {
-		System.out.println("numbers"+numbers+"//"+numbers.toString());
-		boardService.deleteWritingList(numbers);
+	@DeleteMapping("/board/detail/{no}")
+	public ResponseDto<Integer> deleteWriting(@PathVariable int no) {
+		System.out.println("numbers"+no);
+		boardService.deleteWritingList(no);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 }

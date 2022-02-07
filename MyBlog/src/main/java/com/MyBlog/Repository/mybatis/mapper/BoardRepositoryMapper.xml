@@ -29,10 +29,7 @@
 	</select>
 
 	<delete id="deleteWritingList">
-		DELETE FROM board WHERE no in
-		<foreach item="no" collection="numbers" open="(" separator="," close=")">
-			#{no}
-		</foreach>
+		DELETE FROM board WHERE no =${no}
 	</delete>
 
 	<select id="getWritingCount" resultType="int">

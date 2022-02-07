@@ -37,8 +37,8 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public void deleteWritingList(Map<String, Object> numbers) {
-		boardRepository.deleteWritingList(numbers);
+	public void deleteWritingList(int no) {
+		boardRepository.deleteWritingList(no);
 		
 	} 
 	

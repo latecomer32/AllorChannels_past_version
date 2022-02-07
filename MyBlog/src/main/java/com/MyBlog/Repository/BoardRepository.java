@@ -13,7 +13,7 @@ public interface BoardRepository {
 
 	int getWritingCount(String field, String query);
 
-	int deleteWritingList(Map<String, Object> numbers);
+	int deleteWritingList(int no);
 
 	Board getWritingDetail(int no);
 }

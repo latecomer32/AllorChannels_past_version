@@ -36,7 +36,7 @@ public class MybatisBoardRepository implements BoardRepository {
 	
 
 	@Override
-	public int deleteWritingList(Map<String, Object> no) {
+	public int deleteWritingList(int no) {
 		return mapper.deleteWritingList(no);
 	}
 	
