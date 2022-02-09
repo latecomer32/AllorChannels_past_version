@@ -6,8 +6,11 @@
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
+
+
+
 <style>
-.nav {
+.header {
 	box-shadow: 0px 0px 4px 0.3px gray !important; //
 	margin-bottom: 20px !important;
 }
@@ -15,6 +18,11 @@
 ul li a {
 	line-height: 380%;
 	color: black !important;
+}
+
+.icon- {
+	width: 150% !important;
+	color: rgba(155, 155, 155, 0.3);
 }
 </style>
 
@@ -24,7 +32,7 @@ ul li a {
 <!-- -------모달 창 ---------- -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" >
+	<div class="modal-dialog">
 		<div class="modal-content">
 
 			<form action="/auth/loginProc" method="POST">
@@ -52,26 +60,38 @@ ul li a {
 	</div>
 </div>
 <!-- -------<header> ---------- -->
-<ul class="nav justify-content-center">
+<div class=" header d-flex justify-content-start  ">
+	<div class="leftDisplay">1</div>
 
-	<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">검색</a></li>
-	<c:choose>
-		<c:when test="${empty principal}">
-			<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/">로그인</a></li>
-			<li class="nav-item"><a
-				href="
+	<div class="d-flex justify-content-between middeDisplay">
+		<a class="marginTopBottomAuto NoUnderline" href="/">B</a> <span>
+			<ul class="nav">
+				<form class="d-flex flex-row" action="/">
+					<li class="nav-item marginTopBottomAuto"><input type="text" name="q" value="${param.q}" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}" /></li>
+					<li class="nav-item marginTopBottomAuto"><input type="image" src="./image/search.svg" onclick="search_onclick_submit" class="submit icon-" /></li>
+				</form>
+				<c:choose>
+					<c:when test="${empty principal}">
+						<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/">로그인</a></li>
+						<li class="nav-item marginTopBottomAuto"><a
+							href="
 https://kauth.kakao.com/oauth/authorize
 ?client_id=84d0b808b23f632f987e7ec4dd0bbf40
 &redirect_uri=http://localhost:8000/auth/kakao/callback
-&response_type=code"> <img height="40px"
-					src="/image/kakao_login_button.png"></a></li>
-			<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
-		</c:when>
-		<c:otherwise>
-			<li class="nav-item"><a class="nav-link" href="/board/saveTheWritingForm">글쓰기</a></li>
-			<li class="nav-item"><a class="nav-link" href="/user/updateForm">회원정보</a></li>
-			<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-		</c:otherwise>
-	</c:choose>
+&response_type=code"> <img
+								height="40px" src="/image/kakao_login_button.png"></a></li>
+						<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="/board/saveTheWritingForm">글쓰기</a></li>
+						<li class="nav-item"><a class="nav-link" href="/header/member">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link flex-row-reverse" href="/logout">로그아웃</a></li>
+					</c:otherwise>
+				</c:choose>
 
-</ul>
+			</ul>
+		</span>
+	</div>
+
+	<div class="rightDisplay">3</div>
+</div>

@@ -1,5 +1,6 @@
 package com.MyBlog.Repository.mybatis;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,5 +32,16 @@ public class MybatisHeaderRepository implements HeaderRepository {
 	public Optional<UserDto> findByUserId(String userId) {
 		//SELECT * FROM user WHERE username = 1?;
 			return mapper.findByUserId(userId);
+	}
+
+	@Override
+	public List<UserDto> getMemberList(int offset, String field, String query, boolean pub, Integer rowNum,
+			String order, String desc) {
+		return mapper.getMemberList(offset, field, query, pub, rowNum, order, desc);
+	}
+
+	@Override
+	public int getMemberCount(String field, String query) {
+		return mapper.getMemberCount(field, query);
 	}
 }

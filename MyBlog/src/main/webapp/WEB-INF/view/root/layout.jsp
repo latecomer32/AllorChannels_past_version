@@ -9,6 +9,10 @@
 <head>
 <title>MyBlog</title>
 <meta charset="UTF-8">
+<!-- fontawesome -->
+<link rel="stylesheet" type="text/css" href="/fontawesome-free-5.15.4-web/css/all.css">
+
+
 
 <!-- 제이쿼리 -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -34,9 +38,6 @@
  -->
 
 
-
-
-
 <style>
 
 
@@ -44,11 +45,14 @@
 	display:flex;
 	font-family: 'Montserrat', sans-serif;
 	overflow: hidden;
-	min-height: 900px;
-	background-color:rgba(228, 228, 228, 0.7);
+	min-height: 1000px;
+	//background-color:rgba(228, 228, 228, 0.7);
 }
-.Display{
-height: 100%;
+.ListHeight{
+margin-top:5px;
+min-height: 700px;
+padding: 20px 0px;
+  box-sizing: border-box;
 
 }
 
@@ -67,6 +71,22 @@ height: 100%;
 	
 }
 
+.NoUnderline{
+color: black !important;
+	text-decoration-line : none;
+}
+
+.whiteBackground {
+	background-color: rgba(250, 250, 250, 1);
+}
+
+.marginTopBottomAuto {
+	margin: auto 0px !important;
+}
+
+.marginAuto-20 {
+	margin: auto 20px !important;
+}
 
 </style>
 

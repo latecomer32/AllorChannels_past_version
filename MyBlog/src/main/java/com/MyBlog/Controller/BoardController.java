@@ -30,7 +30,7 @@ public class BoardController {
 			@RequestParam(name="f", required=false, defaultValue = "title")String field,
 			@RequestParam(name="q", required=false, defaultValue = "")String query,
 			@RequestParam(name="r", required=false, defaultValue = "15") Integer rowNum,
-			@RequestParam(name="desc", required=false, defaultValue = "ASC")String desc,
+			@RequestParam(name="desc", required=false, defaultValue = "DESC")String desc,
 			@RequestParam(name="order", required=false, defaultValue = "date")String order,
 			Model model,Board board) {
 		model.addAttribute("categoryValue",board.getCategory());

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserDto {
 
-	private int id;
+	private int no;
 	
 	private String email;
 	
@@ -30,4 +30,6 @@ public class UserDto {
 	private String oauth; //kakao. google
 	
 	private Timestamp date;
+	
+	private boolean pub;
 }

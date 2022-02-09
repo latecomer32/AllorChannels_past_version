@@ -16,4 +16,22 @@
 	<select id="findByUserId" parameterType="com.MyBlog.Dto.UserDto" resultType="com.MyBlog.Dto.UserDto">
 		SELECT * FROM user WHERE userId = #{userId}
 	</select>
+	
+	
+		<select id="getMemberList" resultType="com.MyBlog.Dto.UserDto">
+		select * from user
+		<where>
+			<if test="query !=null and query != ''">
+				${field} like '%${query}%'
+			</if>
+			and pub = #{pub}
+		</where>
+		order by ${order} ${desc}
+		limit #{offset}, #{rowNum}
+	</select>
+	
+	<select id="getMemberCount" resultType="int">
+		SELECT COUNT(no) COUNT FROM 
+		(SELECT * FROM user WHERE ${field} LIKE '%${query}%' ORDER BY date DESC)N
+	</select>
 </mapper>

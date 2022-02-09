@@ -1,92 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<div class="Display middeDisplay">
-	<style>
-.emptyHeigt-- {
-	
-}
+<style>
 
-td {
-	max-height: 30px !important;
-}
+ table.tmp_table tr {
+    height:53px;
+    text-align: center;
+    vertical-align:middle; /* tr 안에서 세로 정렬 방법 top, middle, bottom */
+    border-bottom: 1px dotted rgb(218, 218, 218); 
+ }
+ 
+  table.tmp_table th {
+
+  }
+  
+  .grayFont_th{
+  color:rgb(150, 150, 150);
+  font-size: 0.8rem;
+  }
+  
+  .grayFont_td{
+  color:rgb(150, 150, 150);
+  font-size: 0.9rem;
+  }
+  
+   .titleFont_td{
+ color:rgb(70, 70, 70) !important;
+  font-size: 1rem;
+
+  }
+ 
 </style>
 
+<div class=" flex-column middeDisplay">
+	<div class="ListHeight">
 
-	<div class="container-sm">
-		<form>
-			<div class="container">
-				<div class="row justify-content-start">
+		<table class="tmp_table table table-hover table-borderless">
+			<thead>
+				<tr>
+					<th scope="col">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="all" id="flexCheckDefault" name="del_member">
+						</div>
+					</th>
+					<th class="grayFont_th" scope="col">번호</th>
+					<th class="grayFont_th" scope="col">제목</th>
+					<th class="grayFont_th" scope="col">작성자</th>
+					<th class="grayFont_th" scope="col">작성일</th>
+					<th class="grayFont_th" scope="col">조회수</th>
+				</tr>
+			</thead>
 
-					<select class="col-2" name="order">
-						<option ${(param.order=="no")?"selected":"" } value="no">번호</option>
-						<option ${(param.order=="title")?"selected":"" } value="title">제목</option>
-						<option ${(param.order=="nickName")?"selected":"" } value="nickName">작성자</option>
-						<option ${(param.order=="date")?"selected":"" } value="date">작성일</option>
-						<option ${(param.order=="Account")?"selected":"" } value="Account">Account</option>
-
-					</select> <select class="col-2" name="desc">
-						<option ${(param.desc=="DESC")?"selected":"" } value="DESC">내림차순</option>
-						<option ${(param.desc=="ASC")?"selected":"" } value="ASC">오름차순</option>
-					</select>
-
-					<div class="col-2">&nbsp;</div>
-
-					<select class="col-1" name="r">
-						<option ${(param.r=="15")?"selected":"" } value="15">15개</option>
-						<option ${(param.r=="10")?"selected":"" } value="10">10개</option>
-						<option ${(param.r=="20")?"selected":"" } value="20">20개</option>
-						<option ${(param.r=="30")?"selected":"" } value="30">30개</option>
-						<option ${(param.r=="50")?"selected":"" } value="50">50개</option>
-						<option ${(param.r=="100")?"selected":"" } value="100">100개</option>
-					</select> <select class="col-2" name="f">
-						<option ${(param.f=="no")?"selected":"" } value="no">번호</option>
-						<option ${(param.f=="title")?"selected":"" } value="title">제목</option>
-						<option ${(param.f=="nickName")?"selected":"" } value="nickName">작성자</option>
-						<option ${(param.f=="date")?"selected":"" } value="date">작성일</option>
-						<option ${(param.f=="Account")?"selected":"" } value="Account">Account</option>
-
-					</select> <input class="col-2" type="text" name="q" value="${param.q}" />
-					<button type="submit" class="btn btn-primary col-1">검색</button>
-				</div>
-			</div>
-		</form>
-
-		<form >
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th scope="col">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="all" id="flexCheckDefault" name="del_member">
-							</div>
-						</th>
-						<th scope="col">번호</th>
-						<th scope="col">제목</th>
-						<th scope="col">작성자</th>
-						<th scope="col">작성일</th>
-						<th scope="col">조회수</th>
-					</tr>
-				</thead>
-
-				<tbody>
+			<tbody>
+				<form>
 					<c:forEach var="getWritingList" items="${getWritingList}">
+
 						<tr>
-							<td>
+							<td >
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="${getWritingList.no}" id="no" name="no">
+									<input class="form-check-input" type="checkbox" value="${getWritingList.no}" id="flexCheckDefault" name="del_member"> <input class="form-check-input" type="checkbox"
+										value="${getWritingList.no}" id="no" name="no">
 								</div>
 							</td>
-							<td scope="row">${getWritingList.no}</td>
-							<td><a href="/board/detail/${getWritingList.no}">${getWritingList.title} </a></td>
-							<td>${getWritingList.nickName}</td>
-							<td>${getWritingList.date}</td>
-							<td>${getWritingList.viewCount}</td>
+							<td class="grayFont_td" scope="row">${getWritingList.no}</td>
+
+							<td ><a class="titleFont_td NoUnderline" href="/board/detail/${getWritingList.no}">${getWritingList.title} </a></td>
+							<td class="titleFont_td">${getWritingList.nickName}</td>
+							<td class="grayFont_td">${getWritingList.date}</td>
+							<td class="grayFont_td">${getWritingList.viewCount}</td>
 						</tr>
 					</c:forEach>
-				</tbody>
-			</table>
-		</form>
+				</form>
+			</tbody>
+		</table>
+
+
+	</div>
+	<div >
 		<button id="btn-delete" class="btn btn-primary col-1">글 삭제</button>
 
 		<c:set var="row" value="${(empty param.r)?15:param.r}" />
