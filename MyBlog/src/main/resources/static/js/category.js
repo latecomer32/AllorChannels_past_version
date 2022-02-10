@@ -2,15 +2,14 @@ function submitItem() {
   if (!validateItem()) {
     return;
   }
-  let data = {
-    categoryName: $("#categoryName").val(),
-  };
+  let categoryName = $("#categoryName").val();
+
   $.ajax({
-    type: "POST",
-    url: "/category/saveCategoryName",
-    data: JSON.stringify(data),
+    type: "GET",
+    url: "/category",
+    data: categoryName,
     contentType: "application/json; charset=utf-8",
-    dataType: "json",
+    dataType: "text",
   })
     .done(function (resp) {
       alert("등록이 완료되었습니다.");

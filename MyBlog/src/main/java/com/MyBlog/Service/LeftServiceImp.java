@@ -16,19 +16,15 @@ public class LeftServiceImp implements LeftService{
 	LeftRepository leftRepository;
 
 	@Override
-	public List<Category> getCategoryList(UserCategoryView getNickName) {
-		return leftRepository.getCategoryList(getNickName);
+	public List<Category> getCategoryList(String nickName) {
+		return leftRepository.getCategoryList(nickName);
 	}
 
 	@Override
-	public void saveCategoryName(UserCategoryView getNickName, UserCategoryView categoryName) {
-		leftRepository.saveCategoryName(getNickName, categoryName);
+	public void saveCategoryName(String nickName, String categoryName) {
+		leftRepository.saveCategoryName(nickName, categoryName);
 	}
 
-	@Override
-	public UserCategoryView getNickName(String username) {
-		return leftRepository.getNickName(username);
-	}
 
 	
 

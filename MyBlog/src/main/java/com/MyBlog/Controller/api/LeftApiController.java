@@ -23,19 +23,19 @@ public class LeftApiController {
 	LeftService leftService;
 
 	@PostMapping("/category/saveCategoryName")
-	public ResponseDto<Integer> saveCategoryName(@RequestBody UserCategoryView categoryName,
+	public String saveCategoryName(@RequestBody String categoryName,
 			@AuthenticationPrincipal PrincipalDetail principal, Model model) {
 
-		UserCategoryView getNickName = leftService.getNickName(principal.getUsername());
-		leftService.saveCategoryName(getNickName, categoryName);
 
-		List<Category> getCategoryList = leftService.getCategoryList(getNickName);
-		System.out.println("getNickName:" + getNickName);
+		leftService.saveCategoryName(principal.getNickName(), categoryName);
+
+		List<Category> getCategoryList = leftService.getCategoryList(principal.getNickName());
+		System.out.println("getNickName:" + principal.getNickName());
 		System.out.println("LeftController getCategoryList:" + getCategoryList);
 		
 		model.addAttribute("getCategoryList", getCategoryList);
-
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+		return "redirect:/";
+		//return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 
 }

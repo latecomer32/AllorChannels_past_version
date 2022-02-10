@@ -12,9 +12,8 @@ import com.MyBlog.Dto.UserDto;
 
 public interface LeftRepository {
 
-	List<Category> getCategoryList(UserCategoryView getNickName);
+	List<Category> getCategoryList(String nickName);
 
-	void saveCategoryName(UserCategoryView getNickName,UserCategoryView categoryName);
+	void saveCategoryName(String nickName,String categoryName);
 
-	UserCategoryView getNickName(String username);
 }

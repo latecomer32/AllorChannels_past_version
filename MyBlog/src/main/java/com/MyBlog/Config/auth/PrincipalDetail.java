@@ -19,7 +19,13 @@ public class PrincipalDetail implements UserDetails {
 		this.user = user;
 
 	}
-
+	
+	public String getNickName() {
+		// TODO Auto-generated method stub
+		return user.getNickName();
+	}
+	
+	
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub

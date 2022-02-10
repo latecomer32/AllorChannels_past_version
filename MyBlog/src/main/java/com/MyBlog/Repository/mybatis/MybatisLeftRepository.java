@@ -21,21 +21,16 @@ public class MybatisLeftRepository implements LeftRepository {
 	}
 
 	@Override
-	public List<Category> getCategoryList(UserCategoryView getNickName) {
-		System.out.println("categoryName mapper:" + getNickName.getNickName());
-		return mapper.getCategoryList(getNickName);
+	public List<Category> getCategoryList(String nickName) {
+		System.out.println("categoryName mapper:" + nickName);
+		return mapper.getCategoryList(nickName);
 	}
 
 	@Override
-	public void saveCategoryName(UserCategoryView getNickName, UserCategoryView categoryName) {
+	public void saveCategoryName(String nickName, String categoryName) {
 
-		mapper.saveCategoryName(getNickName, categoryName);
+		mapper.saveCategoryName(nickName, categoryName);
 	}
 
-	@Override
-	public UserCategoryView getNickName(String username) {
-
-		return mapper.getNickName(username);
-	}
 
 }

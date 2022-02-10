@@ -42,7 +42,7 @@
 2
 		</c:when>
 		<c:otherwise>
-			<div>${principal.username}카테고리목록</div>
+			<div>${principal.nickName}카테고리목록</div>
 			<ul class="list-group" id="sortable">
 				<c:choose>
 					<c:when test="${empty getCategoryList}">
@@ -50,7 +50,7 @@
 
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="getCategoryList" items="getCategoryList">
+						<c:forEach var="getCategoryList" items="${getCategoryList}">
 
 							<li class="ui-state-default list-group-item active"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>${getCategoryList.categoryName}</li>
 

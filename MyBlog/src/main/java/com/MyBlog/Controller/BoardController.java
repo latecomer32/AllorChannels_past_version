@@ -3,6 +3,7 @@ package com.MyBlog.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +11,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.MyBlog.Config.auth.PrincipalDetail;
 import com.MyBlog.Dto.Board;
+import com.MyBlog.Dto.Category;
 import com.MyBlog.Service.BoardService;
+import com.MyBlog.Service.LeftService;
 
 @Controller
 public class BoardController {
 
 	@Autowired
 	BoardService boardService;
+
 	
 	@GetMapping("/board/saveTheWritingForm")
 	public String saveTheWriting() {
@@ -32,7 +37,8 @@ public class BoardController {
 			@RequestParam(name="r", required=false, defaultValue = "15") Integer rowNum,
 			@RequestParam(name="desc", required=false, defaultValue = "DESC")String desc,
 			@RequestParam(name="order", required=false, defaultValue = "date")String order,
-			Model model,Board board) {
+			Model model,
+			Board board) {
 		model.addAttribute("categoryValue",board.getCategory());
 
 		boolean pub =true;
