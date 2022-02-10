@@ -56,5 +56,4 @@ public class HeaderController {
 		model.addAttribute("getMemberCount", getMemberCount);
 		return "root.mid_memberList";
 	}
-
 }
