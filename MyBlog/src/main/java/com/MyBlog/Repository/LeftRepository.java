@@ -7,13 +7,14 @@ import org.apache.ibatis.annotations.Param;
 
 import com.MyBlog.Dto.Board;
 import com.MyBlog.Dto.Category;
+import com.MyBlog.Dto.UserCategoryView;
 import com.MyBlog.Dto.UserDto;
 
 public interface LeftRepository {
 
-	List<Category> getCategoryList(String categoryName);
+	List<Category> getCategoryList(UserCategoryView getNickName);
 
-	void saveCategoryName(UserDto getNickName,Category categoryName);
+	void saveCategoryName(UserCategoryView getNickName,UserCategoryView categoryName);
 
-	UserDto getNickName(String username);
+	UserCategoryView getNickName(String username);
 }

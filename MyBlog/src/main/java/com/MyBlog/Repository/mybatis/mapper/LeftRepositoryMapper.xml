@@ -5,18 +5,18 @@
 <mapper namespace="com.MyBlog.Repository.LeftRepository">
 
 	
-	<insert id="saveCategoryName">
+	<insert id="saveCategoryName" parameterType="com.MyBlog.Dto.UserCategoryView">
 		insert into
 		category(nickName, categoryName)
-		values(${nickName},${categoryName})
+		values(${getNickName.nickName},${categoryName.categoryName})
 	</insert>
 	
-	<select id="getNickName" resultType="com.MyBlog.Dto.UserDto">
+	<select id="getNickName" resultType="com.MyBlog.Dto.UserCategoryView">
 		select * from user where userId= ${username}
 	</select>
 
 	<select id="getCategoryList" resultType="com.MyBlog.Dto.Category">
-		SELECT * FROM category where categoryName=${categoryName}	
+		SELECT * FROM category where categoryName=${getNickName.nickName}
 	</select>
 	
 </mapper>

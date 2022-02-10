@@ -3,14 +3,15 @@ package com.MyBlog.Service;
 import java.util.List;
 
 import com.MyBlog.Dto.Category;
+import com.MyBlog.Dto.UserCategoryView;
 import com.MyBlog.Dto.UserDto;
 
 public interface LeftService {
 
-	void saveCategoryName(UserDto getNickName, Category categoryName);
+	void saveCategoryName(UserCategoryView getNickName, UserCategoryView categoryName);
 
-	List<Category> getCategoryList(String username);
+	List<Category> getCategoryList(UserCategoryView getNickName);
 
-	UserDto getNickName(String username);
+	UserCategoryView getNickName(String string);
 
 }
