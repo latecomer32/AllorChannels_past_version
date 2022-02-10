@@ -13,7 +13,7 @@ public interface LeftRepository {
 
 	List<Category> getCategoryList(String categoryName);
 
-	void saveCategoryName(UserDto getNickName,Category categoryName);
+	void saveCategoryName(String nickName,String categoryName);
 
-	UserDto getNickName(String username);
+	String getNickName(String username);
 }

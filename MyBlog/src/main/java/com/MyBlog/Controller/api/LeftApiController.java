@@ -20,11 +20,11 @@ public class LeftApiController {
 	LeftService leftService;
 
 	@PostMapping("/category/saveCategoryName" )
-	public ResponseDto<Integer> saveCategoryName(@RequestBody Category categoryName,
+	public ResponseDto<Integer> saveCategoryName(@RequestBody String categoryName,
 			@AuthenticationPrincipal PrincipalDetail principal) {
 		
 	
-		UserDto getNickName=leftService.getNickName(principal.getUsername());
+		String getNickName=leftService.getNickName(principal.getUsername());
 		
 		
 		 leftService.saveCategoryName(getNickName, categoryName);

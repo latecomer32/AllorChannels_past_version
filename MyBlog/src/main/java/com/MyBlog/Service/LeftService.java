@@ -7,10 +7,10 @@ import com.MyBlog.Dto.UserDto;
 
 public interface LeftService {
 
-	void saveCategoryName(UserDto getNickName, Category categoryName);
+	void saveCategoryName(String getNickName, String categoryName);
 
 	List<Category> getCategoryList(String username);
 
-	UserDto getNickName(String username);
+	String getNickName(String username);
 
 }

@@ -21,12 +21,12 @@ public class LeftServiceImp implements LeftService{
 	}
 
 	@Override
-	public void saveCategoryName(UserDto getNickName, Category categoryName) {
+	public void saveCategoryName(String getNickName, String categoryName) {
 		leftRepository.saveCategoryName(getNickName, categoryName);
 	}
 
 	@Override
-	public UserDto getNickName(String username) {
+	public String getNickName(String username) {
 		return leftRepository.getNickName(username);
 	}
 

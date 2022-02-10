@@ -5,14 +5,14 @@
 <mapper namespace="com.MyBlog.Repository.LeftRepository">
 
 	
-	<insert id="saveCategoryName">
+	<insert id="saveCategoryName" parameterType="String">
 		insert into
 		category(nickName, categoryName)
 		values(${nickName},${categoryName})
 	</insert>
 	
-	<select id="getNickName" resultType="com.MyBlog.Dto.UserDto">
-		select * from user where userId= ${username}
+	<select id="getNickName" resultType="String">
+		select nickName from user where userId= ${username}
 	</select>
 
 	<select id="getCategoryList" resultType="com.MyBlog.Dto.Category">
