@@ -52,8 +52,11 @@
 					<c:otherwise>
 						<c:forEach var="getCategoryList" items="${getCategoryList}">
 
-							<li class="ui-state-default list-group-item active"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>${getCategoryList.categoryName}</li>
-
+							<li class="ui-state-default list-group-item active">
+							<input type="checkbox" id="deleteCategory" name="deleteCategory" value="${getCategoryList.no}"/>
+							<span class="ui-icon ui-icon-arrowthick-2-n-s">
+							</span>${getCategoryList.categoryName}</li>
+							
 						</c:forEach>
 			</ul>
 		</c:otherwise>
@@ -64,8 +67,10 @@
 
 		<div style="clar: both;">
 
-			<input type="button" id="addItem" value="추가" onclick="createItem();" /> <input type="button" id="submitItem" value="제출" onclick="submitItem();" />
-
+			<input type="button" id="addItem" value="추가" onclick="createItem();" />
+			<input type="button" id="btn_deleteCategory" name="btn_deleteCategory" value="삭제" onclick="btn_deleteCategory();" /> 
+			<input type="button" id="submitItem" value="확인" onclick="submitItem();" />
+			
 		</div>
 	</div>
 	<br />

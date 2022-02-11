@@ -38,8 +38,13 @@ public class BoardController {
 			@RequestParam(name="desc", required=false, defaultValue = "DESC")String desc,
 			@RequestParam(name="order", required=false, defaultValue = "date")String order,
 			Model model,
-			Board board) {
-		model.addAttribute("categoryValue",board.getCategory());
+			Board board,
+			@AuthenticationPrincipal PrincipalDetail principal) {
+		if (principal != null) {
+			return "redirect:/category";
+		}
+		
+		model.addAttribute("categoryValue",board.getCategoryName());
 
 		boolean pub =true;
 

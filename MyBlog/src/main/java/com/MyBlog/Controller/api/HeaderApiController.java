@@ -2,6 +2,7 @@ package com.MyBlog.Controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class HeaderApiController {
 
 	@PostMapping("/auth/joinForm")
 	public ResponseDto<Integer> join(@RequestBody UserDto user) {
+	
 		headerService.join(user);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}

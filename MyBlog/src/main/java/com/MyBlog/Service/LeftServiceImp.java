@@ -25,14 +25,10 @@ public class LeftServiceImp implements LeftService{
 		leftRepository.saveCategoryName(nickName, categoryName);
 	}
 
-
-	
-
-	
-		 
+	@Override
+	public void deleteCategoryName(String[] deleteCategory) {
+		leftRepository.deleteCategoryName(deleteCategory);
 		
-	
-
-	
+	}
 
 }

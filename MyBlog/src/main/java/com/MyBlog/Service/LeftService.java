@@ -12,4 +12,6 @@ public interface LeftService {
 
 	List<Category> getCategoryList(String nickName);
 
+	void deleteCategoryName(String[] deleteCategory);
+
 }

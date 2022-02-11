@@ -32,5 +32,8 @@ public class MybatisLeftRepository implements LeftRepository {
 		mapper.saveCategoryName(nickName, categoryName);
 	}
 
-
+	@Override
+	public void deleteCategoryName(String[] deleteCategory) {
+		mapper.deleteCategoryName(deleteCategory);
+	}
 }

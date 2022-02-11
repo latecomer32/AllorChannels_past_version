@@ -27,7 +27,7 @@ public class Board {
 	
 	private int replyCount;
 	
-	private String category;
+	private String categoryName;
 	
 	private boolean pub;
 	

@@ -34,9 +34,12 @@ public class LeftController {
 			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
 			@AuthenticationPrincipal PrincipalDetail principal, Model model, Board board) {
 
+		if (principal == null) {
+			return "redirect:/";
+		} else {
 			List<Category> getCategoryList = leftService.getCategoryList(principal.getNickName());
 			model.addAttribute("getCategoryList", getCategoryList);
-	
+		}
 
 		boolean pub = true;
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc);

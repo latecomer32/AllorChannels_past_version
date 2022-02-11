@@ -1,3 +1,26 @@
+function btn_deleteCategory() {
+  var deleteCategoryNoArray = [];
+  $("input[name=deleteCategory]:checked").each(function () {
+    deleteCategoryNoArray.push($(this).attr("value"));
+  });
+
+  console.log(deleteCategoryNoArray);
+  $.ajax({
+    type: "POST",
+    url: "/category/deleteCategoryName",
+    data: JSON.stringify(deleteCategoryNoArray),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+  })
+    .done(function (resp) {
+      alert("삭제가 완료되었습니다.");
+      location.href = "/";
+    })
+    .fail(function (error) {
+      alert(JSON.stringify(error));
+    });
+}
+
 function submitItem() {
   if (!validateItem()) {
     return;
@@ -5,8 +28,8 @@ function submitItem() {
   let categoryName = $("#categoryName").val();
 
   $.ajax({
-    type: "GET",
-    url: "/category",
+    type: "POST",
+    url: "/category/saveCategoryName",
     data: categoryName,
     contentType: "application/json; charset=utf-8",
     dataType: "text",

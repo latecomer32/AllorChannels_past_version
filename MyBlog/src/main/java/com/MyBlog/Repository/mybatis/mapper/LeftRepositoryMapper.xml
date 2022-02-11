@@ -4,15 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.MyBlog.Repository.LeftRepository">
 
-	
+
 	<insert id="saveCategoryName" parameterType="String">
 		insert into
 		category(nickName, categoryName)
 		values(#{nickName},#{categoryName})
 	</insert>
-	
-	<select id="getCategoryList" parameterType="String" resultType="com.MyBlog.Dto.Category">
+
+	<select id="getCategoryList" parameterType="String"
+		resultType="com.MyBlog.Dto.Category">
 		SELECT * FROM category where nickName=#{nickName}
 	</select>
+
+	<delete id="deleteCategoryName" parameterType="String">
+		DELETE FROM category where no in
+		<foreach item="no" index="index" collection="deleteCategory"
+	        open="(" separator="," close=")">
+    	      #{no}
+    	</foreach>
 	
+	</delete>
+
+
 </mapper>

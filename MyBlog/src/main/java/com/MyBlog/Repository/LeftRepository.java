@@ -16,4 +16,6 @@ public interface LeftRepository {
 
 	void saveCategoryName(String nickName,String categoryName);
 
+	void deleteCategoryName(String[] deleteCategory);
+
 }

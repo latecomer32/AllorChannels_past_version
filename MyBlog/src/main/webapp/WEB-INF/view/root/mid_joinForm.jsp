@@ -49,7 +49,7 @@ margin-top:50px;
 		<br>
 		<br>
 		<br>
-	va
+	
 		<button id="btn-save" class="btn btn-primary" name="SignUp" onclick="return joinCheck()">가입</button>
 	</div>
 </div>
