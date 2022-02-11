@@ -2,6 +2,9 @@ package com.MyBlog.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -32,15 +35,17 @@ public class LeftController {
 			@RequestParam(name = "r", required = false, defaultValue = "15") Integer rowNum,
 			@RequestParam(name = "desc", required = false, defaultValue = "DESC") String desc,
 			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
-			@AuthenticationPrincipal PrincipalDetail principal, Model model, Board board) {
-
+			@AuthenticationPrincipal PrincipalDetail principal, Model model,
+			Board board,
+			HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		if (principal == null) {
 			return "redirect:/";
 		} else {
 			List<Category> getCategoryList = leftService.getCategoryList(principal.getNickName());
-			model.addAttribute("getCategoryList", getCategoryList);
+			session.setAttribute("getCategoryList", getCategoryList);
 		}
-
+		
 		boolean pub = true;
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc);
 		int getWritingCount = boardService.getWritingCount(field, query);

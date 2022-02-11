@@ -61,26 +61,19 @@ ul li a {
 </div>
 <!-- -------<header> ---------- -->
 <div class=" header d-flex justify-content-start  ">
-	<div class="leftDisplay">1</div>
+	<div class="leftDisplay"></div>
 
 	<div class="d-flex justify-content-between middleDisplay">
-		<a class="marginTopBottomAuto NoUnderline" href="/">B</a> <span>
+		<a class="marginTopBottomAuto NoUnderline" href="/"><b>MyBlog</b></a> <span>
 			<ul class="nav">
 				<form class="d-flex flex-row" action="/">
 					<li class="nav-item marginTopBottomAuto"><input type="text" name="q" value="${param.q}" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}" /></li>
-					<li class="nav-item marginTopBottomAuto"><input type="image" src="./image/search.svg" onclick="search_onclick_submit" class="submit icon-" /></li>
+					<li class="nav-item marginTopBottomAuto"><input type="image" src="/image/search.svg" onclick="search_onclick_submit" class="submit icon-" /></li>
 				</form>
 			
 				<c:choose>
 					<c:when test="${empty principal}">
 						<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/">로그인</a></li>
-						<li class="nav-item marginTopBottomAuto"><a
-							href="
-https://kauth.kakao.com/oauth/authorize
-?client_id=84d0b808b23f632f987e7ec4dd0bbf40
-&redirect_uri=http://localhost:8000/auth/kakao/callback
-&response_type=code"> <img
-								height="40px" src="/image/kakao_login_button.png"></a></li>
 						<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
 					</c:when>
 					<c:otherwise>
@@ -95,5 +88,5 @@ https://kauth.kakao.com/oauth/authorize
 		</span>
 	</div>
 
-	<div class="rightDisplay">3</div>
+	<div class="rightDisplay"></div>
 </div>

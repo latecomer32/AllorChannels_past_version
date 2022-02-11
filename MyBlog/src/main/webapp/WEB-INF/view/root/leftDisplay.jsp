@@ -36,18 +36,16 @@
 
 
 <div>
-	1
+	
 	<c:choose>
 		<c:when test="${empty principal}">
-2
 		</c:when>
 		<c:otherwise>
-			<div>${principal.nickName}카테고리목록</div>
+			<div><b>${principal.nickName}</b>님의 목록</div>
 			<ul class="list-group" id="sortable">
 				<c:choose>
 					<c:when test="${empty getCategoryList}">
-						<li class="ui-state-default list-group-item active"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>카테고리 없음</li>
-
+						<li class="ui-state-default list-group-item active"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>비어있음</li>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="getCategoryList" items="${getCategoryList}">
