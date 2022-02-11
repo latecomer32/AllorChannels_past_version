@@ -22,10 +22,27 @@
 			<if test="query !=null and query != ''">
 				${field} like '%${query}%'
 			</if>
+		and
+			<if test="categoryName !=null and categoryName != ''">
+			categoryName = #{categoryName}
+			</if>
+			
+			<if test="categoryName ==''">
+			categoryName like '%${categoryName}%'
+			</if>
+		and
+			<if test="nickName !=null and nickName != ''">
+			nickName = #{nickName}
+			</if>
+		
+			<if test="nickName ==''">
+			nickName like '%${nickName}%'
+			</if>
 			and pub = #{pub}
-		</where>
-		order by ${order} ${desc}
+			order by ${order} ${desc}
 		limit #{offset}, #{rowNum}
+		</where>
+
 	</select>
 
 	<delete id="deleteWritingList">

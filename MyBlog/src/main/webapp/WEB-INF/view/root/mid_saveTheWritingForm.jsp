@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    
+
 
 <style>
 .joinform {
@@ -26,27 +26,23 @@
 <div class="Display middeDisplay">
 
 	<div class="container">
-		<form method="post" >
+		<form method="post">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Enter title" id="title">
 			</div>
 
-			<select id="category" name="category">
-				<option value="없음" >카테고리 없음</option>
-				<c:forEach var="categoryValue" items="${categoryValue}">
-					<option value="${categoryValue}">${categoryValue}</option>
-				</c:forEach>
+			<select id="categoryName" name="categoryName">
+						<option value="없음">카테고리 없음</option>
+						<c:forEach var="getCategoryList" items="${getCategoryList}">
+							<option value="${getCategoryList.categoryName}">${getCategoryList.categoryName}</option>
+						</c:forEach>
+
 			</select>
 
-			
-			
-			
-	
 			<div class="form-group">
 				<textarea id="summernote" name="editordata"></textarea>
 			</div>
 
-	
 		</form>
 		<button id="btn-saveTheWriting" class="btn btn-primary">글 저장</button>
 	</div>

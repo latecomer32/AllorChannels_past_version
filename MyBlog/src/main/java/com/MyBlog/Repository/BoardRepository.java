@@ -9,7 +9,7 @@ public interface BoardRepository {
 
 	void saveTheWriting(Board board);
 
-	List<Board> getWritingList(int offset, String field, String query, boolean pub, Integer rowNum, String order, String desc);
+	List<Board> getWritingList(int offset, String field, String query, boolean pub, Integer rowNum, String order, String desc, String categoryName, String nickName);
 
 	int getWritingCount(String field, String query);
 

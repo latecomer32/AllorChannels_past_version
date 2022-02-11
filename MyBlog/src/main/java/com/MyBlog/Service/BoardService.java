@@ -12,11 +12,12 @@ public interface BoardService {
 
 	void saveTheWriting(Board board, String username);
 
-	List<Board> getWritingList(int page, String field, String query, boolean pub, Integer rowNum, String order, String desc);
+	List<Board> getWritingList(int page, String field, String query, boolean pub, Integer rowNum, String order, String desc, String categoryName, String nickName);
 
 	void deleteWritingList(int no);
 
 	int getWritingCount(String field, String query);
 
 	Board getWritingDetail(int no);
+
 }

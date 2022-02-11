@@ -22,13 +22,11 @@ public class MybatisLeftRepository implements LeftRepository {
 
 	@Override
 	public List<Category> getCategoryList(String nickName) {
-		System.out.println("categoryName mapper:" + nickName);
 		return mapper.getCategoryList(nickName);
 	}
 
 	@Override
 	public void saveCategoryName(String nickName, String categoryName) {
-
 		mapper.saveCategoryName(nickName, categoryName);
 	}
 

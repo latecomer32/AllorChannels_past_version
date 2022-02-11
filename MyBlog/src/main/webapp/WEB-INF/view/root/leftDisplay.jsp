@@ -36,46 +36,42 @@
 
 
 <div>
-	
+
 	<c:choose>
 		<c:when test="${empty principal}">
 		</c:when>
 		<c:otherwise>
-			<div><b>${principal.nickName}</b>님의 목록</div>
+			<div>
+				<b>${principal.nickName}</b>님의 목록
+			</div>
 			<ul class="list-group" id="sortable">
-				<c:choose>
-					<c:when test="${empty getCategoryList}">
-						<li class="ui-state-default list-group-item active"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>비어있음</li>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="getCategoryList" items="${getCategoryList}">
 
-							<li class="ui-state-default list-group-item active">
-							<input type="checkbox" id="deleteCategory" name="deleteCategory" value="${getCategoryList.no}"/>
-							<span class="ui-icon ui-icon-arrowthick-2-n-s">
-							</span>${getCategoryList.categoryName}</li>
-							
-						</c:forEach>
+				<li class="ui-state-default list-group-item active"><a href="/category/"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>내가 작성한 글 전부 보기
+				</a></li>
+				<li class="ui-state-default list-group-item active"><a href="/category/없음"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>카테고리 없는 글 보기
+				</a></li>
+				<c:forEach var="getCategoryList" items="${getCategoryList}">
+					<li class="ui-state-default list-group-item active"><input type="checkbox" id="deleteCategory" name="deleteCategory" value="${getCategoryList.no}" /> <a
+						href="/category/${getCategoryList.categoryName}"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>${getCategoryList.categoryName}</a></li>
+				</c:forEach>
 			</ul>
+
+			<div>
+
+				<div style="float: left; width: 100px;">아이템 추가 :</div>
+
+				<div style="clar: both;">
+
+					<input type="button" id="addItem" value="추가" onclick="createItem();" /> <input type="button" id="btn_deleteCategory" name="btn_deleteCategory" value="삭제" onclick="btn_deleteCategory();" /> <input
+						type="button" id="submitItem" value="확인" onclick="submitItem();" />
+
+				</div>
+			</div>
+			<br />
+
+			<div id="itemBoxWrap"></div>
+
 		</c:otherwise>
-	</c:choose>
-	<div>
-
-		<div style="float: left; width: 100px;">아이템 추가 :</div>
-
-		<div style="clar: both;">
-
-			<input type="button" id="addItem" value="추가" onclick="createItem();" />
-			<input type="button" id="btn_deleteCategory" name="btn_deleteCategory" value="삭제" onclick="btn_deleteCategory();" /> 
-			<input type="button" id="submitItem" value="확인" onclick="submitItem();" />
-			
-		</div>
-	</div>
-	<br />
-
-	<div id="itemBoxWrap"></div>
-
-	</c:otherwise>
 	</c:choose>
 </div>
 

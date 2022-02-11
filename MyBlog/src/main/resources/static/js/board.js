@@ -21,7 +21,7 @@ let index = {
     let data = {
       title: $("#title").val(),
       content: $("#summernote").val(),
-      category: $("#category").val(),
+      categoryName: $("#categoryName").val(),
     };
     $.ajax({
       type: "POST",

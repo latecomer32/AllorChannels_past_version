@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.MyBlog.Config.auth.PrincipalDetail;
@@ -28,13 +29,14 @@ public class LeftController {
 	public LeftService leftService;
 
 	@GetMapping("/category")
-	public String saveCategoryName(@RequestParam(value = "categoryName", required = false) String categoryName,
-			@RequestParam(name = "p", required = false, defaultValue = "1") Integer page,
+	public String saveCategoryName(@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
+			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
 			@RequestParam(name = "f", required = false, defaultValue = "title") String field,
 			@RequestParam(name = "q", required = false, defaultValue = "") String query,
 			@RequestParam(name = "r", required = false, defaultValue = "15") Integer rowNum,
 			@RequestParam(name = "desc", required = false, defaultValue = "DESC") String desc,
 			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
+			@RequestParam(name = "n", required = false, defaultValue = "") String nickName,
 			@AuthenticationPrincipal PrincipalDetail principal, Model model,
 			Board board,
 			HttpServletRequest request) {
@@ -47,11 +49,32 @@ public class LeftController {
 		}
 		
 		boolean pub = true;
-		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc);
+		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc, categoryName, principal.getNickName());
 		int getWritingCount = boardService.getWritingCount(field, query);
 		model.addAttribute("getWritingList", getWritingList);
 		model.addAttribute("getWritingCount", getWritingCount);
 		return "root.mid_contentList";
-
+	}
+	
+	@GetMapping("/category/{categoryName}")
+	public String getCategoryPage(@PathVariable String categoryName,
+			@RequestParam(name = "p", required = false, defaultValue = "1") Integer page,
+			@RequestParam(name = "f", required = false, defaultValue = "title") String field,
+			@RequestParam(name = "q", required = false, defaultValue = "") String query,
+			@RequestParam(name = "r", required = false, defaultValue = "15") Integer rowNum,
+			@RequestParam(name = "desc", required = false, defaultValue = "DESC") String desc,
+			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
+			@RequestParam(name = "n", required = false, defaultValue = "") String nickName,
+			@AuthenticationPrincipal PrincipalDetail principal,
+			Model model) {
+		
+		boolean pub = true;
+		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc, categoryName, principal.getNickName());
+		int getWritingCount = boardService.getWritingCount(field, query);
+		model.addAttribute("getWritingList", getWritingList);
+		model.addAttribute("getWritingCount", getWritingCount);
+		
+		
+		return "root.mid_contentList";
 	}
 }
