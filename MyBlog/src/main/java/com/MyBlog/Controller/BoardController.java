@@ -23,46 +23,46 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	
 	@GetMapping("/board/saveTheWritingForm")
 	public String saveTheWriting() {
 		return "root.mid_saveTheWritingForm";
 	}
-	
+
 	@RequestMapping({ "", "/" })
-	public String index(
-			@RequestParam(name= "c", required=false, defaultValue = "") String categoryName,
-			@RequestParam(name="p", required=false, defaultValue = "1") int page,
-			@RequestParam(name="f", required=false, defaultValue = "title")String field,
-			@RequestParam(name="q", required=false, defaultValue = "")String query,
-			@RequestParam(name="r", required=false, defaultValue = "15") Integer rowNum,
-			@RequestParam(name="desc", required=false, defaultValue = "DESC")String desc,
-			@RequestParam(name="order", required=false, defaultValue = "date")String order,
-			@RequestParam(name = "n", required = false, defaultValue = "") String nickName,
-			Model model,
-			Board board,
+	public String index(@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
+			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
+			@RequestParam(name = "f", required = false, defaultValue = "title") String field,
+			@RequestParam(name = "q", required = false, defaultValue = "") String query,
+			@RequestParam(name = "r", required = false, defaultValue = "15") Integer rowNum,
+			@RequestParam(name = "desc", required = false, defaultValue = "DESC") String desc,
+			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
+			@RequestParam(name = "n", required = false, defaultValue = "") String nickName, Model model, Board board,
 			@AuthenticationPrincipal PrincipalDetail principal) {
+		boolean pub = true;
+
 		if (principal != null) {
-			return "redirect:/category";
+			List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc,
+					categoryName, nickName);
+			return "forward:/category";
 		}
-		
-		model.addAttribute("categoryValue",board.getCategoryName());
 
-		boolean pub =true;
+		model.addAttribute("categoryValue", board.getCategoryName());
 
-		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub,rowNum,order,desc, categoryName, nickName);
+		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc,
+				categoryName, principal.getNickName());
+
 		int getWritingCount = boardService.getWritingCount(field, query);
 		model.addAttribute("getWritingList", getWritingList);
 		model.addAttribute("getWritingCount", getWritingCount);
 		return "root.mid_contentList";
 	}
-	
+
 	@GetMapping("/board/detail/{no}")
 	public String findByNo(@PathVariable int no, Model model) {
-		System.out.println("no"+boardService.getWritingDetail(no).getNo());
-		model.addAttribute("board",boardService.getWritingDetail(no));
+		System.out.println("no" + boardService.getWritingDetail(no).getNo());
+		model.addAttribute("board", boardService.getWritingDetail(no));
 		return "root.mid_detail";
-		
+
 	}
 
 }

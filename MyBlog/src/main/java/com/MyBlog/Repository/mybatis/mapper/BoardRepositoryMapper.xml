@@ -23,7 +23,7 @@
 				${field} like '%${query}%'
 			</if>
 		and
-			<if test="categoryName !=null and categoryName != ''">
+			<if test="categoryName != ''">
 			categoryName = #{categoryName}
 			</if>
 			
@@ -31,7 +31,7 @@
 			categoryName like '%${categoryName}%'
 			</if>
 		and
-			<if test="nickName !=null and nickName != ''">
+			<if test="nickName != ''">
 			nickName = #{nickName}
 			</if>
 		
@@ -42,7 +42,6 @@
 			order by ${order} ${desc}
 		limit #{offset}, #{rowNum}
 		</where>
-
 	</select>
 
 	<delete id="deleteWritingList">

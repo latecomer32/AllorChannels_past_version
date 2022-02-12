@@ -47,8 +47,6 @@ public class HeaderController {
 			@RequestParam(name="order", required=false, defaultValue = "date")String order,
 			Model model,UserDto user) {
 		
-		String a="aa";
-		model.addAttribute("a",a);
 		
 		boolean pub =true;
 

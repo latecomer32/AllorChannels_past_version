@@ -50,6 +50,17 @@ public class LeftController {
 		
 		boolean pub = true;
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc, categoryName, principal.getNickName());
+		System.out.println("/category_getWritingList:"
+				+"\n page:"+page+
+				"\n field:"+field+
+				"\n query:"+query+
+				"\n rowNum:"+rowNum+
+				"\n order:"+order+
+				"\n categoryName:"+categoryName+
+				"\n nickName:"+principal.getNickName());
+		
+		
+		
 		int getWritingCount = boardService.getWritingCount(field, query);
 		model.addAttribute("getWritingList", getWritingList);
 		model.addAttribute("getWritingCount", getWritingCount);
@@ -70,6 +81,16 @@ public class LeftController {
 		
 		boolean pub = true;
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc, categoryName, principal.getNickName());
+		System.out.println("/category/{categoryName}_getWritingList:"
+				+"\n page:"+page+
+				"\n field:"+field+
+				"\n query:"+query+
+				"\n rowNum:"+rowNum+
+				"\n order:"+order+
+				"\n categoryName:"+categoryName+
+				"\n nickName:"+principal.getNickName());
+		
+		
 		int getWritingCount = boardService.getWritingCount(field, query);
 		model.addAttribute("getWritingList", getWritingList);
 		model.addAttribute("getWritingCount", getWritingCount);
