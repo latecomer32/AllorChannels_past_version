@@ -44,5 +44,16 @@ public class HeaderServiceImp implements HeaderService{
 		return headerRepository.getMemberCount(field, query);
 	}
 
+	@Override
+	public int saveChannel(String channelName, String userId) {
+		return  headerRepository.saveChannel(channelName, userId);
+		
+	}
+
+	@Override
+	public String getChannelName(String userId) {
+		return  headerRepository.getChannelName(userId);
+	}
+
 
 }

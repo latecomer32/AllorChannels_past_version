@@ -29,10 +29,10 @@ public class BoardServiceImp implements BoardService{
 
 	
 	@Override
-	public List<Board> getWritingList(int page, String field, String query, boolean pub, Integer rowNum, String order, String desc, String categoryName, String nickName) {
+	public List<Board> getWritingList(int page, String field, String query, boolean pub, int size, String order, String desc, String categoryName, String nickName) {
 		
-		int offset = 0+(page-1)*rowNum;
-		 List<Board> getWritingList =boardRepository.getWritingList(offset, field, query, pub, rowNum, order, desc, categoryName, nickName);
+		int offset = 0+(page-1)*size;
+		 List<Board> getWritingList =boardRepository.getWritingList(offset, field, query, pub, size, order, desc, categoryName, nickName);
 		 return getWritingList;
 	}
 

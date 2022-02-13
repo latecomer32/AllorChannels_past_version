@@ -3,12 +3,14 @@ package com.MyBlog.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.MyBlog.Config.auth.PrincipalDetail;
 import com.MyBlog.Dto.Board;
 import com.MyBlog.Dto.UserDto;
 import com.MyBlog.Service.HeaderService;
@@ -55,5 +57,18 @@ public class HeaderController {
 		model.addAttribute("getMemberList", getMemberList);
 		model.addAttribute("getMemberCount", getMemberCount);
 		return "root.mid_memberList";
+	}
+	
+	@RequestMapping("/header/channel")
+	public String saveChannel(Model model, @AuthenticationPrincipal PrincipalDetail principal
+			) {
+		
+		String getChannelName = headerService.getChannelName(principal.getUsername());
+		if(getChannelName !=null)
+		{
+		model.addAttribute("getChannelName",getChannelName);
+		}
+		
+		return "root.mid_saveChannel";
 	}
 }

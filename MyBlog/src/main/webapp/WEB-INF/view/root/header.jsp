@@ -70,7 +70,7 @@ ul li a {
 					<li class="nav-item marginTopBottomAuto"><input type="text" name="q" value="${param.q}" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}" /></li>
 					<li class="nav-item marginTopBottomAuto"><input type="image" src="/image/search.svg" onclick="search_onclick_submit" class="submit icon-" /></li>
 				</form>
-			
+
 				<c:choose>
 					<c:when test="${empty principal}">
 						<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/">로그인</a></li>
@@ -79,7 +79,17 @@ ul li a {
 					<c:otherwise>
 						<li class="nav-item"><a class="nav-link" href="/board/saveTheWritingForm">글쓰기</a></li>
 						<li class="nav-item"><a class="nav-link" href="/header/member">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="/header/member">${principal.nickName}</a></li>
+
+						<c:choose>
+							<c:when test="${empty getChannelName}">
+								<li class="nav-item"><a class="nav-link" href="/header/channel">채널 만들기</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item marginTopBottomAuto"><button type="button" class="btn btn-primary channelName" >${getChannelName}</button></li>
+							</c:otherwise>
+						</c:choose>
+
+						<li class="nav-item"><a class="nav-link" href="">${principal.nickName}</a></li>
 						<li class="nav-item"><a class="nav-link flex-row-reverse" href="/logout">로그아웃</a></li>
 					</c:otherwise>
 				</c:choose>

@@ -40,7 +40,7 @@
 			</if>
 			and pub = #{pub}
 			order by ${order} ${desc}
-		limit #{offset}, #{rowNum}
+		limit #{offset}, #{size}
 		</where>
 	</select>
 

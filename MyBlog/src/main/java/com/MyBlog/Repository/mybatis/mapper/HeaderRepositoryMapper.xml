@@ -13,6 +13,16 @@
 		values(#{userId},#{email}, #{nickName}, #{password}, #{role})
 	</insert>
 	
+	<insert id="saveChannel" >
+		insert into channel(title, userId)
+		values(#{channelName}, #{userId})
+	</insert>
+	
+	<select id="getChannelName" resultType="String">
+		SELECT title FROM channel WHERE userId = #{userId}
+	</select>
+	
+	
 	<select id="findByUserId" parameterType="com.MyBlog.Dto.UserDto" resultType="com.MyBlog.Dto.UserDto">
 		SELECT * FROM user WHERE userId = #{userId}
 	</select>

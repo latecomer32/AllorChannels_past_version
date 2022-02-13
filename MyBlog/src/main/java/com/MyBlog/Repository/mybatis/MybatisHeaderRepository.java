@@ -44,4 +44,14 @@ public class MybatisHeaderRepository implements HeaderRepository {
 	public int getMemberCount(String field, String query) {
 		return mapper.getMemberCount(field, query);
 	}
+
+	@Override
+	public int saveChannel(String channelName, String userId) {
+		return mapper.saveChannel(channelName, userId);
+	}
+
+	@Override
+	public String getChannelName(String userId) {
+		return mapper.getChannelName(userId);
+	}
 }

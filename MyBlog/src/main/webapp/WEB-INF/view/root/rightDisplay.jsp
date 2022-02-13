@@ -5,3 +5,15 @@
 <div>
 
 </div>
+
+<script src="/js/join.js"></script>
+<!-- 사용처 : mid_joinForm -->
+
+<script src="/js/user.js"></script>
+<!-- 사용처 : mid_joinForm -->
+
+<script src="/js/board.js"></script>
+<!-- 사용처 : mid_contentList -->
+
+<script src="/js/channel.js"></script>
+<!-- 사용처 : mid_saveChannel -->

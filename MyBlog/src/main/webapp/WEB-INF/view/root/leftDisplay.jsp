@@ -36,6 +36,21 @@
 
 
 <div>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled">Disabled</a>
+  </li>
+</ul>
+
 
 	<c:choose>
 		<c:when test="${empty principal}">
@@ -46,13 +61,13 @@
 			</div>
 			<ul class="list-group" id="sortable">
 
-				<li class="ui-state-default list-group-item active"><a href="/category/"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>내가 작성한 글 전부 보기
+				<li class="ui-state-default list-group-item active"><a href="/category?c="> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>내가 작성한 글 전부 보기
 				</a></li>
-				<li class="ui-state-default list-group-item active"><a href="/category/없음"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>카테고리 없는 글 보기
+				<li class="ui-state-default list-group-item active"><a href="/category?c=없음"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>카테고리 없는 글 보기
 				</a></li>
 				<c:forEach var="getCategoryList" items="${getCategoryList}">
 					<li class="ui-state-default list-group-item active"><input type="checkbox" id="deleteCategory" name="deleteCategory" value="${getCategoryList.no}" /> <a
-						href="/category/${getCategoryList.categoryName}"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>${getCategoryList.categoryName}</a></li>
+						href="/category?c=${getCategoryList.categoryName}"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>${getCategoryList.categoryName}</a></li>
 				</c:forEach>
 			</ul>
 
