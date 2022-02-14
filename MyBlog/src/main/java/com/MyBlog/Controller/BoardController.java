@@ -66,7 +66,7 @@ public class BoardController {
 			model.addAttribute("getWritingList", getWritingList);
 			model.addAttribute("getWritingCount", getWritingCount);
 		}
-		/* 로그인 후 */
+		/* 로그인 후 /category*/
 		else if (request.getContextPath() == "/" && principal != null) {
 			/* board */
 			List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,

@@ -32,60 +32,64 @@
 	display: none;
 	cursor: pointer;
 }
+.beginEmpty{
+min-height:50px;
+}
 </style>
 
 
 <div>
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled">Disabled</a>
-  </li>
-</ul>
+
+<div class="beginEmpty">
+</div>
+
+
+
+
 
 
 	<c:choose>
 		<c:when test="${empty principal}">
 		</c:when>
 		<c:otherwise>
-			<div>
-				<b>${principal.nickName}</b>님의 목록
-			</div>
-			<ul class="list-group" id="sortable">
 
-				<li class="ui-state-default list-group-item active"><a href="/category?c="> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>내가 작성한 글 전부 보기
-				</a></li>
-				<li class="ui-state-default list-group-item active"><a href="/category?c=없음"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>카테고리 없는 글 보기
-				</a></li>
-				<c:forEach var="getCategoryList" items="${getCategoryList}">
-					<li class="ui-state-default list-group-item active"><input type="checkbox" id="deleteCategory" name="deleteCategory" value="${getCategoryList.no}" /> <a
-						href="/category?c=${getCategoryList.categoryName}"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>${getCategoryList.categoryName}</a></li>
-				</c:forEach>
-			</ul>
+			<div class="card" style="width: 18rem;">
+				<ul class="nav nav-tabs">
+					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><b>${principal.nickName}</b></a></li>
+					<li class="nav-item"><a class="nav-link" href="#"> 채널</a></li>
+				</ul>
 
-			<div>
 
-				<div style="float: left; width: 100px;">아이템 추가 :</div>
 
-				<div style="clar: both;">
+				<div class="card-body">
+					<ul class="list-group" id="sortable">
 
-					<input type="button" id="addItem" value="추가" onclick="createItem();" /> <input type="button" id="btn_deleteCategory" name="btn_deleteCategory" value="삭제" onclick="btn_deleteCategory();" /> <input
-						type="button" id="submitItem" value="확인" onclick="submitItem();" />
+						<li class="ui-state-default list-group-item active"><a href="/category?c="> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>내가 작성한 글 전부 보기
+						</a></li>
+						<li class="ui-state-default list-group-item"><a href="/category?c=없음"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>카테고리 없는 글 보기
+						</a></li>
+						<c:forEach var="getCategoryList" items="${getCategoryList}">
+							<li class="ui-state-default list-group-item active"><input type="checkbox" id="deleteCategory" name="deleteCategory" value="${getCategoryList.no}" /> <a
+								href="/category?c=${getCategoryList.categoryName}"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>${getCategoryList.categoryName}</a></li>
+						</c:forEach>
+					</ul>
 
+					<div>
+
+						<div style="float: left; width: 100px;">아이템 추가 :</div>
+
+						<div style="clar: both;">
+
+							<input type="button" id="addItem" value="추가" onclick="createItem();" /> <input type="button" id="btn_deleteCategory" name="btn_deleteCategory" value="삭제" onclick="btn_deleteCategory();" /> <input
+								type="button" id="submitItem" value="확인" onclick="submitItem();" />
+
+						</div>
+					</div>
+					<br />
+
+					<div id="itemBoxWrap"></div>
 				</div>
 			</div>
-			<br />
-
-			<div id="itemBoxWrap"></div>
-
 		</c:otherwise>
 	</c:choose>
 </div>

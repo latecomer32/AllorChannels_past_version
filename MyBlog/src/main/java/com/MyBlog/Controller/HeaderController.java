@@ -56,7 +56,7 @@ public class HeaderController {
 		int getMemberCount = headerService.getMemberCount(field, query);
 		model.addAttribute("getMemberList", getMemberList);
 		model.addAttribute("getMemberCount", getMemberCount);
-		return "root.mid_memberList";
+		return "member.mid_memberList";
 	}
 	
 	@RequestMapping("/header/channel")
