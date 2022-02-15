@@ -13,6 +13,6 @@
 
 	<select id="getChannelCount" resultType="int">
 		SELECT COUNT(no) COUNT FROM 
-		(SELECT * FROM channel WHERE ${field} LIKE '%${query}%')N
+		(SELECT * FROM channel WHERE title LIKE '%${query}%')N
 	</select>
 </mapper>

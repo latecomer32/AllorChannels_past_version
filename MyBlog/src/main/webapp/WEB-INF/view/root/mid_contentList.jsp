@@ -28,34 +28,41 @@ table.tmp_table th {
 	font-size: 1rem;
 }
 
-.channelName{
-max-width:120px;
-main-width:50px;
-max-height:37px;
-margin:2px 3px;
+.channelName {
+	max-width: 120px;
+	main-width: 50px;
+	max-height: 37px;
+	margin: 2px 3px;
 }
 </style>
 
 <div class="flex-column">
-	<div class="d-flex flex-column">
-		<div class="d-flex justify-content-center">
-			<c:set var="row" value="${(empty param.cr)?15:param.cr}" />
-			<c:set var="channelPage" value="${(empty param.cp)?1:param.cp}" />
-			<c:set var="channelstartNum" value="${page-(page-1)%5}" />
-			<c:set var="channellastNum" value="${fn:substringBefore(Math.ceil(getWritingCount/row),'.')}" />
-			<c:forEach var="getChannelList" items="${getChannelList}">
-				<button type="button" class="btn btn-primary channelName" >${getChannelList.title}</button>
-			</c:forEach>
-		</div>
-		<div class="d-flex justify-content-center">
-			<c:forEach var="i" begin="0" end="4">
-				<c:if test="${(channelstartNum+i)<= channellastNum}">
-					<a class="-text-" style="${(channelPage==(channelstartNum+i))?'color:orange;':''}" href="?cp=${channelstartNum+i}&cq=${param.cq}&cr=${param.cr}"> ${channelstartNum+i}</a>
-				</c:if>
-			</c:forEach>
-		</div>
-	</div>
 
+	<c:choose>
+		<c:when test="${Uri=='/category'}">
+		</c:when>
+		<c:otherwise>
+
+			<div class="d-flex flex-column">
+				<div class="d-flex justify-content-center">
+					<c:set var="row" value="${(empty param.cr)?15:param.cr}" />
+					<c:set var="channelPage" value="${(empty param.cp)?1:param.cp}" />
+					<c:set var="channelstartNum" value="${page-(page-1)%5}" />
+					<c:set var="channellastNum" value="${fn:substringBefore(Math.ceil(getWritingCount/row),'.')}" />
+					<c:forEach var="getChannelList" items="${getChannelList}">
+						<button type="button" class="btn btn-primary channelName">${getChannelList.title}</button>
+					</c:forEach>
+				</div>
+				<div class="d-flex justify-content-center">
+					<c:forEach var="i" begin="0" end="4">
+						<c:if test="${(channelstartNum+i)<= channellastNum}">
+							<a class="-text-" style="${(channelPage==(channelstartNum+i))?'color:orange;':''}" href="?cp=${channelstartNum+i}&cq=${param.cq}&cr=${param.cr}"> ${channelstartNum+i}</a>
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
 
 
 	<div class="ListHeight">

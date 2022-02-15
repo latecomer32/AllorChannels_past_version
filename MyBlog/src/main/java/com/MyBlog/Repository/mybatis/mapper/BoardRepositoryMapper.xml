@@ -22,6 +22,7 @@
 			<if test="query !=null and query != ''">
 				${field} like '%${query}%'
 			</if>
+
 		and
 			<if test="categoryName != ''">
 			categoryName = #{categoryName}
@@ -31,13 +32,14 @@
 			categoryName like '%${categoryName}%'
 			</if>
 		and
-			<if test="nickName != ''">
+		<if test="uri != '/category' ">
+			nickName like '%%'
+			</if>
+			
+		<if test="uri =='/category'">
 			nickName = #{nickName}
 			</if>
 		
-			<if test="nickName ==''">
-			nickName like '%${nickName}%'
-			</if>
 			and pub = #{pub}
 			order by ${order} ${desc}
 		limit #{offset}, #{size}

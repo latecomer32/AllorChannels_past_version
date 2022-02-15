@@ -67,6 +67,13 @@ ul li a {
 		<a class="marginTopBottomAuto NoUnderline" href="/"><b>MyBlog</b></a> <span>
 			<ul class="nav">
 				<form class="d-flex flex-row" action="/">
+					<li class="nav-item marginTopBottomAuto"><select type="text" name="f" >
+					<option ${(param.f=="title")?"selected":"" } value="title">제목</option>
+					<option ${(param.f=="content")?"selected":"" } value="content">내용</option>
+					<option ${(param.f=="nickName")?"selected":"" } value="nickName">닉네임</option>
+					
+					</select>
+					</li>
 					<li class="nav-item marginTopBottomAuto"><input type="text" name="q" value="${param.q}" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}" /></li>
 					<li class="nav-item marginTopBottomAuto"><input type="image" src="/image/search.svg" onclick="search_onclick_submit" class="submit icon-" /></li>
 				</form>

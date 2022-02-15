@@ -34,7 +34,7 @@ public class LeftController {
 	@Autowired
 	HeaderService headerService;
 
-	@GetMapping("/category")
+	/* @GetMapping("/category") */
 	public String saveCategoryName(@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
 			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
 			@RequestParam(name = "f", required = false, defaultValue = "title") String field,
@@ -60,8 +60,10 @@ public class LeftController {
 		
 		
 		boolean pub = true;
-		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc, categoryName, principal.getNickName());
-		System.out.println("/category_getWritingList:"
+		/*
+		 * List<Board> getWritingList = boardService.getWritingList(page, field, query,
+		 * pub, size, order, desc, categoryName, principal.getNickName());
+		 */		System.out.println("/category_getWritingList:"
 				+"\n page:"+page+
 				"\n field:"+field+
 				"\n query:"+query+
@@ -73,12 +75,13 @@ public class LeftController {
 		
 		
 		int getWritingCount = boardService.getWritingCount(field, query);
-		model.addAttribute("getWritingList", getWritingList);
-		model.addAttribute("getWritingCount", getWritingCount);
-		return "root.mid_contentList";
+		/*
+		 * model.addAttribute("getWritingList", getWritingList);
+		 * model.addAttribute("getWritingCount", getWritingCount);
+		 */	return "root.mid_contentList";
 	}
 	
-	@GetMapping("/category/{categoryName}")
+	/* @GetMapping("/category/{categoryName}") */
 	public String getCategoryPage(@PathVariable String categoryName,
 			@RequestParam(name = "p", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "f", required = false, defaultValue = "title") String field,
@@ -91,8 +94,10 @@ public class LeftController {
 			Model model) {
 		
 		boolean pub = true;
-		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, rowNum, order, desc, categoryName, principal.getNickName());
-		System.out.println("/category/{categoryName}_getWritingList:"
+		/*
+		 * List<Board> getWritingList = boardService.getWritingList(page, field, query,
+		 * pub, rowNum, order, desc, categoryName, principal.getNickName());
+		 */		System.out.println("/category/{categoryName}_getWritingList:"
 				+"\n page:"+page+
 				"\n field:"+field+
 				"\n query:"+query+
@@ -103,9 +108,10 @@ public class LeftController {
 		
 		
 		int getWritingCount = boardService.getWritingCount(field, query);
-		model.addAttribute("getWritingList", getWritingList);
-		model.addAttribute("getWritingCount", getWritingCount);
-		
+		/*
+		 * model.addAttribute("getWritingList", getWritingList);
+		 * model.addAttribute("getWritingCount", getWritingCount);
+		 */
 		
 		return "root.mid_contentList";
 	}

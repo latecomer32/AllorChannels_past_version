@@ -1,6 +1,7 @@
 package com.MyBlog.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,7 +43,7 @@ public class BoardController {
 		return "root.mid_saveTheWritingForm";
 	}
 
-	@RequestMapping({ "/", "/{channel}", "/{channel}" })
+	@RequestMapping({ "/", "/{channel}" })
 	public String index(@PathVariable(required = false) String channel,
 			@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
 			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
@@ -51,60 +52,49 @@ public class BoardController {
 			@RequestParam(name = "r", required = false, defaultValue = "15") int size,
 			@RequestParam(name = "desc", required = false, defaultValue = "DESC") String desc,
 			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
-			@RequestParam(name = "n", required = false, defaultValue = "") String nickName, Model model, Board board,
+			Model model, Board board,
 			@AuthenticationPrincipal PrincipalDetail principal, HttpServletRequest request) {
+		
 		boolean pub = true;
-	
-
+		String nickName;
+		String UserId=null;
+		boolean loginCheck;
+		String Uri =request.getRequestURI();
+		model.addAttribute("Uri", Uri);
 		/* 로그인 전 */
 		if (principal == null) {
-			/* board */
-			List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-					categoryName, nickName);
-
-			int getWritingCount = boardService.getWritingCount(field, query);
-			model.addAttribute("getWritingList", getWritingList);
-			model.addAttribute("getWritingCount", getWritingCount);
-		}
-		/* 로그인 후 /category*/
-		else if (request.getContextPath() == "/" && principal != null) {
-			/* board */
-			List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-					categoryName, principal.getNickName());
-			int getWritingCount = boardService.getWritingCount(field, query);
-			model.addAttribute("getWritingList", getWritingList);
-			model.addAttribute("getWritingCount", getWritingCount);
-
-			/* header */
-			String getChannelName = headerService.getChannelName(principal.getUsername());
-			if (getChannelName != null) {
-				model.addAttribute("getChannelName", getChannelName);
+			loginCheck =false;
+			nickName ="";
 			}
-			return "forward:/category";
-		} else {
-
-			/* board */
-			List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-					categoryName, principal.getNickName());
-			int getWritingCount = boardService.getWritingCount(field, query);
-			model.addAttribute("getWritingList", getWritingList);
-			model.addAttribute("getWritingCount", getWritingCount);
-
-			/* header */
-			String getChannelName = headerService.getChannelName(principal.getUsername());
-			if (getChannelName != null) {
-				model.addAttribute("getChannelName", getChannelName);
-			}
-
-			/* left */
-			List<Category> getCategoryList = leftService.getCategoryList(principal.getNickName());
-			model.addAttribute("getCategoryList", getCategoryList);
-
+		
+		/* 로그인 후 */
+		else {
+			loginCheck = true;
+			nickName = principal.getNickName();
+			UserId = principal.getUsername();
 		}
+		
+		/* Board */
+		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
+				categoryName, nickName, loginCheck , Uri);
+		int getWritingCount = boardService.getWritingCount(field, query);
+		model.addAttribute("getWritingList", getWritingList);
+		model.addAttribute("getWritingCount", getWritingCount);
+		
+		
+		/* header */
+		String getChannelName = headerService.getChannelName(UserId);
+		if (getChannelName != null) {
+			model.addAttribute("getChannelName", getChannelName);
+		}
+
+		/* left */
+		List<Category> getCategoryList = leftService.getCategoryList(nickName);
+		model.addAttribute("getCategoryList", getCategoryList);
 
 		/* Channel */
 		List<Channel> getChannelList = channelService.getChannelList(page, size, query);
-		int getChannelCount = channelService.getChannelCount(field, query);
+		int getChannelCount = channelService.getChannelCount(field, query); /* field값 쓰면 db컬럼에 content값이 없어 에러 뜨므로 매퍼에 'title'로 값 고정해둠 나중에 삭제요망 */
 		model.addAttribute("getChannelList", getChannelList);
 		model.addAttribute("getChannelCount", getChannelCount);
 
