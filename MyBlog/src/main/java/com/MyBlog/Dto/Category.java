@@ -1,5 +1,7 @@
 package com.MyBlog.Dto;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +18,7 @@ public class Category {
 	private String nickName;
 	
 	private String categoryName;	
+	
+	private Timestamp date;
 
 }

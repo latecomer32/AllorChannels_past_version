@@ -31,5 +31,7 @@ public class Board {
 	
 	private boolean pub;
 	
+	private String channelName;
+	
 
 }

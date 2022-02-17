@@ -18,6 +18,7 @@ public class Channel {
 	private String title;
 	
 	private String userId;
-
+	
+	private Timestamp date;
 
 }

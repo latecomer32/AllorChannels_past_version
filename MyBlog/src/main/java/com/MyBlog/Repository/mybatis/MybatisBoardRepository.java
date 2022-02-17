@@ -30,7 +30,7 @@ public class MybatisBoardRepository implements BoardRepository {
 
 
 	@Override
-	public List<Board> getWritingList(int offset, String field, String query, boolean pub, int size, String order, String desc, String categoryName, String nickName, boolean loginCheck, String uri) {
+	public List<Board> getWritingList(int offset, String field, String query, boolean pub, int size, String order, String desc, String categoryName, String nickName, boolean loginCheck, String uri, String channelNam) {
 		System.out.println("MybatisBoardRepository_getWritingList:"
 	+"\n offset:"+offset+
 	"\n field:"+field+
@@ -40,9 +40,10 @@ public class MybatisBoardRepository implements BoardRepository {
 	"\n categoryName:"+categoryName+
 	"\n nickName:"+nickName+
 	"\n loginCheck:"+loginCheck+
-	"\n uri:"+uri
+	"\n uri:"+uri+
+	"\n channelName:"+channelNam
 	);
-		return mapper.getWritingList(offset, field, query, pub, size, order, desc, categoryName, nickName, loginCheck, uri);
+		return mapper.getWritingList(offset, field, query, pub, size, order, desc, categoryName, nickName, loginCheck, uri, channelNam);
 	}
 	
 
@@ -60,6 +61,13 @@ public class MybatisBoardRepository implements BoardRepository {
 	@Override
 	public Board getWritingDetail(int no) {
 		return mapper.getWritingDetail(no);
+	}
+
+
+	@Override
+	public List<Board> getChannelWritingList(int size) {
+		// TODO Auto-generated method stub
+		return mapper.getChannelWritingList(size);
 	}
 	
 

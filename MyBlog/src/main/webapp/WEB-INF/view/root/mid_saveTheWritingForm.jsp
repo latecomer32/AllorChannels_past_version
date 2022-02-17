@@ -27,15 +27,25 @@
 
 	<div class="container">
 		<form method="post">
+			<c:choose>
+				<c:when test="${empty channelName}">
+					<input type="hidden" id="channelName" value="">
+				</c:when>
+				<c:otherwise>
+					<input type="hidden" id="channelName" value="${channelName}">
+				</c:otherwise>
+			</c:choose>
+
+
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Enter title" id="title">
 			</div>
 
 			<select id="categoryName" name="categoryName">
-						<option value="없음">카테고리 없음</option>
-						<c:forEach var="getCategoryList" items="${getCategoryList}">
-							<option value="${getCategoryList.categoryName}">${getCategoryList.categoryName}</option>
-						</c:forEach>
+				<option value="없음">카테고리 없음</option>
+				<c:forEach var="getCategoryList" items="${getCategoryList}">
+					<option value="${getCategoryList.categoryName}">${getCategoryList.categoryName}</option>
+				</c:forEach>
 
 			</select>
 
@@ -63,7 +73,7 @@
 		});
 	});
 </script>
-<script src="/js/board.js"></script>
+
 
 
 

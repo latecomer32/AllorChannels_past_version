@@ -29,7 +29,7 @@ public class BoardApiController {
 
 		System.out.println("@PostMapping(\"/board/saveTheWritingForm\")");
 
-		boardService.saveTheWriting(board, principal.getUsername());
+		boardService.saveTheWriting(board, principal.getNickName());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 

@@ -38,35 +38,38 @@ public class BoardController {
 	@Autowired
 	ChannelService channelService;
 
-	@GetMapping("/board/saveTheWritingForm")
-	public String saveTheWriting() {
+	@GetMapping("/board/saveTheWritingForm/{channelName}")
+	public String saveTheWriting(@PathVariable(required = false) String channelName, Model model) {
+		model.addAttribute("channelName", channelName);
+		System.out.println("saveTheWriting channelName:"+channelName);
 		return "root.mid_saveTheWritingForm";
 	}
 
-	@RequestMapping({ "/", "/{channel}" })
-	public String index(@PathVariable(required = false) String channel,
+	@RequestMapping({ "/", "/{channelName}" })
+	public String index(@PathVariable(required = false) String channelName,
 			@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
 			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
 			@RequestParam(name = "f", required = false, defaultValue = "title") String field,
 			@RequestParam(name = "q", required = false, defaultValue = "") String query,
 			@RequestParam(name = "r", required = false, defaultValue = "15") int size,
 			@RequestParam(name = "desc", required = false, defaultValue = "DESC") String desc,
-			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
-			Model model, Board board,
-			@AuthenticationPrincipal PrincipalDetail principal, HttpServletRequest request) {
-		
+			@RequestParam(name = "order", required = false, defaultValue = "date") String order, Model model,
+			Board board, Channel channel,  @AuthenticationPrincipal PrincipalDetail principal, HttpServletRequest request) {
+
 		boolean pub = true;
 		String nickName;
-		String UserId=null;
+		String UserId = null;
 		boolean loginCheck;
-		String Uri =request.getRequestURI();
+		String Uri = request.getRequestURI();
 		model.addAttribute("Uri", Uri);
+		
+
 		/* 로그인 전 */
 		if (principal == null) {
-			loginCheck =false;
-			nickName ="";
-			}
-		
+			loginCheck = false;
+			nickName = "";
+		}
+
 		/* 로그인 후 */
 		else {
 			loginCheck = true;
@@ -74,13 +77,12 @@ public class BoardController {
 			UserId = principal.getUsername();
 		}
 		
-		/* Board */
-		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-				categoryName, nickName, loginCheck , Uri);
-		int getWritingCount = boardService.getWritingCount(field, query);
-		model.addAttribute("getWritingList", getWritingList);
-		model.addAttribute("getWritingCount", getWritingCount);
-		
+		if (channelName == null) {
+			channelName = "";
+		}
+	
+		model.addAttribute("channelName", channelName);
+
 		
 		/* header */
 		String getChannelName = headerService.getChannelName(UserId);
@@ -94,15 +96,32 @@ public class BoardController {
 
 		/* Channel */
 		List<Channel> getChannelList = channelService.getChannelList(page, size, query);
-		int getChannelCount = channelService.getChannelCount(field, query); /* field값 쓰면 db컬럼에 content값이 없어 에러 뜨므로 매퍼에 'title'로 값 고정해둠 나중에 삭제요망 */
+		int getChannelCount = channelService.getChannelCount(field,
+				query); /* field값 쓰면 db컬럼에 content값이 없어 에러 뜨므로 매퍼에 'title'로 값 고정해둠 나중에 삭제요망 */
+		
 		model.addAttribute("getChannelList", getChannelList);
 		model.addAttribute("getChannelCount", getChannelCount);
+
+		/* Board */
+		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
+				categoryName, nickName, loginCheck, Uri, channelName);
+		int getWritingCount = boardService.getWritingCount(field, query);
+		List<Board> getChannelWritingList = null;
+	
+			getChannelWritingList = boardService.getChannelWritingList(5);
+		
+		model.addAttribute("getWritingList", getWritingList);
+		model.addAttribute("getWritingCount", getWritingCount);
+		model.addAttribute("getChannelWritingList", getChannelWritingList);
+		
+		
 
 		return "root.mid_contentList";
 	}
 
 	@GetMapping("/board/detail/{no}")
 	public String findByNo(@PathVariable int no, Model model) {
+
 		System.out.println("no" + boardService.getWritingDetail(no).getNo());
 		model.addAttribute("board", boardService.getWritingDetail(no));
 		return "root.mid_detail";

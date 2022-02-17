@@ -19,8 +19,8 @@ public interface HeaderRepository {
 
 	int getMemberCount(String field, String query);
 
-	int saveChannel(String channelName, String userId);
+	int saveChannel(String channelName, String nickName);
 
-	String getChannelName(String userId);
+	String getChannelName(String nickName);
 
 }

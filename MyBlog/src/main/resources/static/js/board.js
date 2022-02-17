@@ -22,7 +22,9 @@ let index = {
       title: $("#title").val(),
       content: $("#summernote").val(),
       categoryName: $("#categoryName").val(),
+      channelName: $("#channelName").val(),
     };
+    console.log("saveTheWriting", data);
     $.ajax({
       type: "POST",
       url: "/board/saveTheWritingForm",

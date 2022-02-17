@@ -38,20 +38,50 @@ table.tmp_table th {
 
 <div class="flex-column">
 
+<!-- /category 에서 채널목록은 출력하지 않도록 설정 -->
 	<c:choose>
 		<c:when test="${Uri=='/category'}">
+			<!-- /category 주소에서 view 단에 채널 출력하지 않는 설정 -->
 		</c:when>
 		<c:otherwise>
-
+			<!-- /category 주소에서 view 단에 채널 출력하는 설정 -->
 			<div class="d-flex flex-column">
 				<div class="d-flex justify-content-center">
 					<c:set var="row" value="${(empty param.cr)?15:param.cr}" />
 					<c:set var="channelPage" value="${(empty param.cp)?1:param.cp}" />
 					<c:set var="channelstartNum" value="${page-(page-1)%5}" />
 					<c:set var="channellastNum" value="${fn:substringBefore(Math.ceil(getWritingCount/row),'.')}" />
+
+
+
 					<c:forEach var="getChannelList" items="${getChannelList}">
-						<button type="button" class="btn btn-primary channelName">${getChannelList.title}</button>
+						<div class="card" style="width: 18rem;">
+							<a href="/${getChannelList.title}" class="btn btn-primary channelName">${getChannelList.title}</a>
+							<table class="tmp_table table table-hover table-borderless">
+								<tr>
+									<th class="grayFont_th" scope="col">제목</th>
+									<th class="grayFont_th" scope="col">작성자</th>
+									<th class="grayFont_th" scope="col">작성일</th>
+								</tr>
+								<div class="card-body">
+									<c:forEach var="getChannelWritingList" items="${getChannelWritingList}">
+										<c:if test="${getChannelList.title==getChannelWritingList.channelName}">
+											<tbody>
+												<tr>
+													<td>${getChannelWritingList.title}</td>
+													<td>${getChannelWritingList.nickName}</td>
+													<td>${getChannelWritingList.date}</td>
+												</tr>
+											</tbody>
+										</c:if>
+									</c:forEach>
+								</div>
+							</table>
+						</div>
 					</c:forEach>
+
+
+
 				</div>
 				<div class="d-flex justify-content-center">
 					<c:forEach var="i" begin="0" end="4">

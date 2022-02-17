@@ -11,9 +11,10 @@
 
 	<insert id="saveTheWriting" parameterType="com.MyBlog.Dto.Board">
 		insert into
-		board(title, content, nickName, categoryName)
+		board(title, content, nickName, categoryName, channelName)
 		values(#{title},#{content},
-		#{nickName}, #{categoryName})
+		#{nickName}, #{categoryName},
+		#{channelName})
 	</insert>
 
 	<select id="getWritingList" resultType="com.MyBlog.Dto.Board">
@@ -23,26 +24,35 @@
 				${field} like '%${query}%'
 			</if>
 
-		and
+			and
 			<if test="categoryName != ''">
-			categoryName = #{categoryName}
+				categoryName = #{categoryName}
 			</if>
-			
+
 			<if test="categoryName ==''">
-			categoryName like '%${categoryName}%'
+				categoryName like '%${categoryName}%'
 			</if>
+			and
+			<if test="uri != '/category' ">
+				nickName like '%%'
+			</if>
+
+			<if test="uri =='/category'">
+				nickName = #{nickName}
+			</if>
+	
 		and
-		<if test="uri != '/category' ">
-			nickName like '%%'
+			<if test="uri =='/category' or uri =='/favicon.ico' ">
+				channelName like '%%'
 			</if>
-			
-		<if test="uri =='/category'">
-			nickName = #{nickName}
-			</if>
-		
+
+			<if test="uri !='/category' and uri !='/favicon.ico' ">
+				channelName = #{channelName}
+			</if> 
+ 
 			and pub = #{pub}
 			order by ${order} ${desc}
-		limit #{offset}, #{size}
+			limit #{offset}, #{size}
 		</where>
 	</select>
 
@@ -51,14 +61,23 @@
 	</delete>
 
 	<select id="getWritingCount" resultType="int">
-		SELECT COUNT(no) COUNT FROM 
+		SELECT COUNT(no) COUNT
+		FROM
 		(SELECT * FROM board WHERE ${field} LIKE '%${query}%' ORDER BY date DESC)N
 	</select>
-	
+
 	<select id="getWritingDetail" resultType="com.MyBlog.Dto.Board">
-		SELECT * FROM board 
+		SELECT * FROM board
 		WHERE no=#{no}
 	</select>
 
+		
+	<select id="getChannelWritingList" resultType="com.MyBlog.Dto.Board">
+	
+		select * from board
+		order by date DESC
+		limit 0, #{size}
+	
+	</select>
 
 </mapper>

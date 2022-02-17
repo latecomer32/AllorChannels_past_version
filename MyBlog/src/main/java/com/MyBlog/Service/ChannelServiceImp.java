@@ -28,6 +28,8 @@ public class ChannelServiceImp implements ChannelService{
 	public int getChannelCount(String field, String query) {
 		return channelRepository.getChannelCount(field, query);
 	}
+
+
 	
 	
 	

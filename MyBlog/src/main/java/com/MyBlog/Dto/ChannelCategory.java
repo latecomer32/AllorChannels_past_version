@@ -19,5 +19,6 @@ public class ChannelCategory {
 	
 	private String title;
 	
+	private Timestamp date;
 
 }

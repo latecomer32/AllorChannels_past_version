@@ -46,12 +46,12 @@ public class MybatisHeaderRepository implements HeaderRepository {
 	}
 
 	@Override
-	public int saveChannel(String channelName, String userId) {
-		return mapper.saveChannel(channelName, userId);
+	public int saveChannel(String channelName, String nickName) {
+		return mapper.saveChannel(channelName, nickName);
 	}
 
 	@Override
-	public String getChannelName(String userId) {
-		return mapper.getChannelName(userId);
+	public String getChannelName(String nickName) {
+		return mapper.getChannelName(nickName);
 	}
 }

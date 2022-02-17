@@ -14,12 +14,12 @@
 	</insert>
 	
 	<insert id="saveChannel" >
-		insert into channel(title, userId)
-		values(#{channelName}, #{userId})
+		insert into channel(title, nickName)
+		values(#{channelName}, #{nickName})
 	</insert>
 	
 	<select id="getChannelName" resultType="String">
-		SELECT title FROM channel WHERE userId = #{userId}
+		SELECT title FROM channel WHERE nickName = #{nickName}
 	</select>
 	
 	

@@ -45,14 +45,14 @@ public class HeaderServiceImp implements HeaderService{
 	}
 
 	@Override
-	public int saveChannel(String channelName, String userId) {
-		return  headerRepository.saveChannel(channelName, userId);
+	public int saveChannel(String channelName, String nickName) {
+		return  headerRepository.saveChannel(channelName, nickName);
 		
 	}
 
 	@Override
-	public String getChannelName(String userId) {
-		return  headerRepository.getChannelName(userId);
+	public String getChannelName(String nickName) {
+		return  headerRepository.getChannelName(nickName);
 	}
 
 
