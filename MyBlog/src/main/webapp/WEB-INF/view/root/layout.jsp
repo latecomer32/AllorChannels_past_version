@@ -87,6 +87,8 @@
 .marginAuto-20 {
 	margin: auto 20px !important;
 }
+
+
 </style>
 
 

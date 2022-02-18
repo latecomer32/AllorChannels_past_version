@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.MyBlog.Dto.Board;
+import com.MyBlog.Dto.Channel;
 import com.MyBlog.Repository.BoardRepository;
 
 @Service
@@ -51,9 +52,9 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public List<Board> getChannelWritingList(int size) {
+	public List<Board> getChannelWritingList(int size, List<Channel> getChannelList) {
 		// TODO Auto-generated method stub
-		return boardRepository.getChannelWritingList(size);
+		return boardRepository.getChannelWritingList(size, getChannelList);
 	}
 
 }

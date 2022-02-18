@@ -33,23 +33,23 @@
 				categoryName like '%${categoryName}%'
 			</if>
 			and
-			<if test="uri != '/category' ">
+			<if test="uri != '/index/category' ">
 				nickName like '%%'
 			</if>
 
-			<if test="uri =='/category'">
+			<if test="uri =='/index/category'">
 				nickName = #{nickName}
 			</if>
-	
-		and
-			<if test="uri =='/category' or uri =='/favicon.ico' ">
+
+			and
+			<if test="uri =='/index/category' or uri =='/index' ">
 				channelName like '%%'
 			</if>
 
-			<if test="uri !='/category' and uri !='/favicon.ico' ">
+			<if test="uri !='/index/category' and uri !='/index' ">
 				channelName = #{channelName}
-			</if> 
- 
+			</if>
+
 			and pub = #{pub}
 			order by ${order} ${desc}
 			limit #{offset}, #{size}
@@ -63,7 +63,8 @@
 	<select id="getWritingCount" resultType="int">
 		SELECT COUNT(no) COUNT
 		FROM
-		(SELECT * FROM board WHERE ${field} LIKE '%${query}%' ORDER BY date DESC)N
+		(SELECT * FROM board WHERE ${field} LIKE '%${query}%' ORDER BY
+		date DESC)N
 	</select>
 
 	<select id="getWritingDetail" resultType="com.MyBlog.Dto.Board">
@@ -71,13 +72,23 @@
 		WHERE no=#{no}
 	</select>
 
-		
-	<select id="getChannelWritingList" resultType="com.MyBlog.Dto.Board">
+
+
+	<select id="getChannelWritingList" parameterType="com.MyBlog.Dto.Channel" resultType="com.MyBlog.Dto.Board">
 	
-		select * from board
-		order by date DESC
-		limit 0, #{size}
-	
+			<foreach item="getChannelList" collection="getChannelList" open="" close="" separator="UNION ALL">
+			
+			(select * from board where channelName = #{getChannelList.title} order by date DESC limit 0,#{size})
+			
+			
+			</foreach>
 	</select>
+
+
+
+	<!-- <where> <foreach item="getChannelList" collection="getChannelList"> 
+		<if test="channelName == ${getChannelList.title}"> order by date DESC limit 
+		0, #{size} </if> <if test="channelName != ${getChannelList.title}"> </if> 
+		</foreach> </where> -->
 
 </mapper>

@@ -20,6 +20,10 @@ ul li a {
 	color: black !important;
 }
 
+.textWhite{
+	color: white !important;
+}
+
 .icon- {
 	width: 150% !important;
 	color: rgba(155, 155, 155, 0.3);
@@ -64,23 +68,22 @@ ul li a {
 	<div class="leftDisplay"></div>
 
 	<div class="d-flex justify-content-between middleDisplay">
-		<a class="marginTopBottomAuto NoUnderline" href="/"><b>MyBlog</b></a> <span>
+		<a class="marginTopBottomAuto NoUnderline" href="/index"><b>MyBlog</b></a> <span>
 			<ul class="nav">
-				<form class="d-flex flex-row" action="/">
-					<li class="nav-item marginTopBottomAuto"><select type="text" name="f" >
-					<option ${(param.f=="title")?"selected":"" } value="title">제목</option>
-					<option ${(param.f=="content")?"selected":"" } value="content">내용</option>
-					<option ${(param.f=="nickName")?"selected":"" } value="nickName">닉네임</option>
-					
-					</select>
-					</li>
+				<form class="d-flex flex-row" action="/index">
+					<li class="nav-item marginTopBottomAuto"><select type="text" name="f">
+							<option ${(param.f=="title")?"selected":"" } value="title">제목</option>
+							<option ${(param.f=="content")?"selected":"" } value="content">내용</option>
+							<option ${(param.f=="nickName")?"selected":"" } value="nickName">닉네임</option>
+
+					</select></li>
 					<li class="nav-item marginTopBottomAuto"><input type="text" name="q" value="${param.q}" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}" /></li>
 					<li class="nav-item marginTopBottomAuto"><input type="image" src="/image/search.svg" onclick="search_onclick_submit" class="submit icon-" /></li>
 				</form>
 
 				<c:choose>
 					<c:when test="${empty principal}">
-						<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/index">로그인</a></li>
 						<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
 					</c:when>
 					<c:otherwise>
@@ -92,7 +95,7 @@ ul li a {
 								<li class="nav-item"><a class="nav-link" href="/header/channel">채널 만들기</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item marginTopBottomAuto"><button type="button" class="btn btn-primary channelName" >${getChannelName}</button></li>
+								<li class="nav-item marginTopBottomAuto"><a class="btn btn-primary textWhite" href="/index/${getChannelName}"}>${getChannelName}</a></li>
 							</c:otherwise>
 						</c:choose>
 

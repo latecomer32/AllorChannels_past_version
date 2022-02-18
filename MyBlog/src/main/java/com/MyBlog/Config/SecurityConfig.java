@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.csrf().disable() //csrf 토큰 비활성화
 		.authorizeRequests()
-		.antMatchers("/","/fontawesome-free-5.15.4-web/**","/logout", "/auth/**", "/js/**", "/css/**", "/image/**", "/resources/**", "/error")
+		.antMatchers("/","/fontawesome-free-5.15.4-web/**","/logout", "/auth/**", "/js/**", "/css/**", "/image/**", "/resources/**", "/error", "/index/**")
 		.permitAll()
 		.anyRequest()
 		.authenticated()
@@ -75,10 +75,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.formLogin()
 		.usernameParameter("loginUserId")//.JSP에서 전송오는 name="loginUserId"이면 default값인 username과 다르므로 해당 설정해줘야함.
 		.passwordParameter("loginPpassword")
-		.loginPage("/") // 인증이 필요한 곳으로 요청오면 해당 주소로 이동
+		.loginPage("/index") // 인증이 필요한 곳으로 요청오면 해당 주소로 이동
 		.loginProcessingUrl("/auth/loginProc") //해당 주소에서 로그인 처리, 해당 페이지 안만들어도 시큐리티가 가로채서 username 확인하게된다.
 		.failureHandler(customFailurHandler) // 실패 핸들러
-		.defaultSuccessUrl("/");
+		.defaultSuccessUrl("/index");
 	
 	}
 }

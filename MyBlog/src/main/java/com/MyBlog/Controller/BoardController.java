@@ -38,14 +38,8 @@ public class BoardController {
 	@Autowired
 	ChannelService channelService;
 
-	@GetMapping("/board/saveTheWritingForm/{channelName}")
-	public String saveTheWriting(@PathVariable(required = false) String channelName, Model model) {
-		model.addAttribute("channelName", channelName);
-		System.out.println("saveTheWriting channelName:"+channelName);
-		return "root.mid_saveTheWritingForm";
-	}
-
-	@RequestMapping({ "/", "/{channelName}" })
+	
+	@RequestMapping({ "/index", "/index/{channelName}" })
 	public String index(@PathVariable(required = false) String channelName,
 			@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
 			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
@@ -61,7 +55,9 @@ public class BoardController {
 		String UserId = null;
 		boolean loginCheck;
 		String Uri = request.getRequestURI();
+		String uri ="/index/"+channelName;
 		model.addAttribute("Uri", Uri);
+		model.addAttribute("uri", uri);
 		
 
 		/* 로그인 전 */
@@ -108,24 +104,42 @@ public class BoardController {
 		int getWritingCount = boardService.getWritingCount(field, query);
 		List<Board> getChannelWritingList = null;
 	
-			getChannelWritingList = boardService.getChannelWritingList(5);
+		
+			getChannelWritingList = boardService.getChannelWritingList(5, getChannelList);
+			model.addAttribute("getChannelWritingList", getChannelWritingList);
+		
 		
 		model.addAttribute("getWritingList", getWritingList);
 		model.addAttribute("getWritingCount", getWritingCount);
-		model.addAttribute("getChannelWritingList", getChannelWritingList);
 		
 		
-
 		return "root.mid_contentList";
 	}
 
-	@GetMapping("/board/detail/{no}")
-	public String findByNo(@PathVariable int no, Model model) {
+	@GetMapping("/index/board/detail/{no}")
+	public String findByNo(@PathVariable int no, Model model,  @AuthenticationPrincipal PrincipalDetail principal) {
 
-		System.out.println("no" + boardService.getWritingDetail(no).getNo());
+		/* board */
 		model.addAttribute("board", boardService.getWritingDetail(no));
+		
+		/* left */
+		List<Category> getCategoryList = leftService.getCategoryList(principal.getNickName());
+		model.addAttribute("getCategoryList", getCategoryList);
 		return "root.mid_detail";
 
 	}
+	
+	@RequestMapping({"/board/saveTheWritingForm/{channelName}","/board/saveTheWritingForm"})
+	public String saveTheWriting(@PathVariable(required = false) String channelName, Model model,  @AuthenticationPrincipal PrincipalDetail principal) {
+		
+		/* board */
+		model.addAttribute("channelName", channelName);
+
+		/* left */
+		List<Category> getCategoryList = leftService.getCategoryList(principal.getNickName());
+		model.addAttribute("getCategoryList", getCategoryList);
+		return "root.mid_saveTheWritingForm";
+	}
+
 
 }

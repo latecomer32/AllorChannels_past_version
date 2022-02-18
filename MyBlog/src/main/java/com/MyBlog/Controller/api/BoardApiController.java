@@ -33,7 +33,7 @@ public class BoardApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 
-	@DeleteMapping("/board/detail/{no}")
+	@DeleteMapping("/index/board/detail/{no}")
 	public ResponseDto<Integer> deleteWriting(@PathVariable int no) {
 		System.out.println("numbers"+no);
 		boardService.deleteWritingList(no);

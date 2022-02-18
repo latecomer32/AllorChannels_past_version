@@ -9,7 +9,7 @@ function btn_saveChannel() {
   })
     .done(function (resp) {
       alert("데이터 전송완료");
-      location.href = "/";
+      location.href = "/index";
     })
     .fail(function (error) {
       alert(JSON.stringify(error));

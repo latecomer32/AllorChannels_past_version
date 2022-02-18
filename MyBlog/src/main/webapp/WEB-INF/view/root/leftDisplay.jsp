@@ -32,16 +32,16 @@
 	display: none;
 	cursor: pointer;
 }
-.beginEmpty{
-min-height:50px;
+
+.beginEmpty {
+	min-height: 50px;
 }
 </style>
 
 
 <div>
 
-<div class="beginEmpty">
-</div>
+	<div class="beginEmpty"></div>
 
 
 
@@ -55,8 +55,17 @@ min-height:50px;
 
 			<div class="card" style="width: 18rem;">
 				<ul class="nav nav-tabs">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><b>${principal.nickName}</b></a></li>
-					<li class="nav-item"><a class="nav-link" href="#"> 채널</a></li>
+					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/index/category"><b>${principal.nickName}</b></a></li>
+					<c:choose>
+						<c:when test="${channelName eq getChannelName}">
+							<li class="nav-item"><a class="nav-link" href="/index/${getChannelName}"> ${getChannelName}</a></li>
+						</c:when>
+						<c:when test="${channelName eq 'category'}">
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item"><a class="nav-link" href="/index/${channelName}"> ${channelName}</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 
 
@@ -64,19 +73,17 @@ min-height:50px;
 				<div class="card-body">
 					<ul class="list-group" id="sortable">
 
-						<li class="ui-state-default list-group-item active"><a href="/category?c="> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>내가 작성한 글 전부 보기
-						</a></li>
-						<li class="ui-state-default list-group-item"><a href="/category?c=없음"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>카테고리 없는 글 보기
-						</a></li>
+						<li class="ui-state-default list-group-item active"><a href="/index/category?c="> 내가 작성한 글 전부 보기 </a></li>
+						<li class="ui-state-default list-group-item"><a href="/index/category?c=없음"> 카테고리 없는 글 보기 </a></li>
 						<c:forEach var="getCategoryList" items="${getCategoryList}">
 							<li class="ui-state-default list-group-item active"><input type="checkbox" id="deleteCategory" name="deleteCategory" value="${getCategoryList.no}" /> <a
-								href="/category?c=${getCategoryList.categoryName}"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>${getCategoryList.categoryName}</a></li>
+								href="/index/category?c=${getCategoryList.categoryName}"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>${getCategoryList.categoryName}</a></li>
 						</c:forEach>
 					</ul>
 
 					<div>
 
-						<div style="float: left; width: 100px;">아이템 추가 :</div>
+						<div style="float: left; width: 100px;">카테고리 추가 :</div>
 
 						<div style="clar: both;">
 

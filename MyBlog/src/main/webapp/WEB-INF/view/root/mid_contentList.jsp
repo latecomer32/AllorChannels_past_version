@@ -34,66 +34,69 @@ table.tmp_table th {
 	max-height: 37px;
 	margin: 2px 3px;
 }
+
+
+
+
 </style>
 
 <div class="flex-column">
 
-<!-- /category 에서 채널목록은 출력하지 않도록 설정 -->
-	<c:choose>
-		<c:when test="${Uri=='/category'}">
-			<!-- /category 주소에서 view 단에 채널 출력하지 않는 설정 -->
-		</c:when>
-		<c:otherwise>
-			<!-- /category 주소에서 view 단에 채널 출력하는 설정 -->
-			<div class="d-flex flex-column">
-				<div class="d-flex justify-content-center">
-					<c:set var="row" value="${(empty param.cr)?15:param.cr}" />
-					<c:set var="channelPage" value="${(empty param.cp)?1:param.cp}" />
-					<c:set var="channelstartNum" value="${page-(page-1)%5}" />
-					<c:set var="channellastNum" value="${fn:substringBefore(Math.ceil(getWritingCount/row),'.')}" />
+		<!-- /category 에서 채널목록은 출력하지 않도록 설정 -->
+		<c:choose>
+			<c:when test="${Uri=='/category'}">
+				<!-- /category 주소에서 view 단에 채널 출력하지 않는 설정 -->
+			</c:when>
+			<c:otherwise>
+				<!-- /category 주소에서 view 단에 채널 출력하는 설정 -->
+				<div class=" d-flex flex-column">
+					<div class="d-flex justify-content-center">
+						<c:set var="channelrow" value="${(empty param.cr)?15:param.cr}" />
+						<c:set var="channelPage" value="${(empty param.cp)?1:param.cp}" />
+						<c:set var="channelstartNum" value="${channelPage-(channelPage-1)%5}" />
+						<c:set var="channellastNum" value="${fn:substringBefore(Math.ceil(getChannelCount/channelrow),'.')}" />
 
 
 
-					<c:forEach var="getChannelList" items="${getChannelList}">
-						<div class="card" style="width: 18rem;">
-							<a href="/${getChannelList.title}" class="btn btn-primary channelName">${getChannelList.title}</a>
-							<table class="tmp_table table table-hover table-borderless">
-								<tr>
-									<th class="grayFont_th" scope="col">제목</th>
-									<th class="grayFont_th" scope="col">작성자</th>
-									<th class="grayFont_th" scope="col">작성일</th>
-								</tr>
-								<div class="card-body">
-									<c:forEach var="getChannelWritingList" items="${getChannelWritingList}">
-										<c:if test="${getChannelList.title==getChannelWritingList.channelName}">
-											<tbody>
-												<tr>
-													<td>${getChannelWritingList.title}</td>
-													<td>${getChannelWritingList.nickName}</td>
-													<td>${getChannelWritingList.date}</td>
-												</tr>
-											</tbody>
-										</c:if>
-									</c:forEach>
-								</div>
-							</table>
-						</div>
-					</c:forEach>
+
+						<c:forEach var="getChannelList" items="${getChannelList}">
+							<div class="card" style="width: 18rem;">
+								<a href="/index/${getChannelList.title}" class="btn btn-primary channelName">${getChannelList.title}</a>
+								<table class="tmp_table table table-hover table-borderless">
+
+									
+										<c:forEach var="getChannelWritingList" items="${getChannelWritingList}">
+											<c:if test="${getChannelList.title==getChannelWritingList.channelName}">
+											
+												<tbody>
+													<tr>
+														<td><a class="titleFont_td NoUnderline" href="/index/board/detail/${getChannelWritingList.no}">${getChannelWritingList.title}</a></td>
+														<td>${getChannelWritingList.date}</td>
+													</tr>
+												</tbody>
+											
+											</c:if>
+										</c:forEach>
+									
+								</table>
+							</div>
+						</c:forEach>
 
 
 
+
+
+					</div>
+					<div class="d-flex justify-content-center">
+						<c:forEach var="i" begin="0" end="4">
+							<c:if test="${(channelstartNum+i)<= channellastNum}">
+								<a class="-text-" style="${(channelPage==(channelstartNum+i))?'color:orange;':''}" href="?cp=${channelstartNum+i}&cq=${param.cq}&cr=${param.cr}"> ${channelstartNum+i}</a>
+							</c:if>
+						</c:forEach>
+					</div>
 				</div>
-				<div class="d-flex justify-content-center">
-					<c:forEach var="i" begin="0" end="4">
-						<c:if test="${(channelstartNum+i)<= channellastNum}">
-							<a class="-text-" style="${(channelPage==(channelstartNum+i))?'color:orange;':''}" href="?cp=${channelstartNum+i}&cq=${param.cq}&cr=${param.cr}"> ${channelstartNum+i}</a>
-						</c:if>
-					</c:forEach>
-				</div>
-			</div>
-		</c:otherwise>
-	</c:choose>
-
+			</c:otherwise>
+		</c:choose>
 
 	<div class="ListHeight">
 
@@ -126,7 +129,7 @@ table.tmp_table th {
 							</td>
 							<td class="grayFont_td" scope="row">${getWritingList.no}</td>
 
-							<td><a class="titleFont_td NoUnderline" href="/board/detail/${getWritingList.no}">${getWritingList.title} </a></td>
+							<td><a class="titleFont_td NoUnderline" href="/index/board/detail/${getWritingList.no}">${getWritingList.title} </a></td>
 							<td class="titleFont_td">${getWritingList.nickName}</td>
 							<td class="grayFont_td">${getWritingList.date}</td>
 							<td class="grayFont_td">${getWritingList.viewCount}</td>
@@ -135,12 +138,12 @@ table.tmp_table th {
 				</form>
 			</tbody>
 		</table>
-
-
-	</div>
-	<div>
 		<button id="btn-delete" class="btn btn-primary col-1">글 삭제</button>
-
+	
+	</div>
+	
+	<div class="">
+		
 		<c:set var="row" value="${(empty param.r)?15:param.r}" />
 		<c:set var="page" value="${(empty param.p)?1:param.p}" />
 		<c:set var="startNum" value="${page-(page-1)%5}" />

@@ -34,7 +34,7 @@ let index = {
     })
       .done(function (resp) {
         alert("글쓰기가 완료되었습니다.");
-        location.href = "/";
+        location.href = "/index";
       })
       .fail(function (error) {
         alert(JSON.stringify(error));
@@ -46,23 +46,24 @@ let index = {
 
     let no = "";
 
-    $("input[name=no]:checked").each(function () {
-      var no = $(this).attr("value");
-      console.log(no);
+    $("input[name=no]:checked")
+      .each(function () {
+        var no = $(this).attr("value");
+        console.log(no);
 
-      $.ajax({
-        type: "DELETE",
-        url: "/board/detail/" + no,
-        data: JSON.stringify(no),
-      })
-        .done(function (resp) {
-          alert("글삭제가 완료되었습니다.");
-          location.href = "/";
-        })
-        .fail(function (error) {
-          alert(JSON.stringify(error));
+        $.ajax({
+          type: "DELETE",
+          url: "/index/board/detail/" + no,
+          data: JSON.stringify(no),
         });
-    });
+      })
+      .done(function (resp) {
+        alert("글삭제가 완료되었습니다.");
+        location.href = "/index";
+      })
+      .fail(function (error) {
+        alert(JSON.stringify(error));
+      });
   },
 
   update: function () {
@@ -80,7 +81,7 @@ let index = {
     })
       .done(function (resp) {
         alert("글수정이 완료되었습니다.");
-        location.href = "/";
+        location.href = "/index";
       })
       .fail(function (error) {
         alert(JSON.stringify(error));
@@ -121,7 +122,7 @@ let index = {
 
     $.ajax({
       type: "GET",
-      url: `/`,
+      url: "/index",
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8",
       dataType: "json",

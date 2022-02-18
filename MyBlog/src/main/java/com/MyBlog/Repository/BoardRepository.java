@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.MyBlog.Dto.Board;
+import com.MyBlog.Dto.Channel;
 
 public interface BoardRepository {
 
@@ -17,5 +18,5 @@ public interface BoardRepository {
 
 	Board getWritingDetail(int no);
 
-	List<Board> getChannelWritingList(int size);
+	List<Board> getChannelWritingList(int size, List<Channel> getChannelList);
 }

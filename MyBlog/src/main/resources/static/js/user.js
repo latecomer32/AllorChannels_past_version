@@ -40,7 +40,7 @@ let user = {
       .done(function (resp) {
         alert("회원가입이 완료되었습니다.");
 
-        location.href = "/";
+        location.href = "/index";
       })
       .fail(function (error) {
         console.log("실패 data:", data); //console.log("실패 data:"+ data); 라고 쓰면 원하는대로 출력되지 않았었음.
@@ -64,7 +64,7 @@ let user = {
     })
       .done(function (resp) {
         alert("회원수정이 완료되었습니다.");
-        location.href = "/";
+        location.href = "/index";
       })
       .fail(function (error) {
         alert(JSON.stringify(error));

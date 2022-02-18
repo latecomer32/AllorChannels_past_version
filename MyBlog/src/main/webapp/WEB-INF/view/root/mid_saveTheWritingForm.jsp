@@ -30,18 +30,21 @@
 			<c:choose>
 				<c:when test="${empty channelName}">
 					<input type="hidden" id="channelName" value="">
+					채널명 : <input id="channelName" value="없음" disabled>
 				</c:when>
 				<c:otherwise>
 					<input type="hidden" id="channelName" value="${channelName}">
+					채널명 : <input id="channelName" value="${channelName}" disabled>
+
 				</c:otherwise>
 			</c:choose>
 
 
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Enter title" id="title">
+				제목 : <input type="text" class="form-control" placeholder="Enter title" id="title">
 			</div>
 
-			<select id="categoryName" name="categoryName">
+			카테고리 : <select id="categoryName" name="categoryName">
 				<option value="없음">카테고리 없음</option>
 				<c:forEach var="getCategoryList" items="${getCategoryList}">
 					<option value="${getCategoryList.categoryName}">${getCategoryList.categoryName}</option>
@@ -50,6 +53,7 @@
 			</select>
 
 			<div class="form-group">
+				내용
 				<textarea id="summernote" name="editordata"></textarea>
 			</div>
 

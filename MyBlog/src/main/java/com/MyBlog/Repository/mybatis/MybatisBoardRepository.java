@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.MyBlog.Dto.Board;
+import com.MyBlog.Dto.Channel;
 import com.MyBlog.Repository.BoardRepository;
 
 @Repository
@@ -65,9 +66,9 @@ public class MybatisBoardRepository implements BoardRepository {
 
 
 	@Override
-	public List<Board> getChannelWritingList(int size) {
+	public List<Board> getChannelWritingList(int size, List<Channel> getChannelList) {
 		// TODO Auto-generated method stub
-		return mapper.getChannelWritingList(size);
+		return mapper.getChannelWritingList(size, getChannelList);
 	}
 	
 
