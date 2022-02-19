@@ -89,6 +89,70 @@
 }
 
 
+
+
+.card-- {
+  background: #fff;
+  text-decoration: none;
+  color: #444;
+  box-shadow: 0 2px 5px rbga(0, 0, 0, 0.1);
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  top: 0;
+  transition: 0.2s;
+}
+
+.card--:hover {
+  top: -2px;
+  box-shadow: 0 4px 5px rbga(0, 0, 0, 0.2);
+}
+
+.thumb-- {
+  padding-bottom: 60%;
+  background-size: cover;
+  background-position: center center;
+}
+.article-- {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.article-- p {
+  flex: 1;
+}
+
+.band-- {
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
+@media screen and (min-width: 500px) {
+  .band-- {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (min-width: 850px) {
+  .band-- {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.headerSetting{
+margin-bottom:50px;
+
+}
+
 </style>
 
 
@@ -99,9 +163,9 @@
 
 	<!-- header 부분 -->
 
-
+<div class="headerSetting">
 	<tiles:insertAttribute name="header" />
-
+</div>
 	<div class="d-flex container--">
 
 

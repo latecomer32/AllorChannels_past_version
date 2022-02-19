@@ -12,15 +12,16 @@
 <style>
 .header {
 	box-shadow: 0px 0px 4px 0.3px gray !important; //
+	min-height: 5000px !important;
 	margin-bottom: 20px !important;
 }
 
 ul li a {
-	line-height: 380%;
+	line-height: 450%;
 	color: black !important;
 }
 
-.textWhite{
+.textWhite {
 	color: white !important;
 }
 
@@ -68,43 +69,45 @@ ul li a {
 	<div class="leftDisplay"></div>
 
 	<div class="d-flex justify-content-between middleDisplay">
-		<a class="marginTopBottomAuto NoUnderline" href="/index"><b>MyBlog</b></a> <span>
-			<ul class="nav">
-				<form class="d-flex flex-row" action="/index">
-					<li class="nav-item marginTopBottomAuto"><select type="text" name="f">
-							<option ${(param.f=="title")?"selected":"" } value="title">제목</option>
-							<option ${(param.f=="content")?"selected":"" } value="content">내용</option>
-							<option ${(param.f=="nickName")?"selected":"" } value="nickName">닉네임</option>
+		<div class="marginTopBottomAuto">
+			<a class="marginTopBottomAuto NoUnderline" href="/index"><b>MyBlog</b></a> <span> <span><b> / </b></span> <a class="marginTopBottomAuto NoUnderline" href="/index/channels"><b> 채널s</b></a> <span>
+		</div>
+		<ul class="nav">
+			<form class="d-flex flex-row" action="/index">
+				<li class="nav-item marginTopBottomAuto"><select type="text" name="f">
+						<option ${(param.f=="title")?"selected":"" } value="title">제목</option>
+						<option ${(param.f=="content")?"selected":"" } value="content">내용</option>
+						<option ${(param.f=="nickName")?"selected":"" } value="nickName">닉네임</option>
 
-					</select></li>
-					<li class="nav-item marginTopBottomAuto"><input type="text" name="q" value="${param.q}" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}" /></li>
-					<li class="nav-item marginTopBottomAuto"><input type="image" src="/image/search.svg" onclick="search_onclick_submit" class="submit icon-" /></li>
-				</form>
+				</select></li>
+				<li class="nav-item marginTopBottomAuto"><input type="text" name="q" value="${param.q}" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}" /></li>
+				<li class="nav-item marginTopBottomAuto"><input type="image" src="/image/search.svg" onclick="search_onclick_submit" class="submit icon-" /></li>
+			</form>
 
-				<c:choose>
-					<c:when test="${empty principal}">
-						<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/index">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="nav-item"><a class="nav-link" href="/board/saveTheWritingForm/${channelName}">글쓰기</a></li>
-						<li class="nav-item"><a class="nav-link" href="/header/member">회원정보</a></li>
+			<c:choose>
+				<c:when test="${empty principal}">
+					<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="/index">로그인</a></li>
+					<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="nav-item"><a class="nav-link" href="/board/saveTheWritingForm/${channelName}">글쓰기</a></li>
+					<li class="nav-item"><a class="nav-link" href="/header/member">회원정보</a></li>
 
-						<c:choose>
-							<c:when test="${empty getChannelName}">
-								<li class="nav-item"><a class="nav-link" href="/header/channel">채널 만들기</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="nav-item marginTopBottomAuto"><a class="btn btn-primary textWhite" href="/index/${getChannelName}"}>${getChannelName}</a></li>
-							</c:otherwise>
-						</c:choose>
+					<c:choose>
+						<c:when test="${empty getChannelName}">
+							<li class="nav-item"><a class="nav-link" href="/header/channel">채널 만들기</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item marginTopBottomAuto"><a class="btn btn-primary textWhite" href="/index/${getChannelName}"}>${getChannelName}</a></li>
+						</c:otherwise>
+					</c:choose>
 
-						<li class="nav-item"><a class="nav-link" href="">${principal.nickName}</a></li>
-						<li class="nav-item"><a class="nav-link flex-row-reverse" href="/logout">로그아웃</a></li>
-					</c:otherwise>
-				</c:choose>
+					<li class="nav-item"><a class="nav-link" href="">${principal.nickName}</a></li>
+					<li class="nav-item"><a class="nav-link flex-row-reverse" href="/logout">로그아웃</a></li>
+				</c:otherwise>
+			</c:choose>
 
-			</ul>
+		</ul>
 		</span>
 	</div>
 

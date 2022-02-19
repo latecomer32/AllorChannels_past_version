@@ -7,7 +7,6 @@
 
 
 <div>
-
 	<div scope="row">${board.no}</div>
 	<div>${board.title}</div>
 	<div>${board.nickName}</div>
@@ -25,7 +24,7 @@
 	</div>
 	<div>${board.viewCount}</div>
 	<div>${board.content}</div>
-
-
-
 </div>
+
+<jsp:include page="mid_channerContentList.jsp" flush="true"/>
+

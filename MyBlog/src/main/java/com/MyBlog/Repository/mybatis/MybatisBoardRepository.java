@@ -31,7 +31,7 @@ public class MybatisBoardRepository implements BoardRepository {
 
 
 	@Override
-	public List<Board> getWritingList(int offset, String field, String query, boolean pub, int size, String order, String desc, String categoryName, String nickName, boolean loginCheck, String uri, String channelNam) {
+	public List<Board> getWritingList(int offset, String field, String query, boolean pub, int size, String order, String desc, String categoryName, String nickName, boolean loginCheck, String uri, String channelName) {
 		System.out.println("MybatisBoardRepository_getWritingList:"
 	+"\n offset:"+offset+
 	"\n field:"+field+
@@ -42,9 +42,9 @@ public class MybatisBoardRepository implements BoardRepository {
 	"\n nickName:"+nickName+
 	"\n loginCheck:"+loginCheck+
 	"\n uri:"+uri+
-	"\n channelName:"+channelNam
+	"\n channelName:"+channelName
 	);
-		return mapper.getWritingList(offset, field, query, pub, size, order, desc, categoryName, nickName, loginCheck, uri, channelNam);
+		return mapper.getWritingList(offset, field, query, pub, size, order, desc, categoryName, nickName, loginCheck, uri, channelName);
 	}
 	
 

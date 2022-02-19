@@ -42,7 +42,7 @@
 			</if>
 
 			and
-			<if test="uri =='/index/category' or uri =='/index' ">
+			<if test="uri =='/index/category' or uri =='/index'">
 				channelName like '%%'
 			</if>
 
