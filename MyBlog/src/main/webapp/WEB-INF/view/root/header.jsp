@@ -98,7 +98,7 @@ ul li a {
 							<li class="nav-item"><a class="nav-link" href="/header/channel">채널 만들기</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="nav-item marginTopBottomAuto"><a class="btn btn-primary textWhite" href="/index/${getChannelName}"}>${getChannelName}</a></li>
+							<li class="nav-item marginTopBottomAuto"><a class="btn btn-primary textWhite" href="/index/channels/${getChannelName}"}>${getChannelName}</a></li>
 						</c:otherwise>
 					</c:choose>
 

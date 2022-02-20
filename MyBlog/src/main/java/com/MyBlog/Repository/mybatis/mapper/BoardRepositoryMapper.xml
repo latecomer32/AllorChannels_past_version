@@ -42,11 +42,11 @@
 			</if>
 
 			and
-			<if test="uri != '/index/channels/'+channelName">
+			<if test="uri != '/index/channels/'+channelName and uri != '/index/channels/'+channelName+'/'+no">
 				channelName like '%%'
 			</if>
 
-			<if test="uri == '/index/channels/'+channelName">
+			<if test="uri == '/index/channels/'+channelName or uri == '/index/channels/'+channelName+'/'+no">
 				channelName = #{channelName}
 			</if>
 

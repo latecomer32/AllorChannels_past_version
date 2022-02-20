@@ -46,7 +46,7 @@ public class BoardController {
 
 	
 	/* Board 부분 메소드가 다름 */
-	@RequestMapping({ "/index/channels", "/index/channel/board/detail/{no}" })
+	@RequestMapping("/index/channels")
 	public String Channels(@PathVariable(required = false) Integer no,
 			@PathVariable(required = false) String channelName,
 			@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
@@ -149,22 +149,23 @@ public class BoardController {
 		String nickName;
 		String UserId = null;
 		boolean loginCheck;
-
-		
-		
-		
-		
 		String Uri = request.getRequestURI();
 		String encodeUri = UriEncoder.decode(Uri); 
+		System.out.println("Controller Uri:"+encodeUri);
 		model.addAttribute("Uri", encodeUri);
-
+		/* <c:if>문에서 아래 내용이 먹히질 않아서 여기서 변수로 만들어 EL문으로 전송보냄 */
+		String indexChannelsChannel="/index/channels/"+channelName;
+		model.addAttribute("indexChannelsChannel", indexChannelsChannel);
+		String indexChannelsChannelNo="/index/channels/"+channelName+"/"+no;
+		model.addAttribute("indexChannelsChannelNo", indexChannelsChannelNo);
+		
 		
 		if(channelName==null) {
 		channelName="";
 		}
 		
 		model.addAttribute("channelName", channelName);
-		/* uri 안 쓰이는 듯하다 나중에 삭제 정리하자 */
+		
 
 		/* 로그인 전 */
 		if (principal == null) {
@@ -177,15 +178,12 @@ public class BoardController {
 			loginCheck = true;
 			nickName = principal.getNickName();
 			UserId = principal.getUsername();
-			
 		}
 		
 		/* /index/board/detail/{no} */
 		if (no != null) {
 			model.addAttribute("board", boardService.getWritingDetail(no));
 		}
-		
-		
 
 		/* header */
 		String getChannelName = headerService.getChannelName(UserId);
@@ -199,7 +197,7 @@ public class BoardController {
 
 		/* Board */
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-				categoryName, nickName, loginCheck, encodeUri, channelName);
+				categoryName, nickName, loginCheck, encodeUri, channelName, no);
 		int getWritingCount = boardService.getWritingCount(field, query);
 
 		model.addAttribute("getWritingList", getWritingList);

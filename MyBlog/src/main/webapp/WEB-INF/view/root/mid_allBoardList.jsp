@@ -43,25 +43,25 @@ table.tmp_table th {
 <!-- !empty board.title를 조건으로 한건 board의 no컬럼은 자동증가로 값이 조건하므로 empty가 아니다.
       하지만 board.title은 값이 없으면 empty이므로 없을땐 출력하지 않도록 설정 -->
 <c:if test="${!empty board.title}">
-<div>
-	<div scope="row">${board.no}</div>
-	<div>${board.title}</div>
-	<div>${board.nickName}</div>
 	<div>
-		<fmt:formatDate pattern="yy/MM/dd" value="${board.date}" var="date_year" />
-		<fmt:formatDate pattern="hh:mm:ss" value="${board.date}" var="date_hour" />
-		<c:choose>
-			<c:when test="${date_year == today_str_year}">
-				<c:out value="${date_hour}" />
-			</c:when>
-			<c:otherwise>
-				<c:out value="${date_year}" />
-			</c:otherwise>
-		</c:choose>
+		<div scope="row">${board.no}</div>
+		<div>${board.title}</div>
+		<div>${board.nickName}</div>
+		<div>
+			<fmt:formatDate pattern="yy/MM/dd" value="${board.date}" var="date_year" />
+			<fmt:formatDate pattern="hh:mm:ss" value="${board.date}" var="date_hour" />
+			<c:choose>
+				<c:when test="${date_year == today_str_year}">
+					<c:out value="${date_hour}" />
+				</c:when>
+				<c:otherwise>
+					<c:out value="${date_year}" />
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<div>${board.viewCount}</div>
+		<div>${board.content}</div>
 	</div>
-	<div>${board.viewCount}</div>
-	<div>${board.content}</div>
-</div>
 </c:if>
 
 
@@ -103,19 +103,18 @@ table.tmp_table th {
 						</div>
 					</td>
 					<td class="grayFont_td" scope="row">${getWritingList.no}</td>
-					
-					
-				
-				
-				<c:set var="boardHref" value="/index/board/detail/${getWritingList.no}"></c:set>
-					
+					<c:choose>
+						<c:when test="${Uri eq indexChannelsChannel}">
+							<c:set var="boardHref" value="/index/channels/${channelName}/${getWritingList.no}"></c:set>
+						</c:when>
+						<c:when test="${Uri eq indexChannelsChannelNo}">
+							<c:set var="boardHref" value="/index/channels/${channelName}/${getWritingList.no}"></c:set>
+						</c:when>
+						<c:otherwise>
+							<c:set var="boardHref" value="/index/board/detail/${getWritingList.no}"></c:set>
+						</c:otherwise>
+					</c:choose>
 					<td><a class="titleFont_td NoUnderline" href="${boardHref}">${getWritingList.title} </a></td>
-					
-			
-					
-					
-					
-					
 					<td class="titleFont_td">${getWritingList.nickName}</td>
 					<td class="grayFont_td"><fmt:formatDate pattern="yy/MM/dd" value="${getWritingList.date}" var="date_year" /> <fmt:formatDate pattern="hh:mm:ss" value="${getWritingList.date}"
 							var="date_hour" /> <c:choose>

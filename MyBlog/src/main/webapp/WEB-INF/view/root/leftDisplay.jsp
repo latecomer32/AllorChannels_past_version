@@ -55,15 +55,16 @@
 
 			<div class="card" style="width: 18rem;">
 				<ul class="nav nav-tabs">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/index/category"><b>${principal.nickName}</b></a></li>
+					<li class="nav-item"><a class="nav-link " aria-current="page" href="/index/category"><b>${principal.nickName}</b></a></li>
 					<c:choose>
-						<c:when test="${channelName eq getChannelName}">
-							<li class="nav-item"><a class="nav-link" href="/index/${getChannelName}"> ${getChannelName}</a></li>
+						<c:when test="${empty getChannelName}">
+							
 						</c:when>
-						<c:when test="${channelName eq 'category'}">
+						<c:when test="${Uri == indexChannelsChannel}">
+						<li class="nav-item"><a class="nav-link active" href="/index/channels/${channelName}"> ${channelName}</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="nav-item"><a class="nav-link" href="/index/${channelName}"> ${channelName}</a></li>
+							<li class="nav-item"><a class="nav-link active" href="/index/channels/${getChannelName}"> ${getChannelName}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
