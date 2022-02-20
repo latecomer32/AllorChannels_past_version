@@ -86,7 +86,7 @@ table.tmp_table th {
 							<c:if test="${getChannelList.title==getChannelWritingList.channelName}">
 								<tbody>
 									<tr>
-										<td><a class="titleFont_td NoUnderline" href="/index/channel/board/detail/${getChannelWritingList.no}">${getChannelWritingList.title}</a></td>
+										<td><a class="titleFont_td NoUnderline" href="/index/channels/${getChannelList.title}/${getChannelWritingList.no}">${getChannelWritingList.title}</a></td>
 										<td><fmt:formatDate pattern="yy/MM/dd" value="${getChannelWritingList.date}" var="date_year" /> <fmt:formatDate pattern="hh:mm:ss" value="${getChannelWritingList.date}" var="date_hour" />
 											<c:choose>
 												<c:when test="${date_year == today_str_year}">

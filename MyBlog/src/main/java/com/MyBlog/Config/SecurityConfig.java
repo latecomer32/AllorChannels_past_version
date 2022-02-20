@@ -15,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.MyBlog.Config.auth.PrincipalDetailService;
 
@@ -44,7 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Override // js, css, image 설정은 보안 설정의 영향 밖에 있도록 만들어주는 설정.
 	 	public void configure(WebSecurity web) throws Exception {
 	        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-	    }
+	        
+	 }
 		/* .antMatchers("/favicon.ico", "/resources/**", "/error") */
 	 
 	 //configure(AuthenticationManagerBuilder auth) : 해쉬로 암호화를 하게 되면
@@ -64,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
 		http
 		.csrf().disable() //csrf 토큰 비활성화
 		.authorizeRequests()

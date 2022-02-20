@@ -103,7 +103,19 @@ table.tmp_table th {
 						</div>
 					</td>
 					<td class="grayFont_td" scope="row">${getWritingList.no}</td>
-					<td><a class="titleFont_td NoUnderline" href="/index/board/detail/${getWritingList.no}">${getWritingList.title} </a></td>
+					
+					
+				
+				
+				<c:set var="boardHref" value="/index/board/detail/${getWritingList.no}"></c:set>
+					
+					<td><a class="titleFont_td NoUnderline" href="${boardHref}">${getWritingList.title} </a></td>
+					
+			
+					
+					
+					
+					
 					<td class="titleFont_td">${getWritingList.nickName}</td>
 					<td class="grayFont_td"><fmt:formatDate pattern="yy/MM/dd" value="${getWritingList.date}" var="date_year" /> <fmt:formatDate pattern="hh:mm:ss" value="${getWritingList.date}"
 							var="date_hour" /> <c:choose>

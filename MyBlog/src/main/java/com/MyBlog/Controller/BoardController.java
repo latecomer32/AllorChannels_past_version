@@ -1,5 +1,7 @@
 package com.MyBlog.Controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.yaml.snakeyaml.util.UriEncoder;
 
 import com.MyBlog.Config.auth.PrincipalDetail;
 import com.MyBlog.Dto.Board;
@@ -41,8 +44,10 @@ public class BoardController {
 	@Autowired
 	ChannelService channelService;
 
+	
+	/* Board 부분 메소드가 다름 */
 	@RequestMapping({ "/index/channels", "/index/channel/board/detail/{no}" })
-	public String indexChannels(@PathVariable(required = false) Integer no,
+	public String Channels(@PathVariable(required = false) Integer no,
 			@PathVariable(required = false) String channelName,
 			@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
 			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
@@ -107,7 +112,6 @@ public class BoardController {
 		model.addAttribute("getChannelCount", getChannelCount);
 
 		/* Board */
-
 		List<Board> getChannelWritingList = null;
 		getChannelWritingList = boardService.getChannelWritingList(5, getChannelList);
 		model.addAttribute("getChannelWritingList", getChannelWritingList);
@@ -118,11 +122,17 @@ public class BoardController {
 		String today_str_year = dateFormat_year.format(today_date);
 		model.addAttribute("today_str_year", today_str_year);
 
-		return "root.mid_channerContentList";
+		return "root.mid_allChannerList";
 	}
-
-	@RequestMapping({ "/index", "/index/board/detail/{no}", "/index/channels/{channelName}" })
-	public String index(
+	
+	
+	@RequestMapping({"/index",
+					 "/index/category",
+					 "/index/category/{categoryName}",
+					 "/index/board/detail/{no}",
+					 "/index/channels/{channelName}",
+					 "/index/channels/{channelName}/{no}"})
+	public String channelName(
 			@PathVariable(required = false) Integer no,
 			@PathVariable(required = false) String channelName,
 			@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
@@ -133,16 +143,27 @@ public class BoardController {
 			@RequestParam(name = "desc", required = false, defaultValue = "DESC") String desc,
 			@RequestParam(name = "order", required = false, defaultValue = "date") String order, Model model,
 			Board board, Channel channel, @AuthenticationPrincipal PrincipalDetail principal,
-			HttpServletRequest request) {
-
+			HttpServletRequest request, HttpServletRequest response) throws UnsupportedEncodingException {
+		System.out.println("board controller");
 		boolean pub = true;
 		String nickName;
 		String UserId = null;
 		boolean loginCheck;
+
+		
+		
+		
+		
 		String Uri = request.getRequestURI();
-		String uri = "/index/channels/" + channelName;
-		model.addAttribute("Uri", Uri);
-		model.addAttribute("uri", uri);
+		String encodeUri = UriEncoder.decode(Uri); 
+		model.addAttribute("Uri", encodeUri);
+
+		
+		if(channelName==null) {
+		channelName="";
+		}
+		
+		model.addAttribute("channelName", channelName);
 		/* uri 안 쓰이는 듯하다 나중에 삭제 정리하자 */
 
 		/* 로그인 전 */
@@ -156,6 +177,7 @@ public class BoardController {
 			loginCheck = true;
 			nickName = principal.getNickName();
 			UserId = principal.getUsername();
+			
 		}
 		
 		/* /index/board/detail/{no} */
@@ -177,7 +199,7 @@ public class BoardController {
 
 		/* Board */
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-				categoryName, nickName, loginCheck, Uri, channelName);
+				categoryName, nickName, loginCheck, encodeUri, channelName);
 		int getWritingCount = boardService.getWritingCount(field, query);
 
 		model.addAttribute("getWritingList", getWritingList);
@@ -189,8 +211,9 @@ public class BoardController {
 		String today_str_year = dateFormat_year.format(today_date);
 		model.addAttribute("today_str_year", today_str_year);
 
-		return "root.mid_contentList";
+		return "root.mid_allBoardList";
 	}
+	
 
 	/*
 	 * @GetMapping("/index/channel/board/detail/{no}") public String

@@ -21,8 +21,8 @@ import com.MyBlog.Service.BoardService;
 import com.MyBlog.Service.HeaderService;
 import com.MyBlog.Service.LeftService;
 
-/*사용하지 않음*/
-/*@Controller*/
+
+@Controller
 public class LeftController {
 
 	@Autowired
@@ -34,8 +34,10 @@ public class LeftController {
 	@Autowired
 	HeaderService headerService;
 
-	/* @GetMapping("/category") */
-	public String saveCategoryName(@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
+	
+	public String saveCategoryName(
+			@PathVariable(required = false) Integer no,
+			@RequestParam(name = "c", required = false, defaultValue = "") String categoryName,
 			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
 			@RequestParam(name = "f", required = false, defaultValue = "title") String field,
 			@RequestParam(name = "q", required = false, defaultValue = "") String query,
@@ -44,9 +46,40 @@ public class LeftController {
 			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
 			@RequestParam(name = "n", required = false, defaultValue = "") String nickName,
 			@AuthenticationPrincipal PrincipalDetail principal, Model model,
-			Board board
+			Board board,
+			HttpServletRequest request
 			) {
 
+		boolean pub = true;
+		String UserId = null;
+		String channelName="";
+		boolean loginCheck;
+		String Uri = request.getRequestURI();
+		String uri = "/index/channels/" + channelName;
+		model.addAttribute("Uri", Uri);
+		model.addAttribute("uri", uri);
+		/* uri 안 쓰이는 듯하다 나중에 삭제 정리하자 */
+
+		/* 로그인 전 */
+		if (principal == null) {
+			loginCheck = false;
+			nickName = "";
+		}
+
+		/* 로그인 후 */
+		else {
+			loginCheck = true;
+			nickName = principal.getNickName();
+			UserId = principal.getUsername();
+		}
+		
+		/* /index/board/detail/{no} */
+		if (no != null) {
+			model.addAttribute("board", boardService.getWritingDetail(no));
+		}
+		
+		
+		
 		
 			List<Category> getCategoryList = leftService.getCategoryList(principal.getNickName());
 			model.addAttribute("getCategoryList",getCategoryList);
@@ -58,12 +91,11 @@ public class LeftController {
 				model.addAttribute("getChannelName",getChannelName);
 			}
 		
+
 		
-		boolean pub = true;
-		/*
-		 * List<Board> getWritingList = boardService.getWritingList(page, field, query,
-		 * pub, size, order, desc, categoryName, principal.getNickName());
-		 */		System.out.println("/category_getWritingList:"
+		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
+				categoryName, nickName, loginCheck, Uri, channelName);
+		 	System.out.println("/category_getWritingList:"
 				+"\n page:"+page+
 				"\n field:"+field+
 				"\n query:"+query+
@@ -75,44 +107,66 @@ public class LeftController {
 		
 		
 		int getWritingCount = boardService.getWritingCount(field, query);
-		/*
-		 * model.addAttribute("getWritingList", getWritingList);
-		 * model.addAttribute("getWritingCount", getWritingCount);
-		 */	return "root.mid_contentList";
+		
+		 model.addAttribute("getWritingList", getWritingList);
+		 model.addAttribute("getWritingCount", getWritingCount);
+		 return "root.mid_allBoardList";
 	}
 	
-	/* @GetMapping("/category/{categoryName}") */
-	public String getCategoryPage(@PathVariable String categoryName,
-			@RequestParam(name = "p", required = false, defaultValue = "1") Integer page,
+
+	public String getCategoryPage(
+			@PathVariable(required = false) Integer no,
+			@PathVariable String categoryName,
+			@RequestParam(name = "p", required = false, defaultValue = "1") int page,
 			@RequestParam(name = "f", required = false, defaultValue = "title") String field,
 			@RequestParam(name = "q", required = false, defaultValue = "") String query,
-			@RequestParam(name = "r", required = false, defaultValue = "15") Integer rowNum,
+			@RequestParam(name = "r", required = false, defaultValue = "15") int size,
 			@RequestParam(name = "desc", required = false, defaultValue = "DESC") String desc,
 			@RequestParam(name = "order", required = false, defaultValue = "date") String order,
 			@RequestParam(name = "n", required = false, defaultValue = "") String nickName,
 			@AuthenticationPrincipal PrincipalDetail principal,
-			Model model) {
+			Model model,
+			HttpServletRequest request) {
 		
+
 		boolean pub = true;
-		/*
-		 * List<Board> getWritingList = boardService.getWritingList(page, field, query,
-		 * pub, rowNum, order, desc, categoryName, principal.getNickName());
-		 */		System.out.println("/category/{categoryName}_getWritingList:"
-				+"\n page:"+page+
-				"\n field:"+field+
-				"\n query:"+query+
-				"\n rowNum:"+rowNum+
-				"\n order:"+order+
-				"\n categoryName:"+categoryName+
-				"\n nickName:"+principal.getNickName());
+		String UserId = null;
+		boolean loginCheck;
+		String Uri = request.getRequestURI();
+		String channelName="";
+		String uri = "/index/channels/" + channelName;
+		model.addAttribute("Uri", Uri);
+		model.addAttribute("uri", uri);
+		/* uri 안 쓰이는 듯하다 나중에 삭제 정리하자 */
+
+		/* 로그인 전 */
+		if (principal == null) {
+			loginCheck = false;
+			nickName = "";
+		}
+
+		/* 로그인 후 */
+		else {
+			loginCheck = true;
+			nickName = principal.getNickName();
+			UserId = principal.getUsername();
+		}
+		
+		/* /index/board/detail/{no} */
+		if (no != null) {
+			model.addAttribute("board", boardService.getWritingDetail(no));
+		}
 		
 		
+		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
+				categoryName, nickName, loginCheck, Uri, channelName);
+
 		int getWritingCount = boardService.getWritingCount(field, query);
 		/*
 		 * model.addAttribute("getWritingList", getWritingList);
 		 * model.addAttribute("getWritingCount", getWritingCount);
 		 */
 		
-		return "root.mid_contentList";
+		return "root.mid_allBoardList";
 	}
 }

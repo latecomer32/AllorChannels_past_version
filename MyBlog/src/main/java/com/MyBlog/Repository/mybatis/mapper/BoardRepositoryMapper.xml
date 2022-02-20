@@ -42,11 +42,11 @@
 			</if>
 
 			and
-			<if test="uri =='/index/category' or uri =='/index'">
+			<if test="uri != '/index/channels/'+channelName">
 				channelName like '%%'
 			</if>
 
-			<if test="uri !='/index/category' and uri !='/index' ">
+			<if test="uri == '/index/channels/'+channelName">
 				channelName = #{channelName}
 			</if>
 
@@ -54,6 +54,7 @@
 			order by ${order} ${desc}
 			limit #{offset}, #{size}
 		</where>
+		<!-- uri !='/index/channels'  -->
 	</select>
 
 	<delete id="deleteWritingList">
