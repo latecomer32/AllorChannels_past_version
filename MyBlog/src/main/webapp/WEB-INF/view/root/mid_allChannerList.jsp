@@ -37,9 +37,17 @@ table.tmp_table th {
 }
 </style>
 
+<c:choose>
+<c:when test="${Uri == '/index/channels'}">
+채널 목록
+</c:when>
+
+</c:choose>
+
+
 <div class="">
 
-<!-- "/index/channel/board/detail/{no}" no값이 null이 아닐때-->
+<!-- 글 상세보기 구현-->
 <!-- !empty board.title를 조건으로 한건 board의 no컬럼은 자동증가로 값이 조건하므로 empty가 아니다.
       하지만 board.title은 값이 없으면 empty이므로 없을땐 출력하지 않도록 설정 -->
 <c:if test="${!empty board.title}">
@@ -66,9 +74,7 @@ table.tmp_table th {
 
 
 
-	<!-- /index/category 페이지에서 채널명 출력하지 않는 설정 -->
-	<c:if test="${Uri!='/index/category'}">
-
+	
 		<!-- 각 채널 4행(반응시-> 2행,1행 변경) 그리드 설정 -->
 		<div class="band--">
 
@@ -121,6 +127,5 @@ table.tmp_table th {
 				</c:if>
 			</c:forEach>
 		</div>
-	</c:if>
 
 </div>

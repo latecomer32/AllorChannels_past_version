@@ -10,4 +10,5 @@ public interface ChannelService {
 
 	int getChannelCount(String field, String query);
 
+
 }

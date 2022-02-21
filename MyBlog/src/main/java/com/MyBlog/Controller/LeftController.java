@@ -94,7 +94,7 @@ public class LeftController {
 
 		
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-				categoryName, nickName, loginCheck, Uri, channelName);
+				categoryName, nickName, loginCheck, Uri, channelName, no);
 		 	System.out.println("/category_getWritingList:"
 				+"\n page:"+page+
 				"\n field:"+field+
@@ -159,7 +159,7 @@ public class LeftController {
 		
 		
 		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-				categoryName, nickName, loginCheck, Uri, channelName);
+				categoryName, nickName, loginCheck, Uri, channelName, no);
 
 		int getWritingCount = boardService.getWritingCount(field, query);
 		/*

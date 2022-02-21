@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style>
 table.tmp_table tr {
@@ -38,10 +38,24 @@ table.tmp_table th {
 }
 </style>
 
+<c:choose>
+	<c:when test="${fn:contains(Uri, 'category')}">
+MyBlog
+</c:when>
+	<c:when test="${fn:contains(Uri, 'channels')}">
+${channelName}
+</c:when>
+	<c:otherwise>
+Home
+</c:otherwise>
+
+</c:choose>
 
 <!-- "/index/board/detail/{no}" no값이 null이 아닐때-->
-<!-- !empty board.title를 조건으로 한건 board의 no컬럼은 자동증가로 값이 조건하므로 empty가 아니다.
-      하지만 board.title은 값이 없으면 empty이므로 없을땐 출력하지 않도록 설정 -->
+<!-- !empty board.title를 조건으로 한건 
+	  MySQL board 테이블에서 no컬럼은 자동증가로 값이 조건하므로 empty가 아니다.
+      하지만 board.title은 값이 없으면 empty이므로 
+      board.title를 특정해서 empty이면 출력하지 않도록 설정 -->
 <c:if test="${!empty board.title}">
 	<div>
 		<div scope="row">${board.no}</div>
@@ -69,12 +83,15 @@ table.tmp_table th {
 
 
 
-
 <!-- 게시판 페이징 변수 설정 -->
 <c:set var="row" value="${(empty param.r)?15:param.r}" />
 <c:set var="page" value="${(empty param.p)?1:param.p}" />
 <c:set var="startNum" value="${page-(page-1)%5}" />
 <c:set var="lastNum" value="${fn:substringBefore(Math.ceil(getWritingCount/row),'.')}" />
+
+
+
+
 
 <!-- 전체 게시글 -->
 <table class="tmp_table table table-hover table-borderless">
@@ -88,6 +105,7 @@ table.tmp_table th {
 			<th class="grayFont_th" scope="col">번호</th>
 			<th class="grayFont_th" scope="col">제목</th>
 			<th class="grayFont_th" scope="col">작성자</th>
+			<th class="grayFont_th" scope="col">채널</th>
 			<th class="grayFont_th" scope="col">작성일</th>
 			<th class="grayFont_th" scope="col">조회수</th>
 		</tr>
@@ -104,18 +122,23 @@ table.tmp_table th {
 					</td>
 					<td class="grayFont_td" scope="row">${getWritingList.no}</td>
 					<c:choose>
-						<c:when test="${Uri eq indexChannelsChannel}">
+
+						<%-- URI가 /index/channels/${channelName},/index/channels/${channelName}/${no} 2개 경우가 있다. --%>
+						<c:when test="${fn:contains(Uri, '/index/channels')}">
 							<c:set var="boardHref" value="/index/channels/${channelName}/${getWritingList.no}"></c:set>
 						</c:when>
-						<c:when test="${Uri eq indexChannelsChannelNo}">
-							<c:set var="boardHref" value="/index/channels/${channelName}/${getWritingList.no}"></c:set>
+						
+						<c:when test="${fn:contains(Uri, '/index/category')}">
+							<c:set var="boardHref" value="/index/category/${getWritingList.no}?c=${categoryName}"></c:set>
 						</c:when>
+						
 						<c:otherwise>
 							<c:set var="boardHref" value="/index/board/detail/${getWritingList.no}"></c:set>
 						</c:otherwise>
 					</c:choose>
 					<td><a class="titleFont_td NoUnderline" href="${boardHref}">${getWritingList.title} </a></td>
 					<td class="titleFont_td">${getWritingList.nickName}</td>
+					<td class="titleFont_td">${getWritingList.channelName}</td>
 					<td class="grayFont_td"><fmt:formatDate pattern="yy/MM/dd" value="${getWritingList.date}" var="date_year" /> <fmt:formatDate pattern="hh:mm:ss" value="${getWritingList.date}"
 							var="date_hour" /> <c:choose>
 							<c:when test="${date_year == today_str_year}">

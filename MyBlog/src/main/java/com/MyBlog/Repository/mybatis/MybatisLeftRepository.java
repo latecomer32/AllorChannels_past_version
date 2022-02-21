@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.MyBlog.Dto.Category;
+import com.MyBlog.Dto.ChannelCategory;
 import com.MyBlog.Dto.UserCategoryView;
 import com.MyBlog.Repository.LeftRepository;
 
@@ -33,5 +34,20 @@ public class MybatisLeftRepository implements LeftRepository {
 	@Override
 	public void deleteCategoryName(String[] deleteCategory) {
 		mapper.deleteCategoryName(deleteCategory);
+	}
+
+	@Override
+	public List<ChannelCategory> getChannelCategoryList(String channelName) {
+		return mapper.getChannelCategoryList(channelName);
+	}
+
+	@Override
+	public void saveChannelCategoryName(String categoryName, String title) {
+		mapper.saveChannelCategoryName(categoryName, title);
+	}
+
+	@Override
+	public void deleteChannelCategoryName(String[] deleteChannelCategoryNoArray) {
+		mapper.deleteChannelCategoryName(deleteChannelCategoryNoArray);
 	}
 }

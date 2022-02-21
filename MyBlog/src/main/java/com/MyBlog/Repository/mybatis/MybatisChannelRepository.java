@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.MyBlog.Dto.Board;
 import com.MyBlog.Dto.Channel;
+import com.MyBlog.Dto.ChannelCategory;
 import com.MyBlog.Repository.BoardRepository;
 import com.MyBlog.Repository.ChannelRepository;
 
@@ -33,11 +34,7 @@ public class MybatisChannelRepository implements ChannelRepository {
 	public int getChannelCount(String field, String query) {
 		return mapper.getChannelCount(field, query);
 	}
-
-
-
 	
 
 
-	
 }

@@ -63,10 +63,8 @@ td {
 								</div>
 							</th>
 							<th scope="col">번호</th>
-							<th scope="col">아이디</th>
 							<th scope="col">닉네임</th>
 							<th scope="col">등급</th>
-							<th scope="col">소셜가입</th>
 							<th scope="col">가입일</th>
 
 						</tr>
@@ -81,12 +79,9 @@ td {
 									</div>
 								</td>
 								<td scope="row">${getMemberList.no}</td>
-								<td><a class="NoUnderline" href="/board/detail/${getMemberList.no}">${getMemberList.userId} </a></td>
-								<td>${getMemberList.nickName}</td>
+								<td><a class="NoUnderline" href="/board/detail/${getMemberList.no}">${getMemberList.nickName}</a></td>
 								<td>${getMemberList.role}</td>
-								<td>${getMemberList.oauth}</td>
 								<td>${getMemberList.date}</td>
-
 							</tr>
 						</c:forEach>
 					</tbody>

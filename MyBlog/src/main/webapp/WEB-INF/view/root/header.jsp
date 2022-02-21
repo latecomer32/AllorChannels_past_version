@@ -70,7 +70,7 @@ ul li a {
 
 	<div class="d-flex justify-content-between middleDisplay">
 		<div class="marginTopBottomAuto">
-			<a class="marginTopBottomAuto NoUnderline" href="/index"><b>MyBlog</b></a> <span> <span><b> / </b></span> <a class="marginTopBottomAuto NoUnderline" href="/index/channels"><b> 채널s</b></a> <span>
+			<a class="marginTopBottomAuto NoUnderline" href="/index"><b>Home</b></a> /  <a class="marginTopBottomAuto NoUnderline" href="/index/channels"><b> 채널s</b></a>
 		</div>
 		<ul class="nav">
 			<form class="d-flex flex-row" action="/index">

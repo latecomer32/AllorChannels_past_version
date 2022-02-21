@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.MyBlog.Config.auth.PrincipalDetail;
 import com.MyBlog.Dto.Category;
+import com.MyBlog.Dto.ChannelCategory;
 import com.MyBlog.Dto.ResponseDto;
 import com.MyBlog.Dto.UserCategoryView;
 import com.MyBlog.Service.LeftService;
@@ -23,10 +24,10 @@ public class LeftApiController {
 	LeftService leftService;
 
 	@PostMapping("/category/saveCategoryName")
-	public ResponseDto<Integer> saveCategoryName(@RequestBody String categoryName,
+	public ResponseDto<Integer> saveCategoryName(@RequestBody Category categoryName,
 			@AuthenticationPrincipal PrincipalDetail principal) {
 
-		leftService.saveCategoryName(principal.getNickName(), categoryName);
+		leftService.saveCategoryName(principal.getNickName(), categoryName.getCategoryName());
 
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
@@ -35,6 +36,22 @@ public class LeftApiController {
 	public ResponseDto<Integer> deleteCategoryName(@RequestBody String[] deleteCategoryNoArray) {
 
 		leftService.deleteCategoryName(deleteCategoryNoArray);
+
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/channel/saveChannelCategoryName")
+	public ResponseDto<Integer> channelsaveCategoryName(@RequestBody ChannelCategory channelCategory) {
+
+		leftService.saveChannelCategoryName(channelCategory.getCategoryName(), channelCategory.getTitle());
+
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+
+	@PostMapping("/channel/deleteChannelCategoryName")
+	public ResponseDto<Integer> channeldeleteCategoryName(@RequestBody String[] deleteChannelCategoryNoArray) {
+
+		leftService.deleteChannelCategoryName(deleteChannelCategoryNoArray);
 
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}

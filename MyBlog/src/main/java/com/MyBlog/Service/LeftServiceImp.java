@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.MyBlog.Dto.Category;
+import com.MyBlog.Dto.ChannelCategory;
 import com.MyBlog.Dto.UserCategoryView;
 import com.MyBlog.Repository.LeftRepository;
 
@@ -29,6 +30,23 @@ public class LeftServiceImp implements LeftService{
 	public void deleteCategoryName(String[] deleteCategory) {
 		leftRepository.deleteCategoryName(deleteCategory);
 		
+	}
+
+	
+
+	@Override
+	public void saveChannelCategoryName(String categoryName, String title) {
+		leftRepository.saveChannelCategoryName(categoryName, title);
+	}
+
+	@Override
+	public void deleteChannelCategoryName(String[] deleteChannelCategoryNoArray) {
+		leftRepository.deleteChannelCategoryName(deleteChannelCategoryNoArray);
+	}
+	
+	@Override
+	public List<ChannelCategory> getChannelCategoryList(String channelName) {
+		return leftRepository.getChannelCategoryList(channelName);
 	}
 
 }

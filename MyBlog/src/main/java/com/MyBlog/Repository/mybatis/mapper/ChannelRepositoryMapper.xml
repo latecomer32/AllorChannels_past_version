@@ -15,5 +15,7 @@
 		SELECT COUNT(no) COUNT FROM 
 		(SELECT * FROM channel WHERE title LIKE '%${query}%')N
 	</select>
+	
+	
 
 </mapper>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
@@ -38,68 +38,66 @@
 }
 </style>
 
+<c:if test="${Uri != '/index/channels'}">
+	<div>
 
-<div>
+		<c:choose>
+			<c:when test="${empty principal}">
+			</c:when>
+			<c:otherwise>
+				<div class="card" style="width: 18rem;">
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a class="nav-link ${(fn:contains(Uri, '/index/channels'))?'':'active'}" aria-current="page" href="/index/category"><b>MyBlog</b></a></li>
+						<c:set var="List" value="${getCategoryList}"></c:set>
+						<c:set var="saveCategoryURI" value='/category/saveCategoryName'></c:set>
+						<c:set var="deleteCategoryURI" value='/category/deleteCategoryName'></c:set>
 
-	<div class="beginEmpty"></div>
-
-
-
-
-
-
-	<c:choose>
-		<c:when test="${empty principal}">
-		</c:when>
-		<c:otherwise>
-
-			<div class="card" style="width: 18rem;">
-				<ul class="nav nav-tabs">
-					<li class="nav-item"><a class="nav-link " aria-current="page" href="/index/category"><b>${principal.nickName}</b></a></li>
-					<c:choose>
-						<c:when test="${empty getChannelName}">
-							
-						</c:when>
-						<c:when test="${Uri == indexChannelsChannel}">
-						<li class="nav-item"><a class="nav-link active" href="/index/channels/${channelName}"> ${channelName}</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="nav-item"><a class="nav-link active" href="/index/channels/${getChannelName}"> ${getChannelName}</a></li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-
-
-
-				<div class="card-body">
-					<ul class="list-group" id="sortable">
-
-						<li class="ui-state-default list-group-item active"><a href="/index/category?c="> 내가 작성한 글 전부 보기 </a></li>
-						<li class="ui-state-default list-group-item"><a href="/index/category?c=없음"> 카테고리 없는 글 보기 </a></li>
-						<c:forEach var="getCategoryList" items="${getCategoryList}">
-							<li class="ui-state-default list-group-item active"><input type="checkbox" id="deleteCategory" name="deleteCategory" value="${getCategoryList.no}" /> <a
-								href="/index/category?c=${getCategoryList.categoryName}"> <span class="ui-icon ui-icon-arrowthick-2-n-s"> </span>${getCategoryList.categoryName}</a></li>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${empty getChannelName}">
+							</c:when>
+							<c:when test="${fn:contains(Uri, '/index/channels')}">
+								<li class="nav-item"><a class="nav-link ${(fn:contains(Uri, '/index/channels'))?'active':''}" href="/index/channels/${channelName}"> ${channelName}</a></li>
+								<input type="hidden" id="title" value="${channelName}" />
+								<c:set var="List" value="${getChannelCategoryList}"></c:set>
+								<c:set var="saveCategoryURI" value='/channel/saveChannelCategoryName'></c:set>
+								<c:set var="deleteCategoryURI" value='/channel/deleteChannelCategoryName'></c:set>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item"><a class="nav-link " href="/index/channels/${getChannelName}"> ${getChannelName}</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 
-					<div>
+					<input type="hidden" id="deleteCategoryURI" value='${deleteCategoryURI}' /> 
+					<input type="hidden" id="saveCategoryURI" value='${saveCategoryURI}' /> 
+					<div class="card-body">
+						<ul class="list-group" id="sortable">
 
-						<div style="float: left; width: 100px;">카테고리 추가 :</div>
+							<a class="NoUnderline" href="/index/category?c="><li class="ui-state-default list-group-item active"> 내가 작성한 글 전부 보기 </li></a>
+							<a class="NoUnderline" href="/index/category?c=없음"><li class="ui-state-default list-group-item"> 카테고리 없는 글 보기 </li></a>
+							<c:forEach var="List" items="${List}">
+								<a class="NoUnderline" href="/index/category?c=${List.categoryName}"><li class="ui-state-default list-group-item active">
+								<input type="checkbox" id="deleteCategory" name="deleteCategory" value="${List.no}" /> 
+								${List.categoryName}</li></a>
+							</c:forEach>
+						</ul>
 
-						<div style="clar: both;">
 
-							<input type="button" id="addItem" value="추가" onclick="createItem();" /> <input type="button" id="btn_deleteCategory" name="btn_deleteCategory" value="삭제" onclick="btn_deleteCategory();" /> <input
-								type="button" id="submitItem" value="확인" onclick="submitItem();" />
-
+						<div>
+							<div style="float: left; width: 100px;">카테고리 추가 :</div>
+							<div style="clar: both;">
+								<input type="button" id="addItem" value="추가" onclick="createItem();" /> <input type="button" id="btn_deleteCategory" name="btn_deleteCategory" value="삭제" onclick="btn_deleteCategory();" /> <input
+									type="button" id="submitItem" value="확인" onclick="submitItem();" />
+							</div>
 						</div>
+						<br />
+
+						<div id="itemBoxWrap"></div>
 					</div>
-					<br />
 
-					<div id="itemBoxWrap"></div>
+
 				</div>
-			</div>
-		</c:otherwise>
-	</c:choose>
-</div>
-
-<script src="/js/category.js"></script>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</c:if>

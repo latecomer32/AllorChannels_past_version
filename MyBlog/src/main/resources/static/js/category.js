@@ -3,11 +3,13 @@ function btn_deleteCategory() {
   $("input[name=deleteCategory]:checked").each(function () {
     deleteCategoryNoArray.push($(this).attr("value"));
   });
-
   console.log(deleteCategoryNoArray);
+  uri = $("#deleteCategoryURI").val();
+
+  console.log("deleteCategoryURI:", uri);
   $.ajax({
     type: "POST",
-    url: "/category/deleteCategoryName",
+    url: uri,
     data: JSON.stringify(deleteCategoryNoArray),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
@@ -25,14 +27,20 @@ function submitItem() {
   if (!validateItem()) {
     return;
   }
-  let categoryName = $("#categoryName").val();
 
+  let data = {
+    title: $("#title").val(),
+    categoryName: $("#categoryName").val(),
+  };
+  uri = $("#saveCategoryURI").val();
+  console.log("data:", data);
+  console.log("saveCategoryURI:", uri);
   $.ajax({
     type: "POST",
-    url: "/category/saveCategoryName",
-    data: categoryName,
+    url: uri,
+    data: JSON.stringify(data),
     contentType: "application/json; charset=utf-8",
-    dataType: "text",
+    dataType: "json",
   })
     .done(function (resp) {
       alert("등록이 완료되었습니다.");

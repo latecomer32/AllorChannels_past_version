@@ -150,7 +150,6 @@
 
 .headerSetting{
 margin-bottom:50px;
-
 }
 
 </style>
@@ -189,6 +188,25 @@ margin-bottom:50px;
 			<tiles:insertAttribute name="rightDisplay" />
 		</div>
 	</div>
+	
+	
+	
+<script src="/js/join.js"></script>
+<!-- 사용처 : mid_joinForm -->
+
+<script src="/js/user.js"></script>
+<!-- 사용처 : mid_joinForm -->
+
+
+<script src="/js/board.js"></script>
+<!-- 사용처 : mid_contentList -->
+<!-- 사용처 : mid_saveTheWritingForm -->
+
+<script src="/js/channel.js"></script>
+<!-- 사용처 : mid_saveChannel -->
+
+<script src="/js/category.js"></script>
+<!-- 사용처 : leftDisplay -->
 </body>
 
 </html>

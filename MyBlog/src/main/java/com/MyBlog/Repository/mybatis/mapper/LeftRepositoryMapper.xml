@@ -5,7 +5,7 @@
 <mapper namespace="com.MyBlog.Repository.LeftRepository">
 
 
-	<insert id="saveCategoryName" parameterType="String">
+	<insert id="saveCategoryName" >
 		insert into
 		category(nickName, categoryName)
 		values(#{nickName},#{categoryName})
@@ -25,5 +25,22 @@
 	
 	</delete>
 
-
+	<select id="getChannelCategoryList" resultType="com.MyBlog.Dto.ChannelCategory">
+		SELECT * FROM channelcategory WHERE title = #{title}
+	</select>
+	
+	<insert id="saveChannelCategoryName" parameterType="com.MyBlog.Dto.ChannelCategory">
+		insert into
+		channelcategory(categoryName, title)
+		values(#{categoryName},#{title})
+	</insert>
+	
+	<delete id="deleteChannelCategoryName">
+		DELETE FROM channelcategory where no in
+		<foreach item="no" index="index" collection="deleteChannelCategoryNoArray"
+	        open="(" separator="," close=")">
+    	      #{no}
+    	</foreach>
+	
+	</delete>
 </mapper>

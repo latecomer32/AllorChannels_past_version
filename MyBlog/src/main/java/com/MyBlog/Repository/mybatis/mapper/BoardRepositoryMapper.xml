@@ -33,14 +33,13 @@
 				categoryName like '%${categoryName}%'
 			</if>
 			and
-			<if test="uri != '/index/category' ">
+			<if test="uri != '/index/category' and uri !='/index/category'+'/'+no">
 				nickName like '%%'
 			</if>
 
-			<if test="uri =='/index/category'">
+			<if test="uri =='/index/category' or uri =='/index/category'+'/'+no">
 				nickName = #{nickName}
 			</if>
-
 			and
 			<if test="uri != '/index/channels/'+channelName and uri != '/index/channels/'+channelName+'/'+no">
 				channelName like '%%'
