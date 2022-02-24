@@ -277,11 +277,7 @@ if (getChannelName != null) {
 		String Uri = request.getRequestURI();
 		String encodeUri = UriEncoder.decode(Uri);
 		model.addAttribute("Uri", encodeUri);
-		/* <c:if>문에서 아래 내용이 먹히질 않아서 여기서 변수로 만들어 EL문으로 전송보냄 */
-		String indexChannelsChannel = "/index/channels/" + channelName;
-		model.addAttribute("indexChannelsChannel", indexChannelsChannel);
-		String indexChannelsChannelNo = "/index/channels/" + channelName + "/" + no;
-		model.addAttribute("indexChannelsChannelNo", indexChannelsChannelNo);
+	
 		
 		model.addAttribute("categoryName", categoryName);
 
@@ -329,22 +325,8 @@ if (getChannelName != null) {
 		List<ChannelCategory> getChannelCategoryList = leftService.getChannelCategoryList(channelName);
 		model.addAttribute("getChannelCategoryList", getChannelCategoryList);
 		
-		/* Board */
-		List<Board> getWritingList = boardService.getWritingList(page, field, query, pub, size, order, desc,
-				categoryName, nickName, loginCheck, encodeUri, channelName, no);
-		int getWritingCount = boardService.getWritingCount(field, query);
-
-		model.addAttribute("getWritingList", getWritingList);
-		model.addAttribute("getWritingCount", getWritingCount);
-
+	
 		
-		
-		
-		/* 오늘 날짜 생성하여 Str타입으로 jsp에 전달 */
-		Date today_date = new java.util.Date();
-		DateFormat dateFormat_year = new SimpleDateFormat("yy/MM/dd");
-		String today_str_year = dateFormat_year.format(today_date);
-		model.addAttribute("today_str_year", today_str_year);
 
 		return "root.mid_updateTheWritingForm";
 	}

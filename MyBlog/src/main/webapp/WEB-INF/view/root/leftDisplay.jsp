@@ -131,7 +131,7 @@
 						<input type="button" id="submitItem" value="확인" onclick="submitItem();" />
 
 						<c:if test="${!empty getChannelName and fn:contains(Uri, '/channels')}">
-							<input type="button" id="deleteChannel" value="채널삭제" onclick="deleteChannel();" />
+							<input type="button" id="deleteChannel" value="채널삭제" />
 						</c:if>
 						<!-- 채널 삭제용 -->
 						<input type="hidden" id="deleteChannelName" value='${getChannelName}' />

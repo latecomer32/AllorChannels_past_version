@@ -122,7 +122,7 @@ ul li {
 					<li class="nav-item marginTopBottomAuto">${principal.nickName}</li>
 					<li class="nav-item"><a class="nav-link flex-row-reverse" href="/logout">로그아웃</a></li>
 					<input type="hidden" id="cancelMembership" value="${principal.nickName}"/>
-					<li class="nav-item marginTopBottomAuto" ><button id="btn_submit" class="btn btn-primary" onclick='confirm("정말 회원탈퇴하시겠습니까?. 탈퇴시 게시글이 전부 삭제됩니다.")'>탈퇴</button></li>
+					<li class="nav-item marginTopBottomAuto" ><button id="btn_submit" class="btn btn-primary">탈퇴</button></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

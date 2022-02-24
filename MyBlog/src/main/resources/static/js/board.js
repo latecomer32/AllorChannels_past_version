@@ -33,7 +33,6 @@ let index = {
       dataType: "json",
     })
       .done(function (resp) {
-        alert("글쓰기가 완료되었습니다.");
         history.back();
       })
       .fail(function (error) {
