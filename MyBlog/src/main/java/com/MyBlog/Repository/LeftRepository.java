@@ -25,4 +25,6 @@ public interface LeftRepository {
 
 	void deleteChannelCategoryName(String[] deleteChannelCategoryNoArray);
 
+	void deleteChannelName(String deleteChannelName);
+
 }

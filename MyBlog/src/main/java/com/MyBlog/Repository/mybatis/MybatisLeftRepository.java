@@ -50,4 +50,10 @@ public class MybatisLeftRepository implements LeftRepository {
 	public void deleteChannelCategoryName(String[] deleteChannelCategoryNoArray) {
 		mapper.deleteChannelCategoryName(deleteChannelCategoryNoArray);
 	}
+
+	@Override
+	public void deleteChannelName(String deleteChannelName) {
+		mapper.deleteChannelName(deleteChannelName);
+		
+	}
 }

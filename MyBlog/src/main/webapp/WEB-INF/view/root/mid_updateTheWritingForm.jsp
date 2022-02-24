@@ -23,6 +23,8 @@
 }
 </style>
 
+
+
 <div class="Display middeDisplay">
 
 	<div class="container">
@@ -41,7 +43,7 @@
 
 
 			<div class="form-group">
-				제목 : <input type="text" placeholder="Enter title" class="title" id="title"/>
+				제목 : <input type="text" placeholder="Enter title" class="title" id="title" value="${board.title}">
 			</div>
 
 
@@ -54,6 +56,7 @@
 				</c:otherwise>
 			</c:choose>
 			카테고리 : <select id="categoryName" name="categoryName">
+				<option value="${board.categoryName}" selected>${board.categoryName}</option>
 				<option value="없음">카테고리 없음</option>
 				<c:forEach var="List" items="${List}">
 					<option value="${List.categoryName}">${List.categoryName}</option>
@@ -63,11 +66,14 @@
 
 			<div class="form-group">
 				내용
-				<textarea id="summernote" name="editordata"></textarea>
+				<textarea id="summernote" name="editordata" >${board.content}</textarea>
 			</div>
 
 		</form>
-		<button id="btn-saveTheWriting" class="btn btn-primary">글 저장</button>
+		
+		<input type="hidden" id="boardNo" value="${board.no}"/>
+		
+		<button id="btn-updateTheWriting" class="btn btn-primary">글 저장</button>
 	</div>
 </div>
 

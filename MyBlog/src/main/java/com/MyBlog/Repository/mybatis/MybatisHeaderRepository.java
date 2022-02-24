@@ -54,4 +54,10 @@ public class MybatisHeaderRepository implements HeaderRepository {
 	public String getChannelName(String nickName) {
 		return mapper.getChannelName(nickName);
 	}
+
+	@Override
+	public void cancelMembership(String nickName) {
+		mapper.cancelMembership(nickName);
+		
+	}
 }

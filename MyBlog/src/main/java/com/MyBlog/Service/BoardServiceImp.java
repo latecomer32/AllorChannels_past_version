@@ -57,4 +57,9 @@ public class BoardServiceImp implements BoardService {
 		return boardRepository.getChannelWritingList(size, getChannelList);
 	}
 
+	@Override
+	public void updateWritingList(Board board) {
+		 boardRepository.updateWritingList(board);
+	}
+
 }

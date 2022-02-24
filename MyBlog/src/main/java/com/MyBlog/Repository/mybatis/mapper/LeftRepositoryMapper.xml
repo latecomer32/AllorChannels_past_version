@@ -5,9 +5,10 @@
 <mapper namespace="com.MyBlog.Repository.LeftRepository">
 
 
-	<insert id="saveCategoryName" >
+	<insert id="saveCategoryName">
 		insert into
-		category(nickName, categoryName)
+		category(nickName,
+		categoryName)
 		values(#{nickName},#{categoryName})
 	</insert>
 
@@ -19,28 +20,38 @@
 	<delete id="deleteCategoryName" parameterType="String">
 		DELETE FROM category where no in
 		<foreach item="no" index="index" collection="deleteCategory"
-	        open="(" separator="," close=")">
-    	      #{no}
-    	</foreach>
-	
+			open="(" separator="," close=")">
+			#{no}
+		</foreach>
+
 	</delete>
 
-	<select id="getChannelCategoryList" resultType="com.MyBlog.Dto.ChannelCategory">
+	<select id="getChannelCategoryList"
+		resultType="com.MyBlog.Dto.ChannelCategory">
 		SELECT * FROM channelcategory WHERE title = #{title}
 	</select>
-	
-	<insert id="saveChannelCategoryName" parameterType="com.MyBlog.Dto.ChannelCategory">
+
+	<insert id="saveChannelCategoryName"
+		parameterType="com.MyBlog.Dto.ChannelCategory">
 		insert into
 		channelcategory(categoryName, title)
 		values(#{categoryName},#{title})
 	</insert>
-	
+
 	<delete id="deleteChannelCategoryName">
 		DELETE FROM channelcategory where no in
-		<foreach item="no" index="index" collection="deleteChannelCategoryNoArray"
-	        open="(" separator="," close=")">
-    	      #{no}
-    	</foreach>
-	
+		<foreach item="no" index="index"
+			collection="deleteChannelCategoryNoArray" open="(" separator=","
+			close=")">
+			#{no}
+		</foreach>
+	</delete>
+
+	<delete id="deleteChannelName">
+		DELETE FROM c, cc, board using channel AS c 
+		LEFT JOIN channelcategory AS cc on c.title = cc.title 
+		LEFT JOIN board on c.nickName = board.nickName
+		where
+		c.title=#{deleteChannelName}
 	</delete>
 </mapper>

@@ -2,6 +2,8 @@ package com.MyBlog.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.yaml.snakeyaml.util.UriEncoder;
 
 import com.MyBlog.Config.auth.PrincipalDetail;
 import com.MyBlog.Dto.Board;
@@ -47,8 +50,11 @@ public class HeaderController {
 			@RequestParam(name="r", required=false, defaultValue = "15") Integer rowNum,
 			@RequestParam(name="desc", required=false, defaultValue = "ASC")String desc,
 			@RequestParam(name="order", required=false, defaultValue = "date")String order,
-			Model model,UserDto user) {
+			Model model,UserDto user,HttpServletRequest request) {
 		
+		String Uri = request.getRequestURI();
+		String encodeUri = UriEncoder.decode(Uri);
+		model.addAttribute("Uri", encodeUri);
 		
 		boolean pub =true;
 

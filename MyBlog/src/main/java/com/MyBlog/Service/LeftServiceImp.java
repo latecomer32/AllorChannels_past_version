@@ -49,4 +49,10 @@ public class LeftServiceImp implements LeftService{
 		return leftRepository.getChannelCategoryList(channelName);
 	}
 
+	@Override
+	public void deleteChannelName(String deleteChannelName) {
+		leftRepository.deleteChannelName(deleteChannelName);
+		
+	}
+
 }

@@ -55,5 +55,11 @@ public class HeaderServiceImp implements HeaderService{
 		return  headerRepository.getChannelName(nickName);
 	}
 
+	@Override
+	public void cancelMembership(String nickName) {
+		headerRepository.cancelMembership(nickName);
+		
+	}
+
 
 }

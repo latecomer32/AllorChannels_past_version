@@ -19,4 +19,6 @@ public interface BoardRepository {
 	Board getWritingDetail(int no);
 
 	List<Board> getChannelWritingList(int size, List<Channel> getChannelList);
+
+	int updateWritingList(Board board);
 }

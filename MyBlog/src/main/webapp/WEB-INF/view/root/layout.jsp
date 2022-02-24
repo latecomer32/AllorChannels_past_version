@@ -17,8 +17,8 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!-- 드래그해서 순서를 바꿀 수 있는 리스트 만들기(jQuery UI - Sortable) -->
 <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 
@@ -46,8 +46,8 @@
 	display: flex;
 	font-family: 'Montserrat', sans-serif;
 	overflow: hidden;
-	min-height: 1000px;
-	//background-color: rgba(228, 228, 228, 0.7);
+	min-height: 1000px; //
+	background-color: rgba(228, 228, 228, 0.7);
 }
 
 .ListHeight {
@@ -58,22 +58,25 @@
 }
 
 .leftDisplay {
-
-	flex-basis:300px;
+	flex-basis: 300px;
 }
 
 .middleDisplay {
-	flex-grow:1;
-	
+	flex-grow: 1;
 }
 
 .rightDisplay {
-	flex-basis:300px;
+	flex-basis: 300px;
 }
 
 .NoUnderline {
 	color: black !important;
 	text-decoration-line: none;
+	border-color: white;
+}
+
+.min_content_height {
+	min-height: 250px;
 }
 
 .whiteBackground {
@@ -88,70 +91,104 @@
 	margin: auto 20px !important;
 }
 
-
-
-
 .card-- {
-  background: #fff;
-  text-decoration: none;
-  color: #444;
-  box-shadow: 0 2px 5px rbga(0, 0, 0, 0.1);
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  top: 0;
-  transition: 0.2s;
+	background: #fff;
+	text-decoration: none;
+	color: #444;
+	box-shadow: 0 2px 5px rbga(0, 0, 0, 0.1);
+	display: flex;
+	min-height: 100%;
+	flex-direction: column;
+	justify-content: space-between;
+	position: relative;
+	top: 0;
+	transition: 0.2s;
 }
 
 .card--:hover {
-  top: -2px;
-  box-shadow: 0 4px 5px rbga(0, 0, 0, 0.2);
+	top: -2px;
+	box-shadow: 0 4px 5px rbga(0, 0, 0, 0.2);
 }
 
 .thumb-- {
-  padding-bottom: 60%;
-  background-size: cover;
-  background-position: center center;
+	padding-bottom: 60%;
+	background-size: cover;
+	background-position: center center;
 }
+
 .article-- {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 15px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 15px;
 }
 
 .article-- p {
-  flex: 1;
+	flex: 1;
 }
 
 .band-- {
-  width: 90%;
-  max-width: 1240px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  grid-gap: 20px;
+	width: 90%;
+	max-width: 1240px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto;
+	grid-gap: 20px;
 }
 
 @media screen and (min-width: 500px) {
-  .band-- {
-    grid-template-columns: 1fr 1fr;
-  }
+	.band-- {
+		grid-template-columns: 1fr 1fr;
+	}
 }
+
 @media screen and (min-width: 850px) {
-  .band-- {
-    grid-template-columns: repeat(4, 1fr);
-  }
+	.band-- {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	
+
 }
 
-.headerSetting{
-margin-bottom:50px;
+@media screen and (max-width: 1200px) {
+	
+	.leftDisplay {	
+	flex-basis: 100px;
+	}
+	
+	.rightDisplay {	
+	flex-basis: 0px;
+	}
+
 }
 
+
+.headerSetting {
+	margin-bottom: 50px;
+}
+
+.channelBoxWidth {
+	width: 100px;
+	height: 37px;
+}
+
+.longTextCut {
+	width: 143px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.longTextCut_header {
+	width: 75px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: center;
+}
 </style>
 
 
@@ -162,9 +199,9 @@ margin-bottom:50px;
 
 	<!-- header 부분 -->
 
-<div class="headerSetting">
-	<tiles:insertAttribute name="header" />
-</div>
+	<div class="headerSetting">
+		<tiles:insertAttribute name="header" />
+	</div>
 	<div class="d-flex container--">
 
 
@@ -188,25 +225,9 @@ margin-bottom:50px;
 			<tiles:insertAttribute name="rightDisplay" />
 		</div>
 	</div>
-	
-	
-	
-<script src="/js/join.js"></script>
-<!-- 사용처 : mid_joinForm -->
-
-<script src="/js/user.js"></script>
-<!-- 사용처 : mid_joinForm -->
 
 
-<script src="/js/board.js"></script>
-<!-- 사용처 : mid_contentList -->
-<!-- 사용처 : mid_saveTheWritingForm -->
 
-<script src="/js/channel.js"></script>
-<!-- 사용처 : mid_saveChannel -->
 
-<script src="/js/category.js"></script>
-<!-- 사용처 : leftDisplay -->
 </body>
-
 </html>

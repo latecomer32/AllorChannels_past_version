@@ -19,7 +19,7 @@ function btn_deleteCategory() {
       location.href = "/index";
     })
     .fail(function (error) {
-      alert(JSON.stringify(error));
+      alert("삭제할 항목을 먼저 체크하세요.");
     });
 }
 

@@ -54,6 +54,5 @@ margin-top:50px;
 	</div>
 </div>
 
-<script src="/js/join.js"></script>
-<script src="/js/user.js"></script>
+
 

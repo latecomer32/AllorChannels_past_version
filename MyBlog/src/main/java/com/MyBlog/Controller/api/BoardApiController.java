@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,8 +28,6 @@ public class BoardApiController {
 	public ResponseDto<Integer> saveTheWriting(@RequestBody Board board,
 			@AuthenticationPrincipal PrincipalDetail principal) {
 
-		System.out.println("@PostMapping(\"/board/saveTheWritingForm\")");
-
 		boardService.saveTheWriting(board, principal.getNickName());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
@@ -37,6 +36,14 @@ public class BoardApiController {
 	public ResponseDto<Integer> deleteWriting(@PathVariable int no) {
 		System.out.println("numbers"+no);
 		boardService.deleteWritingList(no);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	@PutMapping("/index/board/detail/update")
+	public ResponseDto<Integer> upadeWriting(
+			@RequestBody Board board) {
+
+		boardService.updateWritingList(board);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 }

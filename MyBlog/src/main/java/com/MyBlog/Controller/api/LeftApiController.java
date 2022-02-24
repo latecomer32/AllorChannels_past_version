@@ -55,5 +55,13 @@ public class LeftApiController {
 
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+	
+	@PostMapping("/left/delete/channel")
+	public String channeldeleteCategoryName(@RequestBody String deleteChannelName) {
+
+		leftService.deleteChannelName(deleteChannelName);
+
+		return"";
+	}
 
 }

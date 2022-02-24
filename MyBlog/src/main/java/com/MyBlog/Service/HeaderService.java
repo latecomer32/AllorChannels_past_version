@@ -20,4 +20,6 @@ public interface HeaderService {
 
 	String getChannelName(String nickName);
 
+	void cancelMembership(String nickName);
+
 }

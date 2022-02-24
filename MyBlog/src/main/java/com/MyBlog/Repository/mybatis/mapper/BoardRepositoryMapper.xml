@@ -33,19 +33,19 @@
 				categoryName like '%${categoryName}%'
 			</if>
 			and
-			<if test="uri != '/index/category' and uri !='/index/category'+'/'+no">
+			<if test="uri != '/index/category' and uri !='/index/category/detail'+'/'+no">
 				nickName like '%%'
 			</if>
 
-			<if test="uri =='/index/category' or uri =='/index/category'+'/'+no">
+			<if test="uri =='/index/category' or uri =='/index/category/detail'+'/'+no">
 				nickName = #{nickName}
 			</if>
 			and
-			<if test="uri != '/index/channels/'+channelName and uri != '/index/channels/'+channelName+'/'+no">
+			<if test="uri != '/index/channels/'+channelName and uri != '/index/channels/detail/'+channelName+'/'+no">
 				channelName like '%%'
 			</if>
 
-			<if test="uri == '/index/channels/'+channelName or uri == '/index/channels/'+channelName+'/'+no">
+			<if test="uri == '/index/channels/'+channelName or uri == '/index/channels/detail/'+channelName+'/'+no">
 				channelName = #{channelName}
 			</if>
 
@@ -84,11 +84,9 @@
 			</foreach>
 	</select>
 
+	<update id="updateWritingList" parameterType="com.MyBlog.Dto.Board">
+		update board set title=#{title},content=#{content}, categoryName=#{categoryName} where no=#{no} 
+	</update>
 
-
-	<!-- <where> <foreach item="getChannelList" collection="getChannelList"> 
-		<if test="channelName == ${getChannelList.title}"> order by date DESC limit 
-		0, #{size} </if> <if test="channelName != ${getChannelList.title}"> </if> 
-		</foreach> </where> -->
 
 </mapper>

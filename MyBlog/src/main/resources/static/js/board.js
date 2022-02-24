@@ -6,8 +6,8 @@ let index = {
     $("#btn-delete").on("click", () => {
       this.deleteById();
     });
-    $("#btn-update").on("click", () => {
-      this.update();
+    $("#btn-updateTheWriting").on("click", () => {
+      this.updateTheWriting();
     });
     $("#btn-reply-save").on("click", () => {
       this.replySave();
@@ -19,7 +19,7 @@ let index = {
 
   saveTheWriting: function () {
     let data = {
-      title: $("#title").val(),
+      title: $(".title").val(),
       content: $("#summernote").val(),
       categoryName: $("#categoryName").val(),
       channelName: $("#channelName").val(),
@@ -34,102 +34,52 @@ let index = {
     })
       .done(function (resp) {
         alert("글쓰기가 완료되었습니다.");
-        location.href = "/index";
+        history.back();
       })
       .fail(function (error) {
-        alert(JSON.stringify(error));
+        alert("글의 용량이 너무 큽니다.");
       });
   },
 
   deleteById: function () {
     //let id = $("#id").val(); 아래 data부분 없애고 이렇게만 넣으면 - (1/3)
 
-    let no = "";
+    $("input[name=no]:checked").each(function () {
+      var no = $(this).attr("value");
+      console.log(no);
 
-    $("input[name=no]:checked")
-      .each(function () {
-        var no = $(this).attr("value");
-        console.log(no);
-
-        $.ajax({
-          type: "DELETE",
-          url: "/index/board/detail/" + no,
-          data: JSON.stringify(no),
+      $.ajax({
+        type: "DELETE",
+        url: "/index/board/detail/" + no,
+        data: JSON.stringify(no),
+      })
+        .done(function (resp) {
+          location.reload();
+        })
+        .fail(function (error) {
+          alert(JSON.stringify(error));
         });
-      })
-      .done(function (resp) {
-        alert("글삭제가 완료되었습니다.");
-        location.href = "/index";
-      })
-      .fail(function (error) {
-        alert(JSON.stringify(error));
-      });
+    });
   },
 
-  update: function () {
-    let id = $("#id").val();
+  updateTheWriting: function () {
     let data = {
-      title: $("#title").val(),
-      content: $("#content").val(),
+      no: $("#boardNo").val(),
+      title: $(".title").val(),
+      content: $("#summernote").val(),
+      categoryName: $("#categoryName").val(),
+      channelName: $("#channelName").val(),
     };
     $.ajax({
       type: "PUT",
-      url: "/api/board/" + id,
+      url: "/index/board/detail/update",
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
     })
       .done(function (resp) {
         alert("글수정이 완료되었습니다.");
-        location.href = "/index";
-      })
-      .fail(function (error) {
-        alert(JSON.stringify(error));
-      });
-  },
-
-  replySave: function () {
-    let data = {
-      content: $("#reply-content").val(),
-    };
-    let boardId = $("#boardId").val();
-
-    $.ajax({
-      type: "POST",
-      url: `/api/board/${boardId}/reply`,
-      data: JSON.stringify(data),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-    })
-      .done(function (resp) {
-        alert("댓글작성이 완료되었습니다.");
-        location.href = `/board/${boardId}`;
-      })
-      .fail(function (error) {
-        alert(JSON.stringify(error));
-      });
-  },
-  writingFilter: function () {
-    let data = {
-      page: $("#p").val(),
-      field: $("#f").val(),
-      query: $("#q").val(),
-      pub: $("#reply-content").val(),
-      rowNum: $("#r").val(),
-      desc: $("#desc").val(),
-      order: $("#order").val(),
-    };
-
-    $.ajax({
-      type: "GET",
-      url: "/index",
-      data: JSON.stringify(data),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-    })
-      .done(function (resp) {
-        alert("데이터 전송완료");
-        location.href = `/board/${boardId}`;
+        history.back();
       })
       .fail(function (error) {
         alert(JSON.stringify(error));
@@ -138,3 +88,12 @@ let index = {
 };
 
 index.init();
+
+//테이블 헤드 체크박스 누르면 화면 내 체크박스들 전부 check On/ Off 기능.
+function btn_allDelete(btn_allDelete) {
+  const checkboxes = document.getElementsByName("no");
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = btn_allDelete.checked;
+  });
+}

@@ -57,11 +57,11 @@ td {
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th scope="col">
+							<!-- <th scope="col">
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" value="all" id="flexCheckDefault" name="del_member">
 								</div>
-							</th>
+							</th> -->
 							<th scope="col">번호</th>
 							<th scope="col">닉네임</th>
 							<th scope="col">등급</th>
@@ -73,11 +73,11 @@ td {
 					<tbody>
 						<c:forEach var="getMemberList" items="${getMemberList}">
 							<tr>
-								<td>
+								<%-- <td>
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value="${getMemberList.no}" id="no" name="no">
 									</div>
-								</td>
+								</td> --%>
 								<td scope="row">${getMemberList.no}</td>
 								<td><a class="NoUnderline" href="/board/detail/${getMemberList.no}">${getMemberList.nickName}</a></td>
 								<td>${getMemberList.role}</td>
@@ -90,7 +90,9 @@ td {
 		</div>
 
 		<div>
-			<button id="btn-delete" class="btn btn-primary col-1">글 삭제</button>
+			
+			<!-- <button id="btn-delete" class="btn btn-primary col-1">글 삭제</button> -->
+			
 			<c:set var="row" value="${(empty param.r)?15:param.r}" />
 			<c:set var="page" value="${(empty param.p)?1:param.p}" />
 			<c:set var="startNum" value="${page-(page-1)%5}" />
@@ -129,4 +131,3 @@ td {
 		</div>
 	</div>
 </div>
-<script src="/js/board.js"></script>

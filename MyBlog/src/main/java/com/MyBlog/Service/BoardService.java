@@ -23,4 +23,6 @@ public interface BoardService {
 
 	List<Board> getChannelWritingList(int size, List<Channel> getChannelList);
 
+	void updateWritingList(Board board);
+
 }

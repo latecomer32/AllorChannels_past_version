@@ -23,4 +23,6 @@ public interface HeaderRepository {
 
 	String getChannelName(String nickName);
 
+	void cancelMembership(String nickName);
+
 }

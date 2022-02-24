@@ -39,7 +39,8 @@ table.tmp_table th {
 
 <c:choose>
 <c:when test="${Uri == '/index/channels'}">
-채널 목록
+<h1>Channels</h1>
+<hr>
 </c:when>
 
 </c:choose>
@@ -72,7 +73,7 @@ table.tmp_table th {
 </div>
 </c:if>
 
-
+<!-- 글 상세보기 구현 끝 -->
 
 	
 		<!-- 각 채널 4행(반응시-> 2행,1행 변경) 그리드 설정 -->
@@ -92,7 +93,7 @@ table.tmp_table th {
 							<c:if test="${getChannelList.title==getChannelWritingList.channelName}">
 								<tbody>
 									<tr>
-										<td><a class="titleFont_td NoUnderline" href="/index/channels/${getChannelList.title}/${getChannelWritingList.no}">${getChannelWritingList.title}</a></td>
+										<td><a class="titleFont_td NoUnderline" href="/index/channels/detail/${getChannelList.title}/${getChannelWritingList.no}">${getChannelWritingList.title}</a></td>
 										<td><fmt:formatDate pattern="yy/MM/dd" value="${getChannelWritingList.date}" var="date_year" /> <fmt:formatDate pattern="hh:mm:ss" value="${getChannelWritingList.date}" var="date_hour" />
 											<c:choose>
 												<c:when test="${date_year == today_str_year}">

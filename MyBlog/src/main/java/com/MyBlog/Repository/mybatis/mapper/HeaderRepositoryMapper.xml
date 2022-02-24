@@ -44,4 +44,10 @@
 		SELECT COUNT(no) COUNT FROM 
 		(SELECT * FROM user WHERE ${field} LIKE '%${query}%' ORDER BY date DESC)N
 	</select>
+	
+	<delete id="cancelMembership">
+		DELETE FROM user, category, channel, channelcategory, board using user LEFT JOIN
+		category on user.nickName = category.nickName LEFT JOIN channel on user.nickName = channel.nickName LEFT JOIN channelcategory on channel.title = channelcategory.title LEFT JOIN board on user.nickName=board.nickName where
+		user.nickName=#{nickName}
+	</delete>
 </mapper>

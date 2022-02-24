@@ -22,4 +22,6 @@ public interface LeftService {
 
 	List<ChannelCategory> getChannelCategoryList(String channelName);
 
+	void deleteChannelName(String deleteChannelName);
+
 }

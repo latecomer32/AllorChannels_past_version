@@ -67,8 +67,15 @@ public class MybatisBoardRepository implements BoardRepository {
 
 	@Override
 	public List<Board> getChannelWritingList(int size, List<Channel> getChannelList) {
-		// TODO Auto-generated method stub
+		
 		return mapper.getChannelWritingList(size, getChannelList);
+		
+	}
+
+
+	@Override
+	public int updateWritingList(Board board) {
+		return mapper.updateWritingList(board);
 	}
 	
 

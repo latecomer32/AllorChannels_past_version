@@ -34,4 +34,14 @@ public class HeaderApiController {
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+	
+	@PostMapping("/header/cancel/membership")
+	public ResponseDto<Integer> cancelMembership(
+		
+			@AuthenticationPrincipal PrincipalDetail principal
+		) {
+		headerService.cancelMembership(principal.getNickName());
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
 }
